@@ -1,7 +1,108 @@
 import { useState } from 'react'
-import { ArrowRight, Sparkles, GraduationCap, Compass, ChevronRight } from 'lucide-react'
+import { ArrowRight, GraduationCap, Activity, BookOpen, Users, BarChart3, Zap, Target, Database } from 'lucide-react'
+
+const products = [
+  {
+    id: 'athena',
+    name: 'Athena',
+    tagline: 'Academic Intelligence',
+    accent: '#f97066',
+    accentDark: '#dc4a40',
+    accentLight: '#fef2f2',
+    gradient: 'from-[#f97066] to-[#fb923c]',
+    icon: GraduationCap,
+    description: 'The unified academic platform that maps every student\'s past, present, and every possible future.',
+    features: [
+      { icon: BookOpen, title: 'Dream-Driven Paths', desc: 'Students say where they want to go. We compute every verified path to get there.' },
+      { icon: Users, title: 'Advisor Superpowers', desc: 'Every student\'s full picture in one place. Guidance over data entry.' },
+      { icon: BarChart3, title: 'Institutional Intelligence', desc: 'Unify fragmented systems. Improve retention and outcomes at scale.' },
+    ],
+  },
+  {
+    id: 'hermes',
+    name: 'Hermes',
+    tagline: 'Athletic & Sports Intelligence',
+    accent: '#3b82f6',
+    accentDark: '#2563eb',
+    accentLight: '#eff6ff',
+    gradient: 'from-[#3b82f6] to-[#06b6d4]',
+    icon: Activity,
+    description: 'Big data meets athletics. Real-time performance intelligence that gives programs a competitive edge.',
+    features: [
+      { icon: Zap, title: 'Performance Analytics', desc: 'Body comp, training load, strength metrics, and readiness — one view.' },
+      { icon: Target, title: 'Compliance & Eligibility', desc: 'APR, CARA hours, eligibility matrices — fully automated.' },
+      { icon: Database, title: 'Recruiting & Operations', desc: 'Pipeline analytics, combine benchmarks, and game week ops.' },
+    ],
+  },
+]
+
+function ProductCard({ product, isActive, onClick }) {
+  return (
+    <div
+      onClick={onClick}
+      className="relative rounded-2xl border overflow-hidden cursor-pointer transition-all duration-500 ease-out"
+      style={{
+        backgroundColor: isActive ? 'white' : product.accentLight,
+        borderColor: isActive ? `${product.accent}20` : `${product.accent}15`,
+        boxShadow: isActive ? `0 25px 50px -12px ${product.accent}20` : `0 4px 20px -4px ${product.accent}10`,
+        transform: isActive ? 'rotate(-1deg) scale(1.02)' : 'rotate(2deg) scale(0.95) translateY(8px)',
+        zIndex: isActive ? 10 : 5,
+        opacity: isActive ? 1 : 0.85,
+      }}
+    >
+      {/* Accent top bar */}
+      <div
+        className="h-1 w-full"
+        style={{ background: `linear-gradient(to right, ${product.accent}, ${product.id === 'athena' ? '#fb923c' : '#06b6d4'})` }}
+      />
+
+      <div className="p-5 sm:p-6">
+        {/* Header */}
+        <div className="flex items-center gap-3 mb-4">
+          <div
+            className="w-10 h-10 rounded-xl flex items-center justify-center"
+            style={{ backgroundColor: product.accentLight }}
+          >
+            <product.icon size={22} style={{ color: product.accent }} />
+          </div>
+          <div>
+            <h2 className="text-base sm:text-lg font-bold text-stone-800">{product.name}</h2>
+            <p className="text-[11px] text-stone-400 tracking-wide uppercase">{product.tagline}</p>
+          </div>
+        </div>
+
+        {isActive && (
+          <>
+            <p className="text-sm text-stone-500 mb-4 leading-relaxed">{product.description}</p>
+            <div className="space-y-3">
+              {product.features.map((f) => (
+                <div key={f.title} className="flex gap-2.5">
+                  <div
+                    className="w-7 h-7 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: product.accentLight }}
+                  >
+                    <f.icon size={14} style={{ color: product.accent }} />
+                  </div>
+                  <div>
+                    <h3 className="text-xs font-semibold text-stone-700">{f.title}</h3>
+                    <p className="text-[11px] text-stone-400 leading-relaxed">{f.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+
+        {!isActive && (
+          <p className="text-xs text-stone-400 mt-1">Click to explore →</p>
+        )}
+      </div>
+    </div>
+  )
+}
 
 function App() {
+  const [activeId, setActiveId] = useState('athena')
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
 
@@ -13,91 +114,74 @@ function App() {
     }
   }
 
-  return (
-    <div className="min-h-screen bg-gray-950 text-white relative overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '2s' }} />
-        <div className="absolute top-[40%] left-[50%] w-[400px] h-[400px] bg-blue-600/8 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '4s' }} />
-        {/* Grid overlay */}
-        <div
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
-          }}
-        />
-      </div>
+  const active = products.find((p) => p.id === activeId)
 
-      {/* Navigation */}
-      <nav className="relative z-10 flex items-center justify-between px-6 sm:px-12 py-6">
-        <div className="flex items-center gap-3">
-          <img src="/metvero_logo.png" alt="Metvero" className="h-10 w-auto" />
-          <span className="text-xl font-bold tracking-tight">Metvero</span>
+  return (
+    <div className="min-h-screen bg-[#faf9f7] flex flex-col relative overflow-hidden">
+      {/* Background accents */}
+      <div
+        className="absolute top-[-200px] right-[-100px] w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none transition-colors duration-700"
+        style={{ backgroundColor: activeId === 'athena' ? 'rgba(249,112,102,0.07)' : 'rgba(59,130,246,0.07)' }}
+      />
+
+      {/* Navbar */}
+      <nav className="relative z-20 flex items-center justify-between px-6 sm:px-10 py-4">
+        <img
+          src="/metvero_header_trimmed.png"
+          alt="Metvero"
+          className="h-10 sm:h-12 w-auto"
+        />
+        <div className="flex items-center gap-4">
+          <span className="text-[10px] sm:text-xs text-stone-400 tracking-[0.2em] uppercase font-medium">
+            Coming Soon
+          </span>
+          <a
+            href="mailto:hello@metvero.com"
+            className="text-xs text-stone-400 hover:text-stone-600 transition-colors hidden sm:block"
+          >
+            Contact
+          </a>
         </div>
-        <a
-          href="mailto:hello@metvero.com"
-          className="text-sm text-gray-400 hover:text-white transition-colors"
-        >
-          Contact Us
-        </a>
       </nav>
 
-      {/* Main content */}
-      <main className="relative z-10 flex flex-col items-center justify-center px-6 pt-16 sm:pt-24 pb-32">
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-10 backdrop-blur-sm">
-          <Sparkles size={14} className="text-indigo-400" />
-          <span className="text-sm font-medium text-gray-300">Coming Soon</span>
-        </div>
-
-        {/* Logo hero */}
-        <div className="mb-10">
-          <img
-            src="/metvero_full_logo.jpg"
-            alt="Metvero"
-            className="h-24 sm:h-32 w-auto rounded-2xl shadow-2xl shadow-indigo-500/10"
-          />
-        </div>
-
-        {/* Headline */}
-        <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-center tracking-tight leading-[1.1] max-w-4xl">
-          The Future of
-          <span className="block bg-gradient-to-r from-indigo-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-            Academic Intelligence
+      {/* Hero */}
+      <main className="relative z-10 flex-1 flex flex-col items-center px-6 pt-8 sm:pt-12 pb-10">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center tracking-tight leading-tight max-w-2xl">
+          <span className="text-stone-800">The Future of</span>
+          <br />
+          <span className={`bg-gradient-to-r ${active.gradient} bg-clip-text text-transparent`}>
+            {active.tagline}
           </span>
+          <br />
+          <span className="text-stone-800">is Here</span>
         </h1>
 
-        {/* Subheadline */}
-        <p className="mt-6 text-lg sm:text-xl text-gray-400 text-center max-w-2xl leading-relaxed">
-          A platform that understands where students want to go — and builds 
-          the verified path to get them there. Every option. Every possibility. 
-          In real time.
+        <p className="mt-4 text-sm sm:text-base text-stone-500 text-center max-w-md leading-relaxed">
+          Two products. One platform. Metvero is building the intelligence layer for higher education.
         </p>
 
-        {/* Feature pills */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          {[
-            { icon: GraduationCap, label: 'Dream-Driven Paths' },
-            { icon: Compass, label: 'Real-Time Guidance' },
-            { icon: Sparkles, label: 'Intelligent Planning' },
-          ].map(({ icon: Icon, label }) => (
-            <div
-              key={label}
-              className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-2 backdrop-blur-sm"
-            >
-              <Icon size={16} className="text-indigo-400" />
-              <span className="text-sm font-medium text-gray-300">{label}</span>
-            </div>
-          ))}
+        {/* Product cards — side by side with overlap */}
+        <div className="mt-10 w-full max-w-3xl">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-[-16px] relative">
+            {products.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                isActive={activeId === product.id}
+                onClick={() => setActiveId(product.id)}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Email signup */}
-        <div className="mt-14 w-full max-w-md">
+        <div className="mt-10 w-full max-w-sm">
           {submitted ? (
-            <div className="text-center p-4 bg-indigo-500/10 border border-indigo-500/20 rounded-2xl backdrop-blur-sm">
-              <p className="text-indigo-300 font-medium">You're on the list! We'll be in touch.</p>
+            <div
+              className="text-center py-3 px-4 rounded-lg border"
+              style={{ backgroundColor: active.accentLight, borderColor: `${active.accent}30` }}
+            >
+              <p className="text-sm font-medium" style={{ color: active.accent }}>You're on the list.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex gap-2">
@@ -105,61 +189,31 @@ function App() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email for early access"
+                placeholder="your@email.com"
                 required
-                className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-indigo-500/50 focus:ring-1 focus:ring-indigo-500/50 backdrop-blur-sm text-sm"
+                className="flex-1 bg-white border border-stone-200 rounded-lg px-4 py-2.5 text-stone-900 placeholder-stone-400 focus:outline-none focus:border-stone-300 text-sm"
               />
               <button
                 type="submit"
-                className="group bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-3 rounded-xl font-semibold text-sm transition-all flex items-center gap-1.5 shadow-lg shadow-indigo-500/20"
+                className="group text-white px-4 py-2.5 rounded-lg font-medium text-sm transition-all flex items-center gap-1.5 hover:opacity-90"
+                style={{ backgroundColor: active.accent }}
               >
                 Notify Me
-                <ArrowRight size={16} className="group-hover:translate-x-0.5 transition-transform" />
+                <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />
               </button>
             </form>
           )}
         </div>
-
-        {/* Teaser cards */}
-        <div className="mt-24 grid sm:grid-cols-3 gap-6 max-w-4xl w-full">
-          {[
-            {
-              title: 'For Students',
-              description: 'Tell us your dream. We\'ll show you every path to get there — with real courses, real timelines, and real outcomes.',
-            },
-            {
-              title: 'For Advisors',
-              description: 'See every student\'s full picture in one place. Spend your time on guidance, not data entry.',
-            },
-            {
-              title: 'For Institutions',
-              description: 'Unify fragmented systems into a single source of truth. Improve retention, outcomes, and student satisfaction.',
-            },
-          ].map((card) => (
-            <div
-              key={card.title}
-              className="group p-6 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] hover:border-indigo-500/20 transition-all duration-300 backdrop-blur-sm"
-            >
-              <h3 className="text-lg font-semibold text-white mb-2 flex items-center gap-2">
-                {card.title}
-                <ChevronRight size={16} className="text-gray-600 group-hover:text-indigo-400 group-hover:translate-x-0.5 transition-all" />
-              </h3>
-              <p className="text-sm text-gray-500 leading-relaxed group-hover:text-gray-400 transition-colors">
-                {card.description}
-              </p>
-            </div>
-          ))}
-        </div>
       </main>
 
       {/* Footer */}
-      <footer className="relative z-10 border-t border-white/5 py-8 px-6 sm:px-12">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 max-w-7xl mx-auto">
-          <p className="text-sm text-gray-600">&copy; {new Date().getFullYear()} Metvero. All rights reserved.</p>
-          <a href="mailto:hello@metvero.com" className="text-sm text-gray-600 hover:text-gray-400 transition-colors">
+      <footer className="relative z-10 py-5 px-6 text-center">
+        <p className="text-[11px] text-stone-400">
+          &copy; {new Date().getFullYear()} Metvero &nbsp;·&nbsp;{' '}
+          <a href="mailto:hello@metvero.com" className="hover:text-stone-600 transition-colors">
             hello@metvero.com
           </a>
-        </div>
+        </p>
       </footer>
     </div>
   )
