@@ -18,3 +18,6 @@ dist-ssr
 # OS
 .DS_Store
 Thumbs.db
+
+# Internal docs — do not publish
+INFO/
