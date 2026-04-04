@@ -26,18 +26,19 @@ function gaussian(rand, mean, std) {
 }
 
 // ─── Chaos cluster centres (start positions) ──────────────────────────────────
-// 10 clusters × 10 objects = 100. Objects start off-screen or pushed to extreme edges.
+// Objects scatter to corners/edges of the VISIBLE viewport so they appear
+// immediately on mobile — no more black screen on entry.
 const CHAOS_CLUSTERS = [
-  { cx: -0.10, cy: 0.22, sx: 0.10, sy: 0.14 }, // off-screen left-upper
-  { cx: -0.10, cy: 0.78, sx: 0.10, sy: 0.14 }, // off-screen left-lower
-  { cx:  1.10, cy: 0.22, sx: 0.10, sy: 0.14 }, // off-screen right-upper
-  { cx:  1.10, cy: 0.78, sx: 0.10, sy: 0.14 }, // off-screen right-lower
-  { cx:  0.25, cy: -0.12, sx: 0.16, sy: 0.08 }, // off-screen top-left
-  { cx:  0.75, cy: -0.12, sx: 0.16, sy: 0.08 }, // off-screen top-right
-  { cx:  0.25, cy:  1.12, sx: 0.16, sy: 0.08 }, // off-screen bottom-left
-  { cx:  0.75, cy:  1.12, sx: 0.16, sy: 0.08 }, // off-screen bottom-right
-  { cx:  0.03, cy:  0.50, sx: 0.04, sy: 0.28 }, // hard left edge
-  { cx:  0.97, cy:  0.50, sx: 0.04, sy: 0.28 }, // hard right edge
+  { cx: 0.08, cy: 0.10, sx: 0.07, sy: 0.08 }, // top-left corner
+  { cx: 0.92, cy: 0.10, sx: 0.07, sy: 0.08 }, // top-right corner
+  { cx: 0.08, cy: 0.90, sx: 0.07, sy: 0.08 }, // bottom-left corner
+  { cx: 0.92, cy: 0.90, sx: 0.07, sy: 0.08 }, // bottom-right corner
+  { cx: 0.50, cy: 0.06, sx: 0.22, sy: 0.05 }, // top edge spread
+  { cx: 0.50, cy: 0.94, sx: 0.22, sy: 0.05 }, // bottom edge spread
+  { cx: 0.06, cy: 0.50, sx: 0.05, sy: 0.22 }, // left edge spread
+  { cx: 0.94, cy: 0.50, sx: 0.05, sy: 0.22 }, // right edge spread
+  { cx: 0.20, cy: 0.30, sx: 0.12, sy: 0.14 }, // upper-left interior
+  { cx: 0.80, cy: 0.70, sx: 0.12, sy: 0.14 }, // lower-right interior
 ]
 
 // 5 hub anchors — larger objects that act as spoke centres in the organized state
@@ -401,73 +402,73 @@ function computeState(obj, progress, time, W, H) {
 
   let x, y, rotation, opacity, detailFactor
 
-  if (p < 0.18) {
-    // ── Phase 1: Chaos — ambient drift at start position ─────────────────────
+  if (p < 0.22) {
+    // ── Phase 1: Chaos — objects visible at scattered positions, slow drift ───
     const dx = Math.sin(time * obj.driftFX + obj.driftPX) * obj.driftAX
     const dy = Math.cos(time * obj.driftFY + obj.driftPY) * obj.driftAY
-    x           = obj.sx * W + dx
-    y           = obj.sy * H + dy
-    rotation    = obj.startRot
-    opacity     = obj.baseOp   // visible immediately on section entry
+    x            = obj.sx * W + dx
+    y            = obj.sy * H + dy
+    rotation     = obj.startRot
+    opacity      = obj.baseOp
     detailFactor = 0
 
-  } else if (p < 0.23) {
-    // ── Phase 1.5: Tension quiver — pressure builds before release ────────────
-    const qt = (p - 0.18) / 0.05
+  } else if (p < 0.28) {
+    // ── Phase 1.5: Tension quiver — pressure builds before release ───────────
+    const qt        = (p - 0.22) / 0.06
     const quiverAmp = smoothstep(qt) * (1 - smoothstep(qt)) * 4 * 14
     const qx = Math.sin(time * 20 + obj.driftPX) * quiverAmp
     const qy = Math.cos(time * 24 + obj.driftPY) * quiverAmp
     const dx = Math.sin(time * obj.driftFX + obj.driftPX) * obj.driftAX
     const dy = Math.cos(time * obj.driftFY + obj.driftPY) * obj.driftAY
-    x           = obj.sx * W + dx + qx
-    y           = obj.sy * H + dy + qy
-    rotation    = obj.startRot
-    opacity     = obj.baseOp * (1 + smoothstep(qt) * 0.3)
+    x            = obj.sx * W + dx + qx
+    y            = obj.sy * H + dy + qy
+    rotation     = obj.startRot
+    opacity      = obj.baseOp * (1 + smoothstep(qt) * 0.3)
     detailFactor = 0
 
-  } else if (p < 0.52) {
-    // ── Phase 2: Magnetic pull — slow start, objects move ~55% of distance ────
-    const raw   = (p - 0.23) / 0.29
+  } else if (p < 0.58) {
+    // ── Phase 2: Magnetic pull — slow start, objects travel ~55% of distance ─
+    const raw   = (p - 0.28) / 0.30
     const eased = smoothstep(raw) * obj.depthSpeedMult
     const dStr  = Math.max(0, 1 - eased * 4)
     const dx = Math.sin(time * obj.driftFX + obj.driftPX) * obj.driftAX * dStr
     const dy = Math.cos(time * obj.driftFY + obj.driftPY) * obj.driftAY * dStr
-    x           = lerp(obj.sx * W, obj.ex * W, eased * 0.55) + dx
-    y           = lerp(obj.sy * H, obj.ey * H, eased * 0.55) + dy
-    rotation    = lerp(obj.startRot, obj.startRot * 0.25, eased)
-    opacity     = lerp(obj.baseOp, obj.baseOp * 1.5, eased)
+    x            = lerp(obj.sx * W, obj.ex * W, eased * 0.55) + dx
+    y            = lerp(obj.sy * H, obj.ey * H, eased * 0.55) + dy
+    rotation     = lerp(obj.startRot, obj.startRot * 0.25, eased)
+    opacity      = lerp(obj.baseOp, obj.baseOp * 1.5, eased)
     detailFactor = 0
 
-  } else if (p < 0.76) {
-    // ── Phase 3: Organization snap — remaining 45% of travel, quintic settle ──
-    const raw    = (p - 0.52) / 0.24
-    const eased  = smootherstep(raw) * obj.depthSpeedMult
-    const midX   = lerp(obj.sx * W, obj.ex * W, 0.55 * obj.depthSpeedMult)
-    const midY   = lerp(obj.sy * H, obj.ey * H, 0.55 * obj.depthSpeedMult)
-    const dStr   = Math.max(0, (1 - eased) * 0.08)
+  } else if (p < 0.82) {
+    // ── Phase 3: Organization snap — final 45% of travel, quintic settle ─────
+    const raw   = (p - 0.58) / 0.24
+    const eased = smootherstep(raw) * obj.depthSpeedMult
+    const midX  = lerp(obj.sx * W, obj.ex * W, 0.55 * obj.depthSpeedMult)
+    const midY  = lerp(obj.sy * H, obj.ey * H, 0.55 * obj.depthSpeedMult)
+    const dStr  = Math.max(0, (1 - eased) * 0.08)
     const dx = Math.sin(time * obj.driftFX + obj.driftPX) * obj.driftAX * dStr
     const dy = Math.cos(time * obj.driftFY + obj.driftPY) * obj.driftAY * dStr
-    x           = lerp(midX, obj.ex * W, eased) + dx
-    y           = lerp(midY, obj.ey * H, eased) + dy
-    rotation    = lerp(obj.startRot * 0.25, 0, eased)
-    opacity     = lerp(obj.baseOp * 1.5, obj.endOp, eased)
+    x            = lerp(midX, obj.ex * W, eased) + dx
+    y            = lerp(midY, obj.ey * H, eased) + dy
+    rotation     = lerp(obj.startRot * 0.25, 0, eased)
+    opacity      = lerp(obj.baseOp * 1.5, obj.endOp, eased)
     detailFactor = smoothstep(eased)
 
-  } else if (p < 0.80) {
-    // ── Phase 4: Settled — structure complete ─────────────────────────────────
-    x           = obj.ex * W
-    y           = obj.ey * H
-    rotation    = 0
-    opacity     = obj.endOp
+  } else if (p < 0.87) {
+    // ── Phase 4: Settled — structure complete ────────────────────────────────
+    x            = obj.ex * W
+    y            = obj.ey * H
+    rotation     = 0
+    opacity      = obj.endOp
     detailFactor = 1
 
   } else {
-    // ── Phase 5: Reveal — system fades for Metvero ───────────────────────────
-    const ft = smoothstep((p - 0.80) / 0.20)
-    x           = obj.ex * W
-    y           = obj.ey * H
-    rotation    = 0
-    opacity     = lerp(obj.endOp, obj.endOp * 0.08, ft)
+    // ── Phase 5: Reveal — system fades back for Metvero text ─────────────────
+    const ft = smoothstep((p - 0.87) / 0.13)
+    x            = obj.ex * W
+    y            = obj.ey * H
+    rotation     = 0
+    opacity      = lerp(obj.endOp, obj.endOp * 0.08, ft)
     detailFactor = lerp(1, 0, ft)
   }
 
@@ -554,18 +555,18 @@ export default function MetveroAlignmentSequence() {
   }, [])
 
   // ── Staggered reveal — each element enters independently ─────────────────
-  const wordmarkOp = useTransform(scrollProgress, [0.65, 0.73], [0, 1])
-  const headlineOp = useTransform(scrollProgress, [0.68, 0.78], [0, 1])
-  const headlineY  = useTransform(scrollProgress, [0.68, 0.78], ['18px', '0px'])
-  const bodyOp     = useTransform(scrollProgress, [0.72, 0.82], [0, 1])
-  const bodyY      = useTransform(scrollProgress, [0.72, 0.82], ['12px', '0px'])
-  const ctaOp      = useTransform(scrollProgress, [0.77, 0.87], [0, 1])
-  const ctaY       = useTransform(scrollProgress, [0.77, 0.87], ['10px', '0px'])
+  const wordmarkOp = useTransform(scrollProgress, [0.72, 0.79], [0, 1])
+  const headlineOp = useTransform(scrollProgress, [0.74, 0.83], [0, 1])
+  const headlineY  = useTransform(scrollProgress, [0.74, 0.83], ['18px', '0px'])
+  const bodyOp     = useTransform(scrollProgress, [0.78, 0.87], [0, 1])
+  const bodyY      = useTransform(scrollProgress, [0.78, 0.87], ['12px', '0px'])
+  const ctaOp      = useTransform(scrollProgress, [0.82, 0.91], [0, 1])
+  const ctaY       = useTransform(scrollProgress, [0.82, 0.91], ['10px', '0px'])
 
   return (
     <section
       ref={containerRef}
-      style={{ height: '190vh', background: '#0d1117', position: 'relative' }}
+      style={{ height: '230vh', background: '#0d1117', position: 'relative' }}
     >
       <div style={{ position: 'sticky', top: 0, height: '100svh', overflow: 'hidden' }}>
 
