@@ -54,7 +54,7 @@ export default function Hero() {
             src="/metvero_griffin_clean.png"
             alt=""
             className="h-20 sm:h-24 lg:h-28 w-auto mx-auto"
-            style={{ filter: 'drop-shadow(0 0 14px rgba(255,255,255,0.12))', transform: 'translateX(-7px)' }}
+            style={{ filter: 'drop-shadow(0 0 14px rgba(255,255,255,0.12))', transform: 'translateX(clamp(-3px, -0.5vw, -7px))' }}
           />
         </motion.div>
 
@@ -110,7 +110,7 @@ export default function Hero() {
             className="text-[clamp(1.4rem,4vw,3.8rem)] font-extralight leading-[1.1] tracking-[0.05em] mt-2 pb-2"
             style={{
               textShadow: '0 0 10px rgba(255,255,255,0.12)',
-              transform: 'translateX(8px) translateY(-3px)',
+              transform: 'translateX(clamp(2px, 0.5vw, 8px)) translateY(-3px)',
               color: 'rgba(255,255,255,0.8)',
             }}
           >
