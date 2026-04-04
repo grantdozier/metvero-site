@@ -110,7 +110,7 @@ export default function Hero() {
             className="text-[clamp(1.4rem,4vw,3.8rem)] font-extralight leading-[1.1] tracking-[0.05em] mt-2 pb-2"
             style={{
               textShadow: '0 0 10px rgba(255,255,255,0.12)',
-              transform: 'translateX(clamp(2px, 0.5vw, 8px)) translateY(-3px)',
+              transform: 'translateX(clamp(2px, 0.5vw, 8px)) translateY(-4px)',
               color: 'rgba(255,255,255,0.8)',
             }}
           >
