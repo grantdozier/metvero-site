@@ -1,5 +1,6 @@
 import { BookOpen, Users, BarChart3, Zap, Target, Database } from 'lucide-react'
 import Hero from '../components/Hero'
+import MetveroAlignmentSequence from '../components/MetveroAlignmentSequence'
 import ProductSection from '../components/ProductSection'
 import CTA from '../components/CTA'
 import FadeIn from '../components/FadeIn'
@@ -44,6 +45,8 @@ export default function Home() {
   return (
     <>
       <Hero />
+
+      <MetveroAlignmentSequence />
 
       {/* Statement */}
       <section className="py-24 lg:py-32 border-t border-white/[0.06]">
