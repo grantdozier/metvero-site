@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react'
-import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
+import { motion, useTransform, useMotionValue } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
 // ─── Math / Easing ────────────────────────────────────────────────────────────
@@ -403,13 +403,12 @@ function computeState(obj, progress, time, W, H) {
 
   if (p < 0.18) {
     // ── Phase 1: Chaos — ambient drift at start position ─────────────────────
-    const fadeIn = smoothstep(Math.min(1, p / 0.04))
     const dx = Math.sin(time * obj.driftFX + obj.driftPX) * obj.driftAX
     const dy = Math.cos(time * obj.driftFY + obj.driftPY) * obj.driftAY
     x           = obj.sx * W + dx
     y           = obj.sy * H + dy
     rotation    = obj.startRot
-    opacity     = lerp(0, obj.baseOp, fadeIn)
+    opacity     = obj.baseOp   // visible immediately on section entry
     detailFactor = 0
 
   } else if (p < 0.23) {
@@ -502,12 +501,26 @@ export default function MetveroAlignmentSequence() {
   const rafRef       = useRef(null)
   const progressRef  = useRef(0)
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  })
+  // Manual scroll tracker — reliable with Lenis unlike useScroll
+  const scrollProgress = useMotionValue(0)
 
-  useMotionValueEvent(scrollYProgress, 'change', v => { progressRef.current = v })
+  useEffect(() => {
+    const section = containerRef.current
+    if (!section) return
+
+    const update = () => {
+      const rect  = section.getBoundingClientRect()
+      const total = rect.height - window.innerHeight
+      if (total <= 0) return
+      const p = Math.max(0, Math.min(1, -rect.top / total))
+      scrollProgress.set(p)
+      progressRef.current = p
+    }
+
+    window.addEventListener('scroll', update, { passive: true })
+    update()
+    return () => window.removeEventListener('scroll', update)
+  }, [scrollProgress])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -541,13 +554,13 @@ export default function MetveroAlignmentSequence() {
   }, [])
 
   // ── Staggered reveal — each element enters independently ─────────────────
-  const wordmarkOp = useTransform(scrollYProgress, [0.76, 0.83], [0, 1])
-  const headlineOp = useTransform(scrollYProgress, [0.78, 0.86], [0, 1])
-  const headlineY  = useTransform(scrollYProgress, [0.78, 0.86], ['18px', '0px'])
-  const bodyOp     = useTransform(scrollYProgress, [0.81, 0.89], [0, 1])
-  const bodyY      = useTransform(scrollYProgress, [0.81, 0.89], ['12px', '0px'])
-  const ctaOp      = useTransform(scrollYProgress, [0.85, 0.93], [0, 1])
-  const ctaY       = useTransform(scrollYProgress, [0.85, 0.93], ['10px', '0px'])
+  const wordmarkOp = useTransform(scrollProgress, [0.65, 0.73], [0, 1])
+  const headlineOp = useTransform(scrollProgress, [0.68, 0.78], [0, 1])
+  const headlineY  = useTransform(scrollProgress, [0.68, 0.78], ['18px', '0px'])
+  const bodyOp     = useTransform(scrollProgress, [0.72, 0.82], [0, 1])
+  const bodyY      = useTransform(scrollProgress, [0.72, 0.82], ['12px', '0px'])
+  const ctaOp      = useTransform(scrollProgress, [0.77, 0.87], [0, 1])
+  const ctaY       = useTransform(scrollProgress, [0.77, 0.87], ['10px', '0px'])
 
   return (
     <section
