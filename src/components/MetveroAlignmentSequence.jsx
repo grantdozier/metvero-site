@@ -73,7 +73,7 @@ function buildObjects(count) {
     const depthRoll = rand()
     const depth = depthRoll < 0.30 ? 0 : depthRoll < 0.65 ? 1 : 2
     const depthScale       = [0.62, 0.84, 1.00][depth]
-    const depthOpacityMult = [0.45, 0.72, 1.00][depth]
+    const depthOpacityMult = [0.72, 0.88, 1.00][depth]
     const depthSpeedMult   = [0.72, 0.88, 1.00][depth]   // background converges slower
 
     // ── Start position — Gaussian cluster ────────────────────────────────────
@@ -102,9 +102,9 @@ function buildObjects(count) {
     // ── Prominence / opacity ──────────────────────────────────────────────────
     const pr = rand()
     let baseOp, endOp
-    if      (pr > 0.68) { baseOp = 0.07 + rand() * 0.07; endOp = 0.24 + rand() * 0.22 }
-    else if (pr > 0.28) { baseOp = 0.04 + rand() * 0.05; endOp = 0.10 + rand() * 0.13 }
-    else                { baseOp = 0.02 + rand() * 0.03; endOp = 0.04 + rand() * 0.05 }
+    if      (pr > 0.68) { baseOp = 0.18 + rand() * 0.12; endOp = 0.52 + rand() * 0.28 }
+    else if (pr > 0.28) { baseOp = 0.10 + rand() * 0.08; endOp = 0.26 + rand() * 0.18 }
+    else                { baseOp = 0.05 + rand() * 0.05; endOp = 0.12 + rand() * 0.10 }
     baseOp *= depthOpacityMult
     endOp  *= depthOpacityMult
 
@@ -249,16 +249,21 @@ function drawInnerDetail(ctx, obj, opacity, detailFactor) {
   ctx.restore()
 }
 
-function drawObject(ctx, obj, { x, y, rotation, opacity, detailFactor }) {
+function drawObject(ctx, obj, { x, y, rotation, opacity, detailFactor }, rScale) {
   if (opacity < 0.004) return
+  // Skip background-depth objects entirely on small screens for performance
+  if (rScale < 0.6 && obj.depth === 0) return
+
+  const w = obj.w * rScale
+  const h = obj.h * rScale
+  const hw = w / 2
+  const hh = h / 2
+
   ctx.save()
   ctx.translate(x, y)
   ctx.scale(obj.depthScale, obj.depthScale)
   if (Math.abs(rotation) > 0.05) ctx.rotate(rotation * (Math.PI / 180))
   ctx.globalAlpha = opacity
-
-  const hw = obj.w / 2
-  const hh = obj.h / 2
 
   if (obj.type === 'dot') {
     ctx.beginPath()
@@ -266,17 +271,17 @@ function drawObject(ctx, obj, { x, y, rotation, opacity, detailFactor }) {
     ctx.fillStyle = obj.stroke
     ctx.fill()
   } else if (obj.type === 'rect' || obj.type === 'card') {
-    roundedRect(ctx, -hw, -hh, obj.w, obj.h, obj.br)
+    roundedRect(ctx, -hw, -hh, w, h, obj.br)
     ctx.fillStyle = obj.fill
     ctx.fill()
     ctx.strokeStyle = obj.stroke
     ctx.lineWidth = obj.isHub ? 1 : 0.75
     ctx.stroke()
-    drawInnerDetail(ctx, obj, opacity, detailFactor)
+    if (rScale > 0.65) drawInnerDetail(ctx, obj, opacity, detailFactor)
   } else {
     // panel / line
-    if (obj.br > 0) roundedRect(ctx, -hw, -hh, obj.w, obj.h, obj.br)
-    else { ctx.beginPath(); ctx.rect(-hw, -hh, obj.w, obj.h) }
+    if (obj.br > 0) roundedRect(ctx, -hw, -hh, w, h, obj.br)
+    else { ctx.beginPath(); ctx.rect(-hw, -hh, w, h) }
     ctx.fillStyle = obj.stroke
     ctx.fill()
   }
@@ -287,7 +292,7 @@ function drawObject(ctx, obj, { x, y, rotation, opacity, detailFactor }) {
 // Two-pass connector system:
 // Pass 1 — hub spokes (higher alpha, up to 8 connections per hub)
 // Pass 2 — ambient proximity mesh (lower alpha, 3 per object)
-function drawConnectors(ctx, states, progress, W, H) {
+function drawConnectors(ctx, states, progress, W, H, rScale) {
   if (progress < 0.42) return
 
   const tIn  = smoothstep(clamp((progress - 0.42) / 0.30, 0, 1))
@@ -321,12 +326,13 @@ function drawConnectors(ctx, states, progress, W, H) {
   // ── Pass 2: Ambient mesh ──────────────────────────────────────────────────
   ctx.beginPath()
   ctx.lineWidth = 0.4
+  const maxLines = rScale < 0.6 ? 60 : 160
   const conns = new Array(states.length).fill(0)
   let drawn = 0
   for (let i = 0; i < states.length; i++) {
     if (states[i].opacity < 0.01 || conns[i] >= 3) continue
     for (let j = i + 1; j < states.length; j++) {
-      if (drawn >= 160) break
+      if (drawn >= maxLines) break
       if (states[j].opacity < 0.01 || conns[j] >= 3) continue
       const dx = (states[i].x - states[j].x) / W
       const dy = (states[i].y - states[j].y) / H
@@ -336,7 +342,7 @@ function drawConnectors(ctx, states, progress, W, H) {
         conns[i]++; conns[j]++; drawn++
       }
     }
-    if (drawn >= 160) break
+    if (drawn >= maxLines) break
   }
   ctx.strokeStyle = `rgba(255,255,255,${(baseAlpha * 0.07).toFixed(4)})`
   ctx.stroke()
@@ -448,7 +454,7 @@ function computeState(obj, progress, time, W, H) {
     opacity     = lerp(obj.baseOp * 1.5, obj.endOp, eased)
     detailFactor = smoothstep(eased)
 
-  } else if (p < 0.86) {
+  } else if (p < 0.80) {
     // ── Phase 4: Settled — structure complete ─────────────────────────────────
     x           = obj.ex * W
     y           = obj.ey * H
@@ -458,7 +464,7 @@ function computeState(obj, progress, time, W, H) {
 
   } else {
     // ── Phase 5: Reveal — system fades for Metvero ───────────────────────────
-    const ft = smoothstep((p - 0.86) / 0.14)
+    const ft = smoothstep((p - 0.80) / 0.20)
     x           = obj.ex * W
     y           = obj.ey * H
     rotation    = 0
@@ -472,6 +478,8 @@ function computeState(obj, progress, time, W, H) {
 function renderFrame(timestamp, ctx, W, H, progressRef) {
   const time     = timestamp / 1000
   const progress = progressRef.current
+  // Responsive scale: objects shrink on narrow viewports (mobile)
+  const rScale   = Math.min(1, Math.max(0.42, W / 1280))
 
   ctx.fillStyle = '#0d1117'
   ctx.fillRect(0, 0, W, H)
@@ -480,10 +488,10 @@ function renderFrame(timestamp, ctx, W, H, progressRef) {
 
   const states = OBJECTS.map(obj => computeState(obj, progress, time, W, H))
 
-  drawConnectors(ctx, states, progress, W, H)
+  drawConnectors(ctx, states, progress, W, H, rScale)
   drawGlow(ctx, W, H, progress)
   drawBloom(ctx, W, H, progress)
-  OBJECTS.forEach((obj, i) => drawObject(ctx, obj, states[i]))
+  OBJECTS.forEach((obj, i) => drawObject(ctx, obj, states[i], rScale))
 }
 
 // ─── React Component ──────────────────────────────────────────────────────────
@@ -533,20 +541,20 @@ export default function MetveroAlignmentSequence() {
   }, [])
 
   // ── Staggered reveal — each element enters independently ─────────────────
-  const wordmarkOp = useTransform(scrollYProgress, [0.85, 0.90], [0, 1])
-  const headlineOp = useTransform(scrollYProgress, [0.87, 0.93], [0, 1])
-  const headlineY  = useTransform(scrollYProgress, [0.87, 0.93], ['18px', '0px'])
-  const bodyOp     = useTransform(scrollYProgress, [0.89, 0.95], [0, 1])
-  const bodyY      = useTransform(scrollYProgress, [0.89, 0.95], ['12px', '0px'])
-  const ctaOp      = useTransform(scrollYProgress, [0.92, 0.97], [0, 1])
-  const ctaY       = useTransform(scrollYProgress, [0.92, 0.97], ['10px', '0px'])
+  const wordmarkOp = useTransform(scrollYProgress, [0.76, 0.83], [0, 1])
+  const headlineOp = useTransform(scrollYProgress, [0.78, 0.86], [0, 1])
+  const headlineY  = useTransform(scrollYProgress, [0.78, 0.86], ['18px', '0px'])
+  const bodyOp     = useTransform(scrollYProgress, [0.81, 0.89], [0, 1])
+  const bodyY      = useTransform(scrollYProgress, [0.81, 0.89], ['12px', '0px'])
+  const ctaOp      = useTransform(scrollYProgress, [0.85, 0.93], [0, 1])
+  const ctaY       = useTransform(scrollYProgress, [0.85, 0.93], ['10px', '0px'])
 
   return (
     <section
       ref={containerRef}
-      style={{ height: '220vh', background: '#0d1117', position: 'relative' }}
+      style={{ height: '190vh', background: '#0d1117', position: 'relative' }}
     >
-      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
+      <div style={{ position: 'sticky', top: 0, height: '100svh', overflow: 'hidden' }}>
 
         <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0 }} />
 
