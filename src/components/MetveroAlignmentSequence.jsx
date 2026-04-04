@@ -112,9 +112,9 @@ function buildObjects(count) {
     // ── Color ─────────────────────────────────────────────────────────────────
     const cr = rand()
     let fill, stroke
-    if      (cr > 0.87) { fill = `rgba(91,192,235,${(rand() * 0.05).toFixed(3)})`;  stroke = `rgba(91,192,235,${(0.09 + rand() * 0.11).toFixed(3)})` }
-    else if (cr > 0.75) { fill = `rgba(214,168,110,${(rand() * 0.04).toFixed(3)})`; stroke = `rgba(214,168,110,${(0.07 + rand() * 0.09).toFixed(3)})` }
-    else                { fill = `rgba(255,255,255,${(0.02 + rand() * 0.04).toFixed(3)})`; stroke = `rgba(255,255,255,${(0.05 + rand() * 0.10).toFixed(3)})` }
+    if      (cr > 0.87) { fill = `rgba(91,192,235,${(0.12 + rand() * 0.14).toFixed(3)})`;  stroke = `rgba(91,192,235,${(0.50 + rand() * 0.35).toFixed(3)})` }
+    else if (cr > 0.75) { fill = `rgba(214,168,110,${(0.10 + rand() * 0.12).toFixed(3)})`; stroke = `rgba(214,168,110,${(0.45 + rand() * 0.35).toFixed(3)})` }
+    else                { fill = `rgba(255,255,255,${(0.08 + rand() * 0.10).toFixed(3)})`;  stroke = `rgba(255,255,255,${(0.40 + rand() * 0.40).toFixed(3)})` }
 
     // ── Drift parameters (chaos phase ambient float) ──────────────────────────
     const driftAX = (8  + rand() * 20) * depthScale
@@ -482,6 +482,14 @@ function renderFrame(timestamp, ctx, W, H, progressRef) {
   const rScale   = Math.min(1, Math.max(0.42, W / 1280))
 
   ctx.fillStyle = '#0d1117'
+  ctx.fillRect(0, 0, W, H)
+
+  // Persistent ambient glow so the section never reads as pure black
+  const ambientG = ctx.createRadialGradient(W / 2, H / 2, 0, W / 2, H / 2, Math.max(W, H) * 0.6)
+  ambientG.addColorStop(0,   'rgba(255,255,255,0.04)')
+  ambientG.addColorStop(0.5, 'rgba(255,255,255,0.015)')
+  ambientG.addColorStop(1,   'rgba(255,255,255,0)')
+  ctx.fillStyle = ambientG
   ctx.fillRect(0, 0, W, H)
 
   drawGrid(ctx, W, H)
