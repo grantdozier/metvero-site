@@ -103,9 +103,9 @@ function buildObjects(count) {
     // ── Prominence / opacity ──────────────────────────────────────────────────
     const pr = rand()
     let baseOp, endOp
-    if      (pr > 0.68) { baseOp = 0.18 + rand() * 0.12; endOp = 0.52 + rand() * 0.28 }
-    else if (pr > 0.28) { baseOp = 0.10 + rand() * 0.08; endOp = 0.26 + rand() * 0.18 }
-    else                { baseOp = 0.05 + rand() * 0.05; endOp = 0.12 + rand() * 0.10 }
+    if      (pr > 0.68) { baseOp = 0.28 + rand() * 0.16; endOp = 0.70 + rand() * 0.25 }
+    else if (pr > 0.28) { baseOp = 0.16 + rand() * 0.10; endOp = 0.40 + rand() * 0.20 }
+    else                { baseOp = 0.08 + rand() * 0.07; endOp = 0.18 + rand() * 0.12 }
     baseOp *= depthOpacityMult
     endOp  *= depthOpacityMult
 
@@ -468,7 +468,7 @@ function computeState(obj, progress, time, W, H) {
     x            = obj.ex * W
     y            = obj.ey * H
     rotation     = 0
-    opacity      = lerp(obj.endOp, obj.endOp * 0.08, ft)
+    opacity      = lerp(obj.endOp, obj.endOp * 0.55, ft)
     detailFactor = lerp(1, 0, ft)
   }
 
