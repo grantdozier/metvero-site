@@ -1,203 +1,411 @@
-import { useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useRef, useEffect } from 'react'
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
-// Each object: start position (% of viewport), movement delta (vw/vh), rotation, opacity, visual style
-const OBJECTS = [
-  {
-    id: 1, w: 130, h: 75,
-    l: '6%', t: '10%',
-    dx: ['0vw', '20vw'], dy: ['0vh', '15vh'],
-    r: -12, op: 0.12,
-    bg: 'rgba(255,255,255,0.045)', bd: '1px solid rgba(255,255,255,0.1)', br: 2,
-  },
-  {
-    id: 2, w: 100, h: 58,
-    l: '75%', t: '8%',
-    dx: ['0vw', '-16vw'], dy: ['0vh', '18vh'],
-    r: 7, op: 0.1,
-    bg: 'rgba(255,255,255,0.05)', bd: '1px solid rgba(255,255,255,0.12)', br: 2,
-  },
-  {
-    id: 3, w: 80, h: 44,
-    l: '2%', t: '44%',
-    dx: ['0vw', '19vw'], dy: ['0vh', '2vh'],
-    r: -5, op: 0.08,
-    bg: 'rgba(255,255,255,0.035)', bd: '1px solid rgba(255,255,255,0.08)', br: 2,
-  },
-  {
-    id: 4, w: 92, h: 52,
-    l: '7%', t: '78%',
-    dx: ['0vw', '21vw'], dy: ['0vh', '-16vh'],
-    r: 14, op: 0.09,
-    bg: 'rgba(100,160,255,0.04)', bd: '1px solid rgba(100,160,255,0.12)', br: 2,
-  },
-  {
-    id: 5, w: 68, h: 68,
-    l: '84%', t: '70%',
-    dx: ['0vw', '-19vw'], dy: ['0vh', '-8vh'],
-    r: -18, op: 0.1,
-    bg: 'rgba(255,255,255,0.04)', bd: '1px solid rgba(255,255,255,0.1)', br: 3,
-  },
-  {
-    id: 6, w: 102, h: 32,
-    l: '71%', t: '14%',
-    dx: ['0vw', '-7vw'], dy: ['0vh', '31vh'],
-    r: 5, op: 0.08,
-    bg: 'rgba(255,255,255,0.03)', bd: '1px solid rgba(255,255,255,0.08)', br: 2,
-  },
-  {
-    id: 7, w: 115, h: 2,
-    l: '87%', t: '41%',
-    dx: ['0vw', '-39vw'], dy: ['0vh', '25vh'],
-    r: 0, op: 0.18,
-    bg: 'rgba(255,255,255,0.18)', bd: 'none', br: 0,
-  },
-  {
-    id: 8, w: 86, h: 50,
-    l: '28%', t: '88%',
-    dx: ['0vw', '18vw'], dy: ['0vh', '-26vh'],
-    r: -8, op: 0.09,
-    bg: 'rgba(255,255,255,0.04)', bd: '1px solid rgba(255,255,255,0.1)', br: 2,
-  },
-  {
-    id: 9, w: 18, h: 18,
-    l: '53%', t: '4%',
-    dx: ['0vw', '-5vw'], dy: ['0vh', '29vh'],
-    r: 0, op: 0.2,
-    bg: 'rgba(255,255,255,0.1)', bd: '1px solid rgba(255,255,255,0.25)', br: 9,
-  },
-  {
-    id: 10, w: 60, h: 36,
-    l: '60%', t: '85%',
-    dx: ['0vw', '6vw'], dy: ['0vh', '-22vh'],
-    r: 10, op: 0.09,
-    bg: 'rgba(91,192,235,0.04)', bd: '1px solid rgba(91,192,235,0.1)', br: 2,
-  },
-  {
-    id: 11, w: 14, h: 14,
-    l: '20%', t: '22%',
-    dx: ['0vw', '12vw'], dy: ['0vh', '20vh'],
-    r: 0, op: 0.18,
-    bg: 'rgba(255,255,255,0.08)', bd: '1px solid rgba(255,255,255,0.2)', br: 7,
-  },
-  {
-    id: 12, w: 44, h: 3,
-    l: '3%', t: '66%',
-    dx: ['0vw', '25vw'], dy: ['0vh', '-8vh'],
-    r: -22, op: 0.15,
-    bg: 'rgba(255,255,255,0.15)', bd: 'none', br: 0,
-  },
-]
+// ─── Utilities ────────────────────────────────────────────────────────────────
 
-function AbstractObject({ def, progress }) {
-  const x = useTransform(progress, [0.03, 0.75], def.dx)
-  const y = useTransform(progress, [0.03, 0.75], def.dy)
-  const rotate = useTransform(progress, [0.03, 0.75], [def.r, 0])
-  const opacity = useTransform(
-    progress,
-    [0, 0.04, 0.75, 0.9, 1],
-    [0, def.op, def.op * 1.6, def.op * 0.5, def.op * 0.2],
-  )
-
-  return (
-    <motion.div
-      style={{
-        position: 'absolute',
-        left: def.l,
-        top: def.t,
-        width: def.w,
-        height: def.h,
-        background: def.bg,
-        border: def.bd,
-        borderRadius: def.br,
-        x,
-        y,
-        rotate,
-        opacity,
-      }}
-    />
-  )
+function seededRng(seed) {
+  let s = seed | 0
+  return () => {
+    s ^= s << 13; s ^= s >> 17; s ^= s << 5
+    return (s >>> 0) / 4294967295
+  }
 }
+
+function lerp(a, b, t) { return a + (b - a) * t }
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)) }
+// Smoothstep: slow start → accelerate → gentle settle
+function smoothstep(t) { return t * t * (3 - 2 * t) }
+// Smoother: even more gradual — feels more like gravitational pull
+function smootherstep(t) { return t * t * t * (t * (t * 6 - 15) + 10) }
+
+// ─── Object Generation (module-level — runs once) ─────────────────────────────
+
+function buildObjects(count) {
+  const rand = seededRng(7741)
+  const out = []
+
+  for (let i = 0; i < count; i++) {
+    // ── Type ──────────────────────────────────────────────────────────────────
+    const typeRoll = rand()
+    let type, w, h, br
+    if (typeRoll < 0.20) {
+      type = 'rect';  w = 55  + rand() * 90;  h = 28 + rand() * 58; br = 2
+    } else if (typeRoll < 0.40) {
+      type = 'card';  w = 65  + rand() * 70;  h = 40 + rand() * 40; br = 2
+    } else if (typeRoll < 0.55) {
+      type = 'panel'; w = 70  + rand() * 130; h = 3  + rand() * 13; br = 1
+    } else if (typeRoll < 0.78) {
+      type = 'dot';   w = 5   + rand() * 18;  h = 0;                 br = 50
+    } else {
+      type = 'line';  w = 40  + rand() * 115; h = 1  + rand() * 2;  br = 0
+    }
+    if (type === 'dot') h = w
+
+    // ── Start position — edges, corners, and off-screen ───────────────────────
+    let sx, sy
+    const zone = i % 8
+    switch (zone) {
+      case 0: sx = -0.08 + rand() * 0.12; sy = 0.05 + rand() * 0.90; break // left
+      case 1: sx =  0.96 + rand() * 0.12; sy = 0.05 + rand() * 0.90; break // right
+      case 2: sx =  0.05 + rand() * 0.90; sy = -0.10 + rand() * 0.14; break // top
+      case 3: sx =  0.05 + rand() * 0.90; sy =  0.96 + rand() * 0.12; break // bottom
+      case 4: sx =  rand() * 0.13;         sy = rand() * 0.16;          break // top-left
+      case 5: sx =  0.87 + rand() * 0.13; sy = rand() * 0.16;           break // top-right
+      case 6: sx =  rand() * 0.13;         sy = 0.84 + rand() * 0.16;   break // bot-left
+      default:sx =  0.87 + rand() * 0.13; sy = 0.84 + rand() * 0.16;   break // bot-right
+    }
+
+    // ── End position — 3-column system grid ──────────────────────────────────
+    // Column 0: left panel  (x 0.14–0.36)
+    // Column 1: center      (x 0.40–0.60)
+    // Column 2: right panel (x 0.64–0.86)
+    const endZone  = i % 3
+    const posInZone = Math.floor(i / 3) // 0..33
+    const zoneCol   = posInZone % 4
+    const zoneRow   = Math.floor(posInZone / 4) // 0..8
+
+    let exBase, exRange
+    if (endZone === 0)      { exBase = 0.14; exRange = 0.22 }
+    else if (endZone === 1) { exBase = 0.40; exRange = 0.20 }
+    else                    { exBase = 0.64; exRange = 0.22 }
+
+    const ex = clamp(exBase + (zoneCol / 3) * exRange + (rand() - 0.5) * 0.024, 0.08, 0.92)
+    const ey = clamp(0.12   + (zoneRow / 8) * 0.76    + (rand() - 0.5) * 0.024, 0.08, 0.92)
+
+    // ── Prominence ────────────────────────────────────────────────────────────
+    const prom = rand()
+    let baseOp, endOp
+    if (prom > 0.68) {
+      baseOp = 0.07 + rand() * 0.07; endOp = 0.24 + rand() * 0.22
+    } else if (prom > 0.28) {
+      baseOp = 0.04 + rand() * 0.05; endOp = 0.10 + rand() * 0.13
+    } else {
+      baseOp = 0.02 + rand() * 0.03; endOp = 0.04 + rand() * 0.05
+    }
+
+    // ── Colors ────────────────────────────────────────────────────────────────
+    const cr = rand()
+    let fill, stroke
+    if (cr > 0.86) {
+      fill   = `rgba(91,192,235,${(rand() * 0.05).toFixed(3)})`
+      stroke = `rgba(91,192,235,${(0.08 + rand() * 0.12).toFixed(3)})`
+    } else if (cr > 0.74) {
+      fill   = `rgba(214,168,110,${(rand() * 0.04).toFixed(3)})`
+      stroke = `rgba(214,168,110,${(0.07 + rand() * 0.09).toFixed(3)})`
+    } else {
+      fill   = `rgba(255,255,255,${(0.02 + rand() * 0.04).toFixed(3)})`
+      stroke = `rgba(255,255,255,${(0.05 + rand() * 0.10).toFixed(3)})`
+    }
+
+    // ── Drift (slow ambient float during chaos state) ─────────────────────────
+    const driftAX = 7  + rand() * 19
+    const driftAY = 5  + rand() * 16
+    const driftFX = 0.15 + rand() * 0.40
+    const driftFY = 0.12 + rand() * 0.35
+    const driftPX = rand() * Math.PI * 2
+    const driftPY = rand() * Math.PI * 2
+
+    out.push({
+      type, w, h, br,
+      sx, sy, ex, ey,
+      baseOp, endOp,
+      fill, stroke,
+      startRot: (rand() - 0.5) * 46,
+      driftAX, driftAY, driftFX, driftFY, driftPX, driftPY,
+      stagger: rand() * 0.03, // subtle per-object delay
+    })
+  }
+
+  return out
+}
+
+const OBJECTS = buildObjects(100)
+
+// ─── Canvas Rendering ─────────────────────────────────────────────────────────
+
+function drawGrid(ctx, W, H) {
+  ctx.save()
+  ctx.globalAlpha = 0.028
+  ctx.strokeStyle = 'rgba(255,255,255,0.5)'
+  ctx.lineWidth = 0.5
+  ctx.beginPath()
+  const step = 80
+  for (let x = 0; x <= W + step; x += step) { ctx.moveTo(x, 0); ctx.lineTo(x, H) }
+  for (let y = 0; y <= H + step; y += step) { ctx.moveTo(0, y); ctx.lineTo(W, y) }
+  ctx.stroke()
+  ctx.restore()
+}
+
+function roundedRect(ctx, x, y, w, h, r) {
+  const rc = Math.min(r, w / 2, h / 2)
+  ctx.beginPath()
+  ctx.moveTo(x + rc, y)
+  ctx.lineTo(x + w - rc, y)
+  ctx.quadraticCurveTo(x + w, y, x + w, y + rc)
+  ctx.lineTo(x + w, y + h - rc)
+  ctx.quadraticCurveTo(x + w, y + h, x + w - rc, y + h)
+  ctx.lineTo(x + rc, y + h)
+  ctx.quadraticCurveTo(x, y + h, x, y + h - rc)
+  ctx.lineTo(x, y + rc)
+  ctx.quadraticCurveTo(x, y, x + rc, y)
+  ctx.closePath()
+}
+
+function drawObject(ctx, obj, { x, y, rotation, opacity }) {
+  if (opacity < 0.004) return
+  ctx.save()
+  ctx.globalAlpha = opacity
+  ctx.translate(x, y)
+  if (Math.abs(rotation) > 0.1) ctx.rotate(rotation * (Math.PI / 180))
+
+  const hw = obj.w / 2
+  const hh = obj.h / 2
+
+  if (obj.type === 'dot') {
+    ctx.beginPath()
+    ctx.arc(0, 0, hw, 0, Math.PI * 2)
+    ctx.fillStyle = obj.stroke
+    ctx.fill()
+  } else if (obj.type === 'rect' || obj.type === 'card') {
+    roundedRect(ctx, -hw, -hh, obj.w, obj.h, obj.br)
+    ctx.fillStyle = obj.fill
+    ctx.fill()
+    ctx.strokeStyle = obj.stroke
+    ctx.lineWidth = 0.75
+    ctx.stroke()
+  } else {
+    // panel / line — solid thin elements
+    if (obj.br > 0) {
+      roundedRect(ctx, -hw, -hh, obj.w, obj.h, obj.br)
+    } else {
+      ctx.beginPath()
+      ctx.rect(-hw, -hh, obj.w, obj.h)
+    }
+    ctx.fillStyle = obj.stroke
+    ctx.fill()
+  }
+
+  ctx.restore()
+}
+
+// Connector lines between nearby objects (appear as organization emerges)
+function drawConnectors(ctx, states, progress, W, H) {
+  if (progress < 0.42) return
+
+  const tIn  = smoothstep(clamp((progress - 0.42) / 0.32, 0, 1))
+  const tOut = progress > 0.82 ? clamp((progress - 0.82) / 0.14, 0, 1) : 0
+  const alpha = tIn * 0.085 * (1 - tOut * 0.92)
+  if (alpha < 0.003) return
+
+  const threshold = 0.145 // normalized viewport fraction
+  const connsPerObj = new Array(states.length).fill(0)
+  let drawn = 0
+
+  ctx.save()
+  ctx.strokeStyle = `rgba(255,255,255,${alpha.toFixed(4)})`
+  ctx.lineWidth = 0.5
+  ctx.beginPath()
+
+  for (let i = 0; i < states.length; i++) {
+    if (states[i].opacity < 0.01 || connsPerObj[i] >= 3) continue
+    for (let j = i + 1; j < states.length; j++) {
+      if (drawn >= 200) break
+      if (states[j].opacity < 0.01 || connsPerObj[j] >= 3) continue
+      const dx = (states[i].x - states[j].x) / W
+      const dy = (states[i].y - states[j].y) / H
+      if (dx * dx + dy * dy < threshold * threshold) {
+        ctx.moveTo(states[i].x, states[i].y)
+        ctx.lineTo(states[j].x, states[j].y)
+        connsPerObj[i]++
+        connsPerObj[j]++
+        drawn++
+      }
+    }
+    if (drawn >= 200) break
+  }
+
+  ctx.stroke()
+  ctx.restore()
+}
+
+// Radial glow emerging from center as order forms
+function drawGlow(ctx, W, H, progress) {
+  const tIn  = smootherstep(clamp((progress - 0.38) / 0.36, 0, 1))
+  const tOut = progress > 0.80 ? clamp((progress - 0.80) / 0.14, 0, 1) : 0
+  const a = tIn * 0.075 * (1 - tOut * 0.68)
+  if (a < 0.003) return
+
+  const cx = W / 2
+  const cy = H / 2
+  const r  = Math.max(W, H) * 0.48
+  const g  = ctx.createRadialGradient(cx, cy, 0, cx, cy, r)
+  g.addColorStop(0,    `rgba(255,255,255,${a.toFixed(4)})`)
+  g.addColorStop(0.30, `rgba(255,255,255,${(a * 0.55).toFixed(4)})`)
+  g.addColorStop(0.65, `rgba(255,255,255,${(a * 0.15).toFixed(4)})`)
+  g.addColorStop(1,    'rgba(255,255,255,0)')
+
+  ctx.save()
+  ctx.fillStyle = g
+  ctx.fillRect(0, 0, W, H)
+  ctx.restore()
+}
+
+// Per-object state computation — the core animation logic
+function computeState(obj, progress, time, W, H) {
+  // Per-object stagger shifts when movement begins
+  const p = clamp(progress - obj.stagger, 0, 1)
+
+  let x, y, rotation, opacity
+
+  if (p < 0.20) {
+    // ── Phase 1: Chaos — objects at scattered start positions with ambient drift ──
+    const fadeIn   = Math.min(1, p / 0.04)
+    const driftStr = 1.0
+    const dx = Math.sin(time * obj.driftFX + obj.driftPX) * obj.driftAX * driftStr
+    const dy = Math.cos(time * obj.driftFY + obj.driftPY) * obj.driftAY * driftStr
+
+    x        = obj.sx * W + dx
+    y        = obj.sy * H + dy
+    rotation = obj.startRot
+    opacity  = lerp(0, obj.baseOp, fadeIn)
+
+  } else if (p < 0.50) {
+    // ── Phase 2: Magnetic pull — objects begin moving inward ──
+    const raw    = (p - 0.20) / 0.30
+    const eased  = smoothstep(raw) // slow start, acceleration, not yet settled
+    const driftStr = Math.max(0, 1 - eased * 3.0)
+    const dx = Math.sin(time * obj.driftFX + obj.driftPX) * obj.driftAX * driftStr
+    const dy = Math.cos(time * obj.driftFY + obj.driftPY) * obj.driftAY * driftStr
+
+    x        = lerp(obj.sx * W, obj.ex * W, eased * 0.6) + dx // only 60% of the way
+    y        = lerp(obj.sy * H, obj.ey * H, eased * 0.6) + dy
+    rotation = lerp(obj.startRot, obj.startRot * 0.3, eased)
+    opacity  = lerp(obj.baseOp, obj.baseOp * 1.4, eased)
+
+  } else if (p < 0.75) {
+    // ── Phase 3: Organization snap — objects converge to structured positions ──
+    // They arrive carrying momentum from phase 2 (already at 60% of travel)
+    const raw   = (p - 0.50) / 0.25
+    const eased = smootherstep(raw) // very smooth settle feel
+    const driftStr = Math.max(0, (1 - eased) * 0.15) // nearly zero drift now
+    const dx = Math.sin(time * obj.driftFX + obj.driftPX) * obj.driftAX * driftStr
+    const dy = Math.cos(time * obj.driftFY + obj.driftPY) * obj.driftAY * driftStr
+
+    // Travel from 60% to 100% of end position over this phase
+    const startFraction = lerp(obj.sx * W, obj.ex * W, 0.6)
+    const startFractionY = lerp(obj.sy * H, obj.ey * H, 0.6)
+
+    x        = lerp(startFraction, obj.ex * W, eased) + dx
+    y        = lerp(startFractionY, obj.ey * H, eased) + dy
+    rotation = lerp(obj.startRot * 0.3, 0, eased)
+    opacity  = lerp(obj.baseOp * 1.4, obj.endOp, eased)
+
+  } else if (p < 0.86) {
+    // ── Phase 4: Settled — structure complete, motion stops ──
+    x        = obj.ex * W
+    y        = obj.ey * H
+    rotation = 0
+    opacity  = obj.endOp
+
+  } else {
+    // ── Phase 5: Reveal — organized system fades back for Metvero ──
+    const ft = (p - 0.86) / 0.14
+    x        = obj.ex * W
+    y        = obj.ey * H
+    rotation = 0
+    opacity  = lerp(obj.endOp, obj.endOp * 0.10, smoothstep(ft))
+  }
+
+  return { x, y, rotation, opacity }
+}
+
+function renderFrame(timestamp, ctx, W, H, progressRef) {
+  const time     = timestamp / 1000
+  const progress = progressRef.current
+
+  // Background
+  ctx.fillStyle = '#0d1117'
+  ctx.fillRect(0, 0, W, H)
+
+  drawGrid(ctx, W, H)
+
+  const states = OBJECTS.map(obj => computeState(obj, progress, time, W, H))
+
+  drawConnectors(ctx, states, progress, W, H)
+  drawGlow(ctx, W, H, progress)
+  OBJECTS.forEach((obj, i) => drawObject(ctx, obj, states[i]))
+}
+
+// ─── React Component ──────────────────────────────────────────────────────────
 
 export default function MetveroAlignmentSequence() {
   const containerRef = useRef(null)
+  const canvasRef    = useRef(null)
+  const rafRef       = useRef(null)
+  const progressRef  = useRef(0)
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ['start start', 'end end'],
   })
 
-  // Center intelligence glow: emerges mid-sequence, recedes during reveal
-  const glowOpacity = useTransform(
-    scrollYProgress,
-    [0.42, 0.68, 0.85, 1],
-    [0, 0.55, 0.25, 0.08],
-  )
-  const glowScale = useTransform(scrollYProgress, [0.42, 0.75], [0.5, 1])
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    progressRef.current = v
+  })
 
-  // Metvero reveal: only after the system has organized
-  const revealOpacity = useTransform(scrollYProgress, [0.82, 0.96], [0, 1])
-  const revealY = useTransform(scrollYProgress, [0.82, 0.96], ['18px', '0px'])
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+
+    const resize = () => {
+      const W = window.innerWidth
+      const H = window.innerHeight
+      canvas.width        = W * dpr
+      canvas.height       = H * dpr
+      canvas.style.width  = `${W}px`
+      canvas.style.height = `${H}px`
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+
+    resize()
+    window.addEventListener('resize', resize)
+
+    let active = true
+    const loop = (ts) => {
+      if (!active) return
+      renderFrame(ts, ctx, window.innerWidth, window.innerHeight, progressRef)
+      rafRef.current = requestAnimationFrame(loop)
+    }
+    rafRef.current = requestAnimationFrame(loop)
+
+    return () => {
+      active = false
+      cancelAnimationFrame(rafRef.current)
+      window.removeEventListener('resize', resize)
+    }
+  }, [])
+
+  // Metvero reveal — HTML overlay driven by scroll
+  const revealOpacity = useTransform(scrollYProgress, [0.84, 0.97], [0, 1])
+  const revealY       = useTransform(scrollYProgress, [0.84, 0.97], ['20px', '0px'])
 
   return (
     <section
       ref={containerRef}
       style={{ height: '220vh', background: '#0d1117', position: 'relative' }}
     >
-      {/* Sticky full-screen viewport */}
-      <div
-        style={{
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
-          overflow: 'hidden',
-        }}
-      >
-        {/* Ambient grid — same pattern as hero */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            opacity: 0.03,
-            backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)',
-            backgroundSize: '80px 80px',
-          }}
+      <div style={{ position: 'sticky', top: 0, height: '100vh', overflow: 'hidden' }}>
+
+        {/* Canvas — all objects, lines, glow rendered here */}
+        <canvas
+          ref={canvasRef}
+          style={{ position: 'absolute', inset: 0 }}
         />
 
-        {/* Abstract objects — scatter then organize via scroll */}
-        <div style={{ position: 'absolute', inset: 0 }}>
-          {OBJECTS.map((obj) => (
-            <AbstractObject key={obj.id} def={obj} progress={scrollYProgress} />
-          ))}
-        </div>
-
-        {/* Center intelligence glow — invisible force pulling everything inward */}
-        <div
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: '50%',
-            width: 0,
-            height: 0,
-          }}
-        >
-          <motion.div
-            style={{
-              x: '-50%',
-              y: '-50%',
-              width: 640,
-              height: 420,
-              background:
-                'radial-gradient(ellipse, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.02) 40%, transparent 70%)',
-              opacity: glowOpacity,
-              scale: glowScale,
-              pointerEvents: 'none',
-            }}
-          />
-        </div>
-
-        {/* Metvero reveal — the resolved final state */}
+        {/* Metvero reveal overlay */}
         <motion.div
           style={{
             position: 'absolute',
@@ -212,7 +420,6 @@ export default function MetveroAlignmentSequence() {
             zIndex: 20,
           }}
         >
-          {/* Wordmark label */}
           <p
             style={{
               fontFamily: "'Space Grotesk', sans-serif",
@@ -227,7 +434,6 @@ export default function MetveroAlignmentSequence() {
             METVERO
           </p>
 
-          {/* Primary headline */}
           <h2
             style={{
               fontFamily: "'Inter', sans-serif",
@@ -243,7 +449,6 @@ export default function MetveroAlignmentSequence() {
             One layer. Clear direction.
           </h2>
 
-          {/* Supporting copy */}
           <p
             style={{
               fontFamily: "'Inter', sans-serif",
@@ -261,7 +466,6 @@ export default function MetveroAlignmentSequence() {
             institutional operations.
           </p>
 
-          {/* CTA */}
           <a
             href="#athena"
             style={{
@@ -281,14 +485,14 @@ export default function MetveroAlignmentSequence() {
               transition: 'background 0.3s, border-color 0.3s, color 0.3s',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.11)'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.22)'
-              e.currentTarget.style.color = 'rgba(255,255,255,0.95)'
+              e.currentTarget.style.background   = 'rgba(255,255,255,0.11)'
+              e.currentTarget.style.borderColor  = 'rgba(255,255,255,0.22)'
+              e.currentTarget.style.color        = 'rgba(255,255,255,0.95)'
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.07)'
-              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)'
-              e.currentTarget.style.color = 'rgba(255,255,255,0.8)'
+              e.currentTarget.style.background   = 'rgba(255,255,255,0.07)'
+              e.currentTarget.style.borderColor  = 'rgba(255,255,255,0.14)'
+              e.currentTarget.style.color        = 'rgba(255,255,255,0.8)'
             }}
           >
             Explore Platform
@@ -296,16 +500,17 @@ export default function MetveroAlignmentSequence() {
           </a>
         </motion.div>
 
-        {/* Bottom fade — smooth handoff to next section */}
+        {/* Bottom fade — smooth handoff into next section */}
         <div
           style={{
             position: 'absolute',
             bottom: 0,
             left: 0,
             right: 0,
-            height: 80,
+            height: 90,
             background: 'linear-gradient(to bottom, transparent, #0d1117)',
             pointerEvents: 'none',
+            zIndex: 30,
           }}
         />
       </div>
