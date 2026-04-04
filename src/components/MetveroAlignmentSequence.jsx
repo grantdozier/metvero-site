@@ -127,10 +127,6 @@ export default function MetveroAlignmentSequence() {
     offset: ['start start', 'end end'],
   })
 
-  // Chaos text: fades in immediately, holds, then fades out as objects begin organizing
-  const chaosOpacity = useTransform(scrollYProgress, [0, 0.07, 0.35, 0.52], [0, 1, 1, 0])
-  const chaosY = useTransform(scrollYProgress, [0.35, 0.52], ['0px', '-20px'])
-
   // Center intelligence glow: emerges mid-sequence, recedes during reveal
   const glowOpacity = useTransform(
     scrollYProgress,
@@ -200,51 +196,6 @@ export default function MetveroAlignmentSequence() {
             }}
           />
         </div>
-
-        {/* Chaos text — visible at the start of the sequence */}
-        <motion.div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            opacity: chaosOpacity,
-            y: chaosY,
-            pointerEvents: 'none',
-            zIndex: 10,
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 'clamp(1.4rem, 3vw, 2.4rem)',
-              fontWeight: 300,
-              color: 'rgba(255,255,255,0.72)',
-              letterSpacing: '-0.015em',
-              lineHeight: 1.4,
-              textAlign: 'center',
-              margin: 0,
-            }}
-          >
-            Everything is scattered.
-          </p>
-          <p
-            style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: 'clamp(1.4rem, 3vw, 2.4rem)',
-              fontWeight: 300,
-              color: 'rgba(255,255,255,0.35)',
-              letterSpacing: '-0.015em',
-              lineHeight: 1.4,
-              textAlign: 'center',
-              margin: '0.4em 0 0',
-            }}
-          >
-            Nothing is aligned.
-          </p>
-        </motion.div>
 
         {/* Metvero reveal — the resolved final state */}
         <motion.div
