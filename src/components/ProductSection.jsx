@@ -40,7 +40,7 @@ export default function ProductSection({
     <section id={id} className="relative py-24 lg:py-40 overflow-hidden">
       {/* Background accent glow */}
       <div
-        className="absolute w-[600px] h-[600px] rounded-full blur-[200px] opacity-[0.03]"
+        className="absolute w-[600px] h-[600px] rounded-full blur-[200px] opacity-[0.03] pointer-events-none"
         style={{
           backgroundColor: accentColor,
           top: '10%',
