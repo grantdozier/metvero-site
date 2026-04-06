@@ -1,6 +1,7 @@
 import { BookOpen, Users, BarChart3, Zap, Target, Database } from 'lucide-react'
 import Hero from '../components/Hero'
 import MetveroAlignmentSequence from '../components/MetveroAlignmentSequence'
+import ServicesSection from '../components/ServicesSection'
 import ProductSection from '../components/ProductSection'
 import CTA from '../components/CTA'
 import FadeIn from '../components/FadeIn'
@@ -54,13 +55,13 @@ export default function Home() {
           <FadeIn>
             <p className="text-xl sm:text-2xl lg:text-[1.75rem] font-light leading-relaxed tracking-[-0.01em]">
               <span className="text-white/45">
-                Advising. Athletics. Operations.
+                Strategy. Systems. Products.
               </span>{' '}
               <span className="text-white/85">
-                One platform that unifies fragmented systems and surfaces
-                intelligence that empowers institutions to be{' '}
+                We embed with institutions to turn fragmented operations into
+                unified intelligence — making them{' '}
               </span>
-              <span className="text-white/45 underline underline-offset-4 decoration-white/20">less transactional</span>
+              <span className="text-white/45 underline underline-offset-4 decoration-white/20">less reactive</span>
               <span className="text-white/85"> and </span>
               <span className="text-white/45 underline underline-offset-4 decoration-white/20">more transformative</span>
               <span className="text-white/85">.</span>
@@ -68,6 +69,11 @@ export default function Home() {
           </FadeIn>
         </div>
       </section>
+
+      <div className="border-t border-white/[0.06]" />
+
+      {/* Services */}
+      <ServicesSection />
 
       <div className="border-t border-white/[0.06]" />
 
@@ -134,9 +140,9 @@ export default function Home() {
 
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-16">
             {[
-              { value: '1', label: 'Unified Platform' },
-              { value: '2', label: 'Purpose-Built Products' },
-              { value: '360°', label: 'Student View' },
+              { value: '3', label: 'Practice Areas' },
+              { value: '2', label: 'Flagship Products' },
+              { value: '360°', label: 'Institutional View' },
               { value: '∞', label: 'Possibilities' },
             ].map((stat, i) => (
               <FadeIn key={stat.label} delay={i * 0.1}>

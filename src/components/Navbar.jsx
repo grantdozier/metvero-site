@@ -36,24 +36,24 @@ export default function Navbar() {
 
         <div className="flex items-center gap-6 lg:gap-8">
           <Link
-            to="/athena"
+            to="/services"
             className={`text-[13px] transition-all duration-300 hidden sm:block px-3 py-1.5 ${
-              location.pathname === '/athena'
-                ? 'text-[#D6A86E] bg-[#D6A86E]/10'
-                : 'text-[#D6A86E]/70 hover:text-[#D6A86E] hover:bg-[#D6A86E]/[0.06]'
+              location.pathname === '/services'
+                ? 'text-white/90 bg-white/[0.08]'
+                : 'text-white/50 hover:text-white/80 hover:bg-white/[0.04]'
             }`}
           >
-            ATHENA
+            SERVICES
           </Link>
           <Link
-            to="/hermes"
+            to="/products"
             className={`text-[13px] transition-all duration-300 hidden sm:block px-3 py-1.5 ${
-              location.pathname === '/hermes'
-                ? 'text-[#5BC0EB] bg-[#5BC0EB]/10'
-                : 'text-[#5BC0EB]/70 hover:text-[#5BC0EB] hover:bg-[#5BC0EB]/[0.06]'
+              ['/products', '/athena', '/hermes'].includes(location.pathname)
+                ? 'text-white/90 bg-white/[0.08]'
+                : 'text-white/50 hover:text-white/80 hover:bg-white/[0.04]'
             }`}
           >
-            HERMES
+            PRODUCTS
           </Link>
           <a
             href={isHome ? '#contact' : '/#contact'}
