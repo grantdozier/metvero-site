@@ -38,7 +38,7 @@ export default function HermesPage() {
       {/* Feature 1 */}
       <FeatureBlock
         title="Performance Analytics"
-        description="Body composition, training load, strength metrics, and readiness — unified in one view. See who's peaking, who's at risk, and who's ready to compete."
+        description="Training, conditioning, and readiness data — unified in one view. See who's peaking, who's at risk, and who's ready to compete."
         image={{
           src: '/college_athletics_treadmill_USE_THIS_ONE.png',
           alt: 'Athletic performance monitoring with real-time data',
@@ -46,9 +46,9 @@ export default function HermesPage() {
         accentColor={accent}
         reversed={false}
         bullets={[
-          'Integrated body composition, strength, and conditioning data across every athlete',
-          'Readiness scoring and injury risk indicators updated in real time',
-          'Position-specific benchmarks and progression tracking',
+          'Holistic athlete performance data unified across every program',
+          'Readiness and injury risk visibility updated in real time',
+          'Progression tracking across every athlete and position',
         ]}
       />
 
@@ -85,7 +85,7 @@ export default function HermesPage() {
       {/* Feature 3 */}
       <FeatureBlock
         title="Recruiting & Operations"
-        description="Pipeline analytics, combine benchmarks, position-specific scouting, and game week operations — from prospect to program."
+        description="Recruiting intelligence, performance evaluation, and game week operations — from prospect to program."
         image={{
           src: '/college_athletics_techy_data_analytics.png',
           alt: 'Athletic data analytics visualization',
@@ -93,9 +93,9 @@ export default function HermesPage() {
         accentColor={accent}
         reversed={false}
         bullets={[
-          'Recruiting pipeline intelligence with prospect scoring and fit analysis',
-          'Combine and performance benchmarks by position and conference',
-          'Game week operational planning and depth chart management',
+          'Recruiting pipeline intelligence from prospect to signed athlete',
+          'Performance evaluation tools built for your conference and competition level',
+          'Game week operations and roster management in one place',
         ]}
       />
 

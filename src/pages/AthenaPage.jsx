@@ -12,7 +12,7 @@ export default function AthenaPage() {
         bgImage="/college_students_learning_BEST_ONE.png"
         label="Athena"
         headline="Academic Operations"
-        subtitle="Map every student's past, present, and future — verified against live data, in real time."
+        subtitle="A unified view of every student's academic journey — past, present, and future."
         accentColor={accent}
         accentGradient="linear-gradient(90deg, #D6A86E, #E8C590)"
       />
@@ -39,7 +39,7 @@ export default function AthenaPage() {
       {/* Feature 1 */}
       <FeatureBlock
         title="Dream-Driven Paths"
-        description="Students declare where they want to go — a career, a graduate program, a credential. Athena computes every verified route to get there, across every degree, every requirement, every open section."
+        description="Students declare where they want to go — a career, a graduate program, a credential. Athena surfaces the best paths forward, tailored to their goals and academic standing."
         image={{
           src: '/college_students_fun.jpg',
           alt: 'Students on campus',
@@ -47,9 +47,9 @@ export default function AthenaPage() {
         accentColor={accent}
         reversed={false}
         bullets={[
-          'Students describe their goals in their own words — Athena translates ambition into action',
-          'Every academic option surfaced and ranked, not just the ones an advisor already knows',
-          'Live course availability built into every recommendation',
+          'Students describe their goals in their own words — Athena turns ambition into a clear plan',
+          'Academic options surfaced and prioritized, not just the ones an advisor already knows',
+          "Recommendations grounded in what's actually available right now",
         ]}
       />
 

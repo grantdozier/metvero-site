@@ -162,9 +162,9 @@ export default function ProductsPage() {
               </FadeIn>
               <FadeIn delay={0.15}>
                 <p className="text-[16px] text-white/50 leading-relaxed mb-8 max-w-lg">
-                  The unified academic platform that maps every student's past,
-                  present, and every possible future. Dream-driven paths, advisor
-                  superpowers, and institutional intelligence — all in one system.
+                  The unified academic platform that brings every student's
+                  journey into a single, clear view — from where they've been
+                  to where they're going.
                 </p>
               </FadeIn>
               <FadeIn delay={0.2}>
@@ -276,10 +276,10 @@ export default function ProductsPage() {
               </FadeIn>
               <FadeIn delay={0.15}>
                 <p className="text-[16px] text-white/50 leading-relaxed mb-8 max-w-lg">
-                  Big data meets athletics. Real-time performance analytics,
+                  Athletics operations, unified. Performance visibility,
                   automated compliance, and recruiting intelligence — giving
-                  programs a competitive edge from the training room to the front
-                  office.
+                  programs a competitive edge from the training room to the
+                  front office.
                 </p>
               </FadeIn>
               <FadeIn delay={0.2}>
@@ -296,121 +296,6 @@ export default function ProductsPage() {
                 </Link>
               </FadeIn>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="border-t border-white/[0.06]" />
-
-      {/* ================================================================ */}
-      {/* THE HORIZON — Titan & Ares emerging from fog                    */}
-      {/* ================================================================ */}
-      <section className="relative py-32 lg:py-48 overflow-hidden">
-        {/* Deep fog gradient — fades up from darkness */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0d1117] via-[#0d1117] to-[#0d1117]" />
-        <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-white/[0.01] to-transparent" />
-
-        <div className="relative z-10 max-w-5xl mx-auto px-6 lg:px-8">
-          {/* Section intro */}
-          <div className="text-center mb-24 lg:mb-32">
-            <FadeIn>
-              <div className="flex items-center justify-center gap-4 mb-8">
-                <div className="w-12 h-px bg-white/[0.08]" />
-                <span className="text-[10px] tracking-[0.35em] uppercase text-white/20 font-medium">
-                  On the Horizon
-                </span>
-                <div className="w-12 h-px bg-white/[0.08]" />
-              </div>
-            </FadeIn>
-            <FadeIn delay={0.1}>
-              <p className="text-[16px] text-white/30 leading-relaxed max-w-md mx-auto">
-                New industries. New problems. Same approach — built from the
-                inside out.
-              </p>
-            </FadeIn>
-          </div>
-
-          {/* Titan */}
-          <div className="mb-24 lg:mb-32">
-            <FadeIn>
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-8 h-px bg-[#C87533]/20" />
-                <span className="text-[10px] tracking-[0.3em] uppercase text-[#C87533]/30 font-medium">
-                  003
-                </span>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.1}>
-              <h2
-                className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.85] mb-4"
-                style={{
-                  background: 'linear-gradient(135deg, #C87533, #D4944F)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  opacity: 0.6,
-                }}
-              >
-                Titan
-              </h2>
-            </FadeIn>
-
-            <FadeIn delay={0.18}>
-              <p className="text-[12px] tracking-[0.2em] uppercase text-[#C87533]/30 font-medium mb-6">
-                Disaster Recovery & Government
-              </p>
-            </FadeIn>
-
-            <FadeIn delay={0.25}>
-              <p className="text-[15px] text-white/25 leading-relaxed max-w-lg">
-                Resilient infrastructure intelligence for the agencies and
-                organizations that can't afford downtime. Built for disaster
-                response, continuity of operations, and critical government
-                systems.
-              </p>
-            </FadeIn>
-          </div>
-
-          {/* Ares */}
-          <div>
-            <FadeIn>
-              <div className="flex items-center gap-4 mb-8">
-                <div className="w-8 h-px bg-[#C44536]/20" />
-                <span className="text-[10px] tracking-[0.3em] uppercase text-[#C44536]/30 font-medium">
-                  004
-                </span>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.1}>
-              <h2
-                className="text-5xl sm:text-6xl lg:text-8xl font-bold tracking-[-0.03em] leading-[0.85] mb-4"
-                style={{
-                  background: 'linear-gradient(135deg, #C44536, #D4655A)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                  opacity: 0.6,
-                }}
-              >
-                Ares
-              </h2>
-            </FadeIn>
-
-            <FadeIn delay={0.18}>
-              <p className="text-[12px] tracking-[0.2em] uppercase text-[#C44536]/30 font-medium mb-6">
-                Defense & Military Applications
-              </p>
-            </FadeIn>
-
-            <FadeIn delay={0.25}>
-              <p className="text-[15px] text-white/25 leading-relaxed max-w-lg">
-                Operational intelligence for defense. Purpose-built for the
-                speed, security, and precision that military applications
-                demand.
-              </p>
-            </FadeIn>
           </div>
         </div>
       </section>

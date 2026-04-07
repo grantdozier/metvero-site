@@ -9,8 +9,8 @@ const services = [
     description:
       'We assess your data landscape, identify the highest-impact AI opportunities, and architect the roadmap — before a single line of code is written.',
     details: [
-      'Institutional AI readiness assessments',
-      'Data infrastructure & pipeline design',
+      'Comprehensive AI readiness assessments',
+      'Technology landscape & infrastructure analysis',
       'Build vs. buy analysis',
     ],
   },
@@ -20,9 +20,9 @@ const services = [
     description:
       'We connect your fragmented tools into a unified intelligence layer. No rip-and-replace — we meet you where you are and build forward.',
     details: [
-      'Legacy system modernization',
-      'API & data unification',
-      'Real-time analytics infrastructure',
+      'Legacy system modernization & unification',
+      'Cross-platform data connectivity',
+      'Modern analytics infrastructure',
     ],
   },
   {
@@ -32,7 +32,7 @@ const services = [
       'When off-the-shelf won\'t cut it, we design and engineer custom platforms purpose-built for your operations.',
     details: [
       'End-to-end product development',
-      'AI/ML model design & deployment',
+      'AI capabilities design & deployment',
       'Ongoing iteration & support',
     ],
   },

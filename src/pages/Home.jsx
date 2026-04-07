@@ -10,7 +10,7 @@ const athenaFeatures = [
   {
     icon: BookOpen,
     title: 'Dream-Driven Paths',
-    desc: 'Students say where they want to go. We compute every verified path to get there.',
+    desc: 'Students say where they want to go. Athena lights the way forward.',
   },
   {
     icon: Users,
@@ -28,17 +28,17 @@ const hermesFeatures = [
   {
     icon: Zap,
     title: 'Performance Analytics',
-    desc: 'Body comp, training load, strength metrics, and readiness — one view.',
+    desc: 'Training, performance, and readiness data — unified in one view.',
   },
   {
     icon: Target,
     title: 'Compliance & Eligibility',
-    desc: 'APR, CARA hours, eligibility matrices — fully automated.',
+    desc: 'Compliance tracking and eligibility management — fully automated.',
   },
   {
     icon: Database,
     title: 'Recruiting & Operations',
-    desc: 'Pipeline analytics, combine benchmarks, and game week ops.',
+    desc: 'Recruiting intelligence and game-day operations — streamlined.',
   },
 ]
 
@@ -82,7 +82,7 @@ export default function Home() {
         id="athena"
         name="Athena"
         tagline="Academic Operations"
-        description="The unified academic platform that maps every student's past, present, and every possible future."
+        description="The unified academic platform that brings every student's journey into a single, clear view."
         features={athenaFeatures}
         accentColor="#D6A86E"
         reversed={false}
@@ -116,7 +116,7 @@ export default function Home() {
         id="hermes"
         name="Hermes"
         tagline="Athletic Operations"
-        description="Big data meets athletics. Real-time performance intelligence that gives programs a competitive edge."
+        description="Athletics operations, unified. Performance visibility that gives programs a competitive edge."
         features={hermesFeatures}
         accentColor="#5BC0EB"
         reversed={true}
