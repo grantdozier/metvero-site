@@ -17,9 +17,9 @@ const services = [
     description:
       'Before writing a single line of code, we map your institutional data landscape, identify the highest-impact AI opportunities, and architect a roadmap that actually gets executed — not a slide deck that collects dust.',
     bullets: [
-      'Institutional AI readiness assessments across every department and system',
-      'Data pipeline and infrastructure analysis — what you have, what you need, what to build first',
-      'Build vs. buy vs. integrate recommendations grounded in your reality, not vendor hype',
+      'Comprehensive AI readiness assessments across your organization',
+      'Technology landscape analysis — what you have, what you need, and where to start',
+      'Honest build vs. buy recommendations grounded in your reality, not vendor hype',
     ],
     Visual: DiscoveryMap,
   },
@@ -28,11 +28,11 @@ const services = [
     label: 'Systems Integration',
     headline: 'One Source of Truth',
     description:
-      'Your institution runs on dozens of disconnected tools — SIS, LMS, CRM, ERP, athletic platforms, compliance systems. We connect them into a unified intelligence layer without ripping out what works.',
+      'Your institution runs on dozens of disconnected tools. We connect them into a unified intelligence layer without ripping out what works.',
     bullets: [
-      'Legacy system modernization and API unification across your entire technology stack',
-      'Real-time data pipelines that keep every system in sync — not nightly batch jobs',
-      'Zero-downtime migration strategies — we meet you where you are and build forward',
+      'Legacy system modernization and unification across your technology stack',
+      'Modern data infrastructure that keeps every system in sync',
+      'Migration strategies designed around continuity — we meet you where you are and build forward',
     ],
     Visual: UnificationDiagram,
   },
@@ -44,8 +44,8 @@ const services = [
       'When off-the-shelf tools force you to reshape your operations around their limitations, we do the opposite. We design and engineer custom platforms built around the way your institution actually works.',
     bullets: [
       'End-to-end product development — from discovery workshops to production deployment',
-      'AI/ML model design, training, and deployment embedded directly into your workflows',
-      'Ongoing iteration and support — we ship v1 fast, then evolve based on real usage data',
+      'AI capabilities designed and embedded directly into your workflows',
+      'Ongoing iteration and support — we ship fast, then evolve based on real usage',
     ],
     Visual: BlueprintDiagram,
   },

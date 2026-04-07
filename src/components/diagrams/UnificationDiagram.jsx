@@ -15,14 +15,14 @@ const ease = [0.22, 1, 0.36, 1]
 
 // System blocks — 8 nodes arranged around the hub
 const systems = [
-  { id: 'SIS',  label: 'SIS',   x: 4,  y: 4,   w: 16, h: 10, startX: -2, startY: -2 },
-  { id: 'LMS',  label: 'LMS',   x: 42, y: 2,   w: 16, h: 10, startX: 42, startY: -4 },
-  { id: 'CRM',  label: 'CRM',   x: 80, y: 4,   w: 16, h: 10, startX: 86, startY: -2 },
-  { id: 'HRIS', label: 'HRIS',  x: 82, y: 45,  w: 16, h: 10, startX: 90, startY: 45 },
-  { id: 'ERP',  label: 'ERP',   x: 80, y: 86,  w: 16, h: 10, startX: 86, startY: 92 },
-  { id: 'DW',   label: 'DW',    x: 42, y: 88,  w: 16, h: 10, startX: 42, startY: 94 },
-  { id: 'API',  label: 'API',   x: 4,  y: 86,  w: 16, h: 10, startX: -2, startY: 92 },
-  { id: 'AUTH', label: 'AUTH',   x: 2,  y: 45,  w: 16, h: 10, startX: -6, startY: 45 },
+  { id: 'A',  label: 'System A',  x: 4,  y: 4,   w: 16, h: 10, startX: -2, startY: -2 },
+  { id: 'B',  label: 'System B',  x: 42, y: 2,   w: 16, h: 10, startX: 42, startY: -4 },
+  { id: 'C',  label: 'System C',  x: 80, y: 4,   w: 16, h: 10, startX: 86, startY: -2 },
+  { id: 'D',  label: 'System D',  x: 82, y: 45,  w: 16, h: 10, startX: 90, startY: 45 },
+  { id: 'E',  label: 'System E',  x: 80, y: 86,  w: 16, h: 10, startX: 86, startY: 92 },
+  { id: 'F',  label: 'System F',  x: 42, y: 88,  w: 16, h: 10, startX: 42, startY: 94 },
+  { id: 'G',  label: 'System G',  x: 4,  y: 86,  w: 16, h: 10, startX: -2, startY: 92 },
+  { id: 'H',  label: 'System H',  x: 2,  y: 45,  w: 16, h: 10, startX: -6, startY: 45 },
 ]
 
 // Central hub
