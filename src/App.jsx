@@ -5,6 +5,8 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
+import ServicesPage from './pages/ServicesPage'
+import ProductsPage from './pages/ProductsPage'
 import AthenaPage from './pages/AthenaPage'
 import HermesPage from './pages/HermesPage'
 
@@ -32,6 +34,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/services" element={<ServicesPage />} />
+          <Route path="/products" element={<ProductsPage />} />
           <Route path="/athena" element={<AthenaPage />} />
           <Route path="/hermes" element={<HermesPage />} />
         </Routes>

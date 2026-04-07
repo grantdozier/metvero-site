@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 
 const taglines = [
+  { lines: ['Institutional', 'Intelligence'], gradient: 'linear-gradient(90deg, #ffffff, #a0aec0)', glow: 'rgba(255,255,255,0.15)' },
   { lines: ['Academic', 'Operations'], gradient: 'linear-gradient(90deg, #D6A86E, #E8C590)', glow: 'rgba(214,168,110,0.25)' },
   { lines: ['Athletic', 'Operations'], gradient: 'linear-gradient(90deg, #5BC0EB, #6FD3FF)', glow: 'rgba(91,192,235,0.25)' },
 ]
@@ -65,7 +66,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 1.4, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="inline-block text-[11px] tracking-[0.35em] uppercase text-white/40 font-medium">
-            A Decision Layer for Modern Universities
+            AI Consulting & Engineering
           </span>
         </motion.div>
 
@@ -79,7 +80,7 @@ export default function Hero() {
           <h1 className="text-[clamp(1.4rem,4vw,3.8rem)] font-extralight leading-[0.95] tracking-[0.03em] text-white/60">
             The Future of
           </h1>
-          <div className="h-[clamp(5.5rem,13vw,12rem)] relative overflow-hidden flex items-start justify-center pt-2">
+          <div className="h-[clamp(7.5rem,17vw,16rem)] relative overflow-hidden flex items-start justify-center pt-2">
             <AnimatePresence mode="wait">
               <motion.h1
                 key={index}
@@ -87,7 +88,7 @@ export default function Hero() {
                 animate={{ opacity: 1, filter: 'blur(0px)' }}
                 exit={{ opacity: 0, filter: 'blur(8px)' }}
                 transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
-                className="text-[clamp(2.5rem,7vw,6.5rem)] leading-[0.85] tracking-[0.015em]"
+                className="text-[clamp(2.3rem,6.5vw,6rem)] leading-[1.05] tracking-[0.015em]"
                 style={{
                   fontFamily: "'Space Grotesk', sans-serif",
                   fontWeight: 700,
@@ -110,7 +111,7 @@ export default function Hero() {
             className="text-[clamp(1.4rem,4vw,3.8rem)] font-extralight leading-[1.1] tracking-[0.05em] mt-2 pb-2"
             style={{
               textShadow: '0 0 10px rgba(255,255,255,0.12)',
-              transform: 'translateX(clamp(2px, 0.5vw, 8px)) translateY(-4px)',
+              transform: 'translateX(clamp(2px, 0.5vw, 8px)) translateY(-34px)',
               color: 'rgba(255,255,255,0.8)',
             }}
           >
@@ -125,7 +126,7 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 2.8, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8 text-[17px] leading-relaxed text-white/50 max-w-xl mx-auto"
         >
-          Every system connected. Every path computed. Every decision informed.
+          We partner with institutions to design, build, and deploy AI that transforms operations.
         </motion.p>
 
         {/* CTAs — last to appear */}
@@ -136,10 +137,10 @@ export default function Hero() {
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
         >
           <a
-            href="#athena"
+            href="#services"
             className="group inline-flex items-center gap-2.5 bg-white text-[#0d1117] px-6 py-3 text-[13px] font-semibold hover:bg-white/90 transition-all duration-300"
           >
-            Enter Platform
+            What We Build
             <ArrowRight
               size={14}
               className="group-hover:translate-x-0.5 transition-transform duration-300"
