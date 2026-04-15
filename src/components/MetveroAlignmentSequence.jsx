@@ -510,26 +510,9 @@ export default function MetveroAlignmentSequence() {
   const rafRef       = useRef(null)
   const progressRef  = useRef(0)
 
-  // Manual scroll tracker — reliable with Lenis unlike useScroll
+  // Manual scroll tracker — updated inside the RAF loop so it is
+  // perfectly synchronised with the canvas render (no cross-frame lag).
   const scrollProgress = useMotionValue(0)
-
-  useEffect(() => {
-    const section = containerRef.current
-    if (!section) return
-
-    const update = () => {
-      const rect  = section.getBoundingClientRect()
-      const total = rect.height - window.innerHeight
-      if (total <= 0) return
-      const p = Math.max(0, Math.min(1, -rect.top / total))
-      scrollProgress.set(p)
-      progressRef.current = p
-    }
-
-    window.addEventListener('scroll', update, { passive: true })
-    update()
-    return () => window.removeEventListener('scroll', update)
-  }, [scrollProgress])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -550,6 +533,17 @@ export default function MetveroAlignmentSequence() {
     let active = true
     const loop = ts => {
       if (!active) return
+      // Compute scroll progress in the same frame as the render
+      const section = containerRef.current
+      if (section) {
+        const rect  = section.getBoundingClientRect()
+        const total = rect.height - window.innerHeight
+        if (total > 0) {
+          const p = Math.max(0, Math.min(1, -rect.top / total))
+          scrollProgress.set(p)
+          progressRef.current = p
+        }
+      }
       renderFrame(ts, ctx, window.innerWidth, window.innerHeight, progressRef)
       rafRef.current = requestAnimationFrame(loop)
     }
@@ -574,7 +568,7 @@ export default function MetveroAlignmentSequence() {
   return (
     <section
       ref={containerRef}
-      style={{ height: '230vh', background: '#0d1117', position: 'relative' }}
+      style={{ height: '180vh', background: '#0d1117', position: 'relative' }}
     >
       <div style={{ position: 'sticky', top: 0, height: '100svh', overflow: 'hidden' }}>
 

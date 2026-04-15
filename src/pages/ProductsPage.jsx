@@ -207,7 +207,7 @@ export default function ProductsPage() {
       {/* Cinematic divider */}
       <div className="relative h-[40vh] lg:h-[50vh] overflow-hidden">
         <img
-          src="/LSU_Stadium.webp"
+          src="/lsu_stadium_final_scrubbed.png"
           alt="Aerial view of athletic campus facilities at night"
           className="absolute inset-0 w-full h-full object-cover"
         />

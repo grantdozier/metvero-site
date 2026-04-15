@@ -9,7 +9,7 @@ export default function HermesPage() {
   return (
     <>
       <PageHero
-        bgImage="/LSU_Stadium.webp"
+        bgImage="/lsu_stadium_final_scrubbed.png"
         label="Hermes"
         headline="Athletic Operations"
         subtitle="Real-time performance intelligence that gives programs a competitive edge across every dimension."
