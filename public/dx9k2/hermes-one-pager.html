@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>METVERO HERMES</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;400;500;600;700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:#1a1a2e;display:flex;justify-content:center;padding:20px;font-family:'Barlow',sans-serif;}
+.page{width:816px;background:#09090e;color:#fff;display:flex;flex-direction:column;}
+
+/* HEADER */
+.hd{display:flex;align-items:stretch;padding:15px 22px 13px;background:#09090e;}
+.brand{display:flex;align-items:center;gap:12px;width:278px;flex-shrink:0;padding-right:18px;}
+.brand img{width:52px;height:52px;object-fit:contain;}
+.wm .co{font-family:'Barlow Condensed',sans-serif;font-size:17px;font-weight:800;letter-spacing:.22em;color:#c9a547;line-height:1;}
+.wm .pr{font-family:'Barlow Condensed',sans-serif;font-size:34px;font-weight:800;letter-spacing:.18em;color:#c9a547;line-height:1;margin-top:-1px;}
+.wm .tg{font-family:'Barlow Condensed',sans-serif;font-size:7.5px;font-weight:400;letter-spacing:.13em;color:rgba(255,255,255,.42);text-transform:uppercase;margin-top:6px;line-height:1.5;}
+.hdv{width:1px;background:rgba(201,165,71,.28);margin:0 18px;align-self:stretch;}
+.vps{flex:1;display:flex;flex-direction:column;justify-content:space-around;gap:5px;}
+.vp{display:flex;align-items:flex-start;gap:10px;}
+.vt{font-family:'Barlow Condensed',sans-serif;font-size:13.5px;font-weight:700;color:#fff;line-height:1.15;}
+.vd{font-size:9px;color:rgba(255,255,255,.55);line-height:1.45;margin-top:1px;}
+
+/* FOUR VIEWS */
+.fv{display:grid;grid-template-columns:repeat(4,1fr);}
+.vc{background:#f4efe3;padding:11px 13px 12px;border-right:1px solid rgba(0,0,0,.08);}
+.vc:last-child{border-right:none;}
+.vl{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;letter-spacing:.15em;color:#0d0d16;text-transform:uppercase;}
+.vs{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;color:#9a7228;letter-spacing:.04em;margin-top:2px;}
+.vhr{width:100%;height:1px;background:rgba(0,0,0,.1);margin:6px 0;}
+.vhr::after{content:'';display:block;height:1px;background:rgba(0,0,0,.05);margin-top:2px;}
+.vp2{font-size:9px;color:#1a1a1a;line-height:1.5;font-weight:500;}
+
+/* LAYER 3 HEADER */
+.l3hd{background:#0c0d15;padding:11px 24px 9px;}
+.lhd{font-family:'Barlow Condensed',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.22em;color:#c9a547;text-transform:uppercase;margin-bottom:9px;}
+.lhd .dim{color:rgba(255,255,255,.42);}
+.caps5{display:grid;grid-template-columns:repeat(5,1fr);}
+.cap5{text-align:center;padding:0 4px;}
+.c5l{font-family:'Barlow Condensed',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:.13em;color:rgba(255,255,255,.82);text-transform:uppercase;margin-bottom:3px;}
+.c5d{font-size:7.5px;color:rgba(255,255,255,.35);line-height:1.4;}
+
+/* 3D GRID */
+.grid-sec{background:#0b0c17;line-height:0;}
+.grid-sec svg{display:block;}
+
+/* DATA FABRIC */
+.dfab{background:#0d1525;padding:9px 24px 10px;border-top:1px solid rgba(100,160,255,.18);border-bottom:1px solid rgba(100,160,255,.12);}
+.dfhd{font-family:'Barlow Condensed',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.2em;color:rgba(140,190,255,.78);text-transform:uppercase;margin-bottom:2px;}
+.dfhd .dim{color:rgba(255,255,255,.38);}
+.dfsub{font-size:8px;color:rgba(255,255,255,.35);font-style:italic;margin-bottom:7px;}
+.dfpipe{display:flex;align-items:stretch;gap:0;margin-bottom:7px;}
+.dfs{flex:1;background:rgba(100,160,255,.07);border:1px solid rgba(100,160,255,.18);border-radius:3px;padding:5px 7px;text-align:center;}
+.dfs-icon{margin-bottom:2px;display:flex;align-items:center;justify-content:center;height:16px;}
+.dfs-l{font-family:'Barlow Condensed',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:.09em;color:rgba(150,205,255,.78);text-transform:uppercase;}
+.dfs-s{font-size:7px;color:rgba(255,255,255,.35);line-height:1.35;margin-top:1px;}
+.dfa{font-size:13px;color:rgba(100,160,255,.45);padding:0 5px;display:flex;align-items:center;flex-shrink:0;}
+.dfnote{font-size:7.5px;color:rgba(255,255,255,.3);line-height:1.45;font-style:italic;}
+.dfnote strong{color:rgba(150,205,255,.6);font-style:normal;}
+
+/* LAYER 2 MID */
+.l2{background:#ede8db;padding:9px 24px 10px;border-top:2px solid rgba(201,165,71,.38);}
+.l2 .lhd{color:rgba(0,0,0,.48);margin-bottom:3px;}
+.l2 .lhd .dim{color:#b08020;}
+.lsub{font-size:8px;color:rgba(0,0,0,.38);font-style:italic;margin-bottom:7px;}
+.srow{display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
+.sb{display:flex;align-items:center;gap:6px;background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:3px;padding:4px 9px 4px 5px;}
+.sbi{width:22px;height:22px;border-radius:3px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sbn{font-family:'Barlow Condensed',sans-serif;font-size:11.5px;font-weight:700;color:#111;letter-spacing:.01em;}
+.sbsb{font-size:7px;color:rgba(0,0,0,.4);display:block;margin-top:-1px;}
+
+/* LAYER 1 BASE */
+.l1{background:#e5e0d1;padding:9px 24px 9px;border-top:1px solid rgba(0,0,0,.07);}
+.l1 .lhd{color:rgba(0,0,0,.44);margin-bottom:3px;}
+.l1 .lhd .dim{color:#9a7020;}
+.l1row{display:flex;align-items:flex-start;gap:6px;margin-top:5px;}
+.l1cat{display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;flex:1;}
+.l1ci{width:30px;height:30px;background:rgba(255,255,255,.85);border:1px solid rgba(0,0,0,.11);border-radius:3px;display:flex;align-items:center;justify-content:center;margin:0 auto;}
+.l1cn{font-family:'Barlow Condensed',sans-serif;font-size:9.5px;font-weight:700;color:#111;letter-spacing:.01em;}
+.l1cs{font-size:7px;color:rgba(0,0,0,.43);line-height:1.3;}
+
+/* GOVERNANCE */
+.gov{background:#141622;padding:7px 24px;display:flex;gap:0;border-top:1px solid rgba(201,165,71,.1);}
+.gi{flex:1;padding-right:7px;}
+.gi:last-child{padding-right:0;}
+.gil{font-family:'Barlow Condensed',sans-serif;font-size:7.5px;font-weight:800;letter-spacing:.1em;color:#fff;text-transform:uppercase;}
+.gid{font-size:6.5px;color:rgba(255,255,255,.36);line-height:1.4;margin-top:1.5px;}
+
+/* METRICS */
+.mets{display:grid;grid-template-columns:repeat(4,1fr);background:#09090e;border-top:2px solid rgba(201,165,71,.32);}
+.met{padding:12px 14px;border-right:1px solid rgba(255,255,255,.04);}
+.met:last-child{border-right:none;}
+.ms{font-family:'Barlow Condensed',sans-serif;font-size:21px;font-weight:800;color:#fff;line-height:1;}
+.ms em{font-style:normal;color:#c9a547;}
+.ms .arr{color:rgba(255,255,255,.32);font-size:15px;}
+.mn{font-family:'Barlow Condensed',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:.16em;color:#c9a547;text-transform:uppercase;margin-top:3px;margin-bottom:4px;}
+.md{font-size:7.5px;color:rgba(255,255,255,.42);line-height:1.5;}
+
+/* FINAL STAT */
+.fs{background:#09090e;padding:9px 24px;text-align:center;border-top:1px solid rgba(201,165,71,.22);}
+.fsp{font-size:10.5px;color:rgba(255,255,255,.65);font-weight:500;line-height:1.5;}
+.fsp em{font-style:normal;color:#c9a547;font-weight:700;}
+.fss{font-size:7.5px;color:rgba(255,255,255,.26);margin-top:2px;}
+
+/* FOOTER */
+.ft{background:#09090e;padding:6px 24px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.05);}
+.ftb{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.22em;color:rgba(255,255,255,.26);}
+.ftb span{margin:0 7px;color:rgba(201,165,71,.38);}
+.ftt{font-family:'Barlow Condensed',sans-serif;font-size:8px;letter-spacing:.18em;color:rgba(201,165,71,.38);text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HEADER ═══ -->
+<header class="hd">
+  <div class="brand">
+    <img src="../IMAGES/metvero_griffin_only_dark_mode.png" alt="Metvero Griffin">
+    <div class="wm">
+      <div class="co">METVERO</div>
+      <div class="pr">HERMES</div>
+      <div class="tg">INSTITUTIONAL INTELLIGENCE<br>FOR FOOTBALL PROGRAMS</div>
+    </div>
+  </div>
+  <div class="hdv"></div>
+  <div class="vps">
+    <div class="vp">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0;margin-top:1px;">
+        <circle cx="10" cy="10" r="8" stroke="#c9a547" stroke-width="1.4"/>
+        <circle cx="10" cy="10" r="4.5" stroke="#c9a547" stroke-width="1.1"/>
+        <circle cx="10" cy="10" r="1.4" fill="#c9a547"/>
+        <line x1="10" y1="2" x2="10" y2="5.2" stroke="#c9a547" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="10" y1="14.8" x2="10" y2="18" stroke="#c9a547" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="2" y1="10" x2="5.2" y2="10" stroke="#c9a547" stroke-width="1.4" stroke-linecap="round"/>
+        <line x1="14.8" y1="10" x2="18" y2="10" stroke="#c9a547" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="vt">Decision speed inside competitive windows.</div>
+        <div class="vd">Portal, eligibility, NIL, medical, and roster signals converge before the offer window closes.</div>
+      </div>
+    </div>
+    <div class="vp">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0;margin-top:1px;">
+        <polyline points="2,15 6,8 11,11 16,4" stroke="#c9a547" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="16" cy="4" r="2.2" stroke="#c9a547" stroke-width="1.3"/>
+        <line x1="16" y1="11" x2="16" y2="18" stroke="#c9a547" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="vt">One intelligence layer above every program system.</div>
+        <div class="vd">Catapult, Hudl, Banner, Workday, Teamworks, NCAA compliance, NIL, EMR, and recruiting feeds connected.</div>
+      </div>
+    </div>
+    <div class="vp">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" style="flex-shrink:0;margin-top:1px;">
+        <ellipse cx="10" cy="10" rx="8" ry="5" stroke="#c9a547" stroke-width="1.4"/>
+        <circle cx="10" cy="10" r="2.5" stroke="#c9a547" stroke-width="1.3"/>
+        <circle cx="10" cy="10" r="1" fill="#c9a547"/>
+      </svg>
+      <div>
+        <div class="vt">Meaning, not reporting.</div>
+        <div class="vd">Program systems tell you what happened. HERMES tells you what it means — and what it may cost if you do not act.</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ FOUR INTELLIGENCE VIEWS ═══ -->
+<section class="fv">
+  <div class="vc">
+    <div class="vl">ATHLETE</div>
+    <div class="vs">Signal View</div>
+    <div class="vhr"></div>
+    <div class="vp2">Every athlete becomes a live signal node across performance, medical clearance, academics, NIL, and eligibility.</div>
+  </div>
+  <div class="vc">
+    <div class="vl">COACHING</div>
+    <div class="vs">Intelligence View</div>
+    <div class="vhr"></div>
+    <div class="vp2">Depth chart, readiness, tactical film signals, and personnel-package guidance in one program view.</div>
+  </div>
+  <div class="vc">
+    <div class="vl">PROGRAM</div>
+    <div class="vs">Command View</div>
+    <div class="vhr"></div>
+    <div class="vp2">Scholarship ledger, NIL budget, APR trajectory, compliance exposure, and recruiting class health.</div>
+  </div>
+  <div class="vc">
+    <div class="vl">INSTITUTIONAL</div>
+    <div class="vs">Outcome View</div>
+    <div class="vhr"></div>
+    <div class="vp2">Leadership visibility into bowl exposure, revenue linkage, brand equity, and competitive positioning.</div>
+  </div>
+</section>
+
+<!-- ═══ LAYER 3 CAPABILITIES ═══ -->
+<div class="l3hd">
+  <div class="lhd"><span class="dim">LAYER 3 — </span>HERMES INTELLIGENCE LAYER</div>
+  <div class="caps5">
+    <div class="cap5"><div class="c5l">Aggregate Signals</div><div class="c5d">Connect fragmented signals from 15+ source systems into unified program intelligence.</div></div>
+    <div class="cap5"><div class="c5l">Normalize Data</div><div class="c5d">Standardize across GPS, compliance, academic, NIL, and EMR platforms.</div></div>
+    <div class="cap5"><div class="c5l">Pattern Detection</div><div class="c5d">Surface cross-domain signals that precede violations, injuries, and eligibility failures.</div></div>
+    <div class="cap5"><div class="c5l">Projection &amp; Guidance</div><div class="c5d">Model APR trajectory, bowl eligibility, roster construction, and injury risk windows.</div></div>
+    <div class="cap5"><div class="c5l">Outcomes</div><div class="c5d">Track scholarship efficiency, compliance standing, and institutional competitive positioning.</div></div>
+  </div>
+</div>
+
+<!-- ═══ HERMES 3D PERSPECTIVE GRID ═══ -->
+<div class="grid-sec">
+<svg viewBox="0 0 816 192" width="816" height="192" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bgG" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#161230"/>
+      <stop offset="100%" stop-color="#08080e"/>
+    </radialGradient>
+    <radialGradient id="floorG" cx="50%" cy="75%" r="42%">
+      <stop offset="0%" stop-color="rgba(201,165,71,0.16)"/>
+      <stop offset="100%" stop-color="rgba(201,165,71,0)"/>
+    </radialGradient>
+    <clipPath id="trap">
+      <polygon points="408,14 816,192 0,192"/>
+    </clipPath>
+    <filter id="tglow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="b"/>
+      <feComposite in="SourceGraphic" in2="b" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="816" height="192" fill="url(#bgG)"/>
+  <polygon points="408,14 816,192 0,192" fill="url(#floorG)"/>
+
+  <!-- Grid lines (clipped to trapezoid) -->
+  <g clip-path="url(#trap)">
+    <!-- Radial lines from VP 408,14 -->
+    <g stroke="#c9a547" stroke-width="0.55" opacity="0.32">
+      <line x1="408" y1="14" x2="0" y2="192"/>
+      <line x1="408" y1="14" x2="68" y2="192"/>
+      <line x1="408" y1="14" x2="136" y2="192"/>
+      <line x1="408" y1="14" x2="204" y2="192"/>
+      <line x1="408" y1="14" x2="272" y2="192"/>
+      <line x1="408" y1="14" x2="340" y2="192"/>
+      <line x1="408" y1="14" x2="476" y2="192"/>
+      <line x1="408" y1="14" x2="544" y2="192"/>
+      <line x1="408" y1="14" x2="612" y2="192"/>
+      <line x1="408" y1="14" x2="680" y2="192"/>
+      <line x1="408" y1="14" x2="748" y2="192"/>
+      <line x1="408" y1="14" x2="816" y2="192"/>
+    </g>
+    <!-- Center vertial brighter -->
+    <line x1="408" y1="14" x2="408" y2="192" stroke="#c9a547" stroke-width="0.9" opacity="0.45"/>
+    <!-- Horizontal depth lines -->
+    <g stroke="#c9a547" opacity="0.28">
+      <line x1="363" y1="34" x2="453" y2="34" stroke-width="0.5"/>
+      <line x1="315" y1="55" x2="501" y2="55" stroke-width="0.5"/>
+      <line x1="258" y1="79" x2="558" y2="79" stroke-width="0.5"/>
+      <line x1="197" y1="105" x2="619" y2="105" stroke-width="0.5"/>
+      <line x1="135" y1="132" x2="681" y2="132" stroke-width="0.5"/>
+      <line x1="76" y1="157" x2="740" y2="157" stroke-width="0.5"/>
+      <line x1="31" y1="176" x2="785" y2="176" stroke-width="0.5"/>
+      <line x1="0" y1="192" x2="816" y2="192" stroke-width="0.55"/>
+    </g>
+  </g>
+
+  <!-- Horizon glow at VP -->
+  <ellipse cx="408" cy="18" rx="65" ry="5" fill="rgba(201,165,71,0.14)"/>
+  <line x1="345" y1="18" x2="471" y2="18" stroke="rgba(201,165,71,0.65)" stroke-width="1.2"/>
+
+  <!-- Connection lines between signal nodes -->
+  <g clip-path="url(#trap)" stroke="#c9a547" stroke-dasharray="3,3" opacity="0.65">
+    <line x1="408" y1="58" x2="330" y2="109" stroke-width="0.85"/>
+    <line x1="408" y1="58" x2="487" y2="98" stroke-width="0.85"/>
+    <line x1="408" y1="58" x2="448" y2="79" stroke-width="0.85"/>
+    <line x1="330" y1="109" x2="148" y2="154" stroke-width="0.7"/>
+    <line x1="330" y1="109" x2="261" y2="128" stroke-width="0.7"/>
+    <line x1="487" y1="98" x2="694" y2="158" stroke-width="0.7"/>
+    <line x1="148" y1="154" x2="261" y2="128" stroke-width="0.6" stroke-dasharray="2,4"/>
+    <line x1="448" y1="79" x2="487" y2="98" stroke-width="0.8"/>
+  </g>
+
+  <!-- Node glow halos -->
+  <g opacity="0.35">
+    <circle cx="408" cy="58" r="9" fill="#c9a547" opacity="0.32"/>
+    <circle cx="330" cy="109" r="7" fill="#c9a547" opacity="0.26"/>
+    <circle cx="487" cy="98" r="7" fill="#c9a547" opacity="0.26"/>
+    <circle cx="148" cy="154" r="7" fill="#c9a547" opacity="0.22"/>
+    <circle cx="694" cy="158" r="7" fill="#c9a547" opacity="0.22"/>
+    <circle cx="261" cy="128" r="6" fill="#c9a547" opacity="0.22"/>
+    <circle cx="448" cy="79" r="6" fill="#c9a547" opacity="0.26"/>
+  </g>
+
+  <!-- Signal nodes -->
+  <circle cx="408" cy="58" r="4.2" fill="#c9a547"/>
+  <circle cx="330" cy="109" r="3.6" fill="#c9a547"/>
+  <circle cx="487" cy="98" r="3.6" fill="#c9a547"/>
+  <circle cx="148" cy="154" r="3.4" fill="#c9a547"/>
+  <circle cx="694" cy="158" r="3.4" fill="#c9a547"/>
+  <circle cx="261" cy="128" r="3" fill="#c9a547"/>
+  <circle cx="448" cy="79" r="3" fill="#c9a547"/>
+
+  <!-- Node labels -->
+  <text x="408" y="47" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.85)" letter-spacing="1.2">TEAMWORKS</text>
+  <text x="295" y="107" text-anchor="end" font-family="Barlow Condensed,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.72)" letter-spacing="1">HUDL</text>
+  <text x="499" y="93" text-anchor="start" font-family="Barlow Condensed,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.72)" letter-spacing="1">NIL</text>
+  <text x="112" y="152" text-anchor="end" font-family="Barlow Condensed,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.65)" letter-spacing="1">PORTAL</text>
+  <text x="707" y="152" text-anchor="start" font-family="Barlow Condensed,sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.65)" letter-spacing="1">CATAPULT</text>
+  <text x="256" y="141" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="7.5" font-weight="600" fill="rgba(255,255,255,0.58)" letter-spacing="0.8">WORKDAY</text>
+  <text x="463" y="74" text-anchor="start" font-family="Barlow Condensed,sans-serif" font-size="7.5" font-weight="600" fill="rgba(255,255,255,0.58)" letter-spacing="0.8">SAMS</text>
+
+  <!-- HERMES ghost text (large, centered, watermark) -->
+  <text x="408" y="120" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="60" font-weight="900" fill="rgba(201,165,71,0.065)" letter-spacing="16" filter="url(#tglow)">HERMES</text>
+  <text x="408" y="120" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="60" font-weight="900" fill="rgba(201,165,71,0.055)" letter-spacing="16">HERMES</text>
+  <!-- Subtitle -->
+  <text x="408" y="136" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="8.5" font-weight="500" fill="rgba(201,165,71,0.36)" letter-spacing="5.5">INTELLIGENCE LAYER</text>
+  <!-- Description -->
+  <text x="408" y="151" text-anchor="middle" font-family="Barlow,sans-serif" font-size="7.2" fill="rgba(255,255,255,0.28)">Ontology engine + signal taxonomy + inference models convert records into meaning.</text>
+</svg>
+</div>
+
+<!-- ═══ ATHLETIC DATA FABRIC (NEW LAYER 2.5) ═══ -->
+<div class="dfab">
+  <div class="dfhd"><span class="dim">LAYER 2.5 — </span>ATHLETIC DATA FABRIC</div>
+  <div class="dfsub">The unified data infrastructure that makes intelligence possible. Fragmented source signals cannot feed an intelligence platform without this layer.</div>
+  <div class="dfpipe">
+    <div class="dfs">
+      <div class="dfs-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2 4v4c0 3.5 6 5.5 6 5.5s6-2 6-5.5V4L8 1.5Z" stroke="rgba(150,210,255,0.75)" stroke-width="1.2" stroke-linejoin="round" fill="none"/><circle cx="8" cy="8" r="2" stroke="rgba(150,210,255,0.75)" stroke-width="1"/></svg>
+      </div>
+      <div class="dfs-l">Unified Ingestion</div>
+      <div class="dfs-s">15+ source systems → single normalized pipeline</div>
+    </div>
+    <div class="dfa">→</div>
+    <div class="dfs">
+      <div class="dfs-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="4.5" cy="4.5" r="2.5" stroke="rgba(150,210,255,0.75)" stroke-width="1.1"/><circle cx="11.5" cy="11.5" r="2.5" stroke="rgba(150,210,255,0.75)" stroke-width="1.1"/><line x1="6.5" y1="6" x2="9.5" y2="10" stroke="rgba(150,210,255,0.75)" stroke-width="1.1" stroke-linecap="round" stroke-dasharray="1.5,1.5"/></svg>
+      </div>
+      <div class="dfs-l">Entity Resolution</div>
+      <div class="dfs-s">Catapult Player ID = Banner Student ID = On3 Prospect</div>
+    </div>
+    <div class="dfa">→</div>
+    <div class="dfs">
+      <div class="dfs-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><ellipse cx="8" cy="5" rx="5" ry="2.2" stroke="rgba(150,210,255,0.75)" stroke-width="1.1"/><path d="M3 5v3M13 5v3" stroke="rgba(150,210,255,0.75)" stroke-width="1.1"/><ellipse cx="8" cy="8" rx="5" ry="2.2" stroke="rgba(150,210,255,0.75)" stroke-width="1.1"/><path d="M3 8v3M13 8v3" stroke="rgba(150,210,255,0.75)" stroke-width="1.1"/><ellipse cx="8" cy="11" rx="5" ry="2.2" stroke="rgba(150,210,255,0.75)" stroke-width="1.1"/></svg>
+      </div>
+      <div class="dfs-l">Delta Tables</div>
+      <div class="dfs-s">Append-only event log — auditable, timestamped, governed</div>
+    </div>
+    <div class="dfa">→</div>
+    <div class="dfs">
+      <div class="dfs-icon">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 13V3M8 3L4.5 6.5M8 3L11.5 6.5" stroke="rgba(150,210,255,0.75)" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="dfs-l">HERMES Signal Feed</div>
+      <div class="dfs-s">Structured, governed, queryable signals ready for intelligence</div>
+    </div>
+  </div>
+  <div class="dfnote"><strong>Why this layer exists:</strong> Palantir's partnership with Databricks proved that ontology-level intelligence requires a structured data foundation first. Football programs operate the same fragmentation problem — without this layer, 15 source systems remain 15 separate silos.</div>
+</div>
+
+<!-- ═══ MID LAYER — FOOTBALL WORKFLOW SYSTEMS ═══ -->
+<section class="l2">
+  <div class="lhd"><span class="dim">MID LAYER — </span>FOOTBALL WORKFLOW SYSTEMS</div>
+  <div class="lsub">The systems program teams already use every day.</div>
+  <div class="srow">
+    <div class="sb">
+      <div class="sbi" style="background:#1B3A6B;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" rx="1.5" fill="rgba(255,255,255,0.12)"/><path d="M3.5 5h7M7 5v5" stroke="white" stroke-width="1.7" stroke-linecap="round"/></svg>
+      </div>
+      <div><div class="sbn">TEAMWORKS</div><div class="sbsb">Recruiting &amp; Ops</div></div>
+    </div>
+    <div class="sb">
+      <div class="sbi" style="background:#E8151B;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polygon points="3.5,2.5 12,7 3.5,11.5" fill="white"/></svg>
+      </div>
+      <div><div class="sbn">HUDL</div><div class="sbsb">Film &amp; Analytics</div></div>
+    </div>
+    <div class="sb">
+      <div class="sbi" style="background:#E85D00;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.5 5.5A5.5 5.5 0 1 0 11.5 9" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M9.5 3.5L12 5.5L9.5 7.5" stroke="white" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      </div>
+      <div><div class="sbn">CATAPULT</div><div class="sbsb">GPS &amp; Load</div></div>
+    </div>
+    <div class="sb">
+      <div class="sbi" style="background:#009B8E;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="1.5,11 4.5,7 7.5,8.5 10.5,4 13,5.5" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div><div class="sbn">KITMAN LABS</div><div class="sbsb">Injury &amp; Recovery</div></div>
+    </div>
+    <div class="sb">
+      <div class="sbi" style="background:#003087;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5L2 3.5V7C2 10 7 12.5 7 12.5S12 10 12 7V3.5L7 1.5Z" stroke="white" stroke-width="1.2" stroke-linejoin="round" fill="none"/><path d="M4.5 7L6 8.5L9.5 5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div><div class="sbn">NCAA CA</div><div class="sbsb">Compliance</div></div>
+    </div>
+    <div class="sb">
+      <div class="sbi" style="background:#0f0f12;border:1px solid rgba(201,165,71,0.4);">
+        <svg width="14" height="14" viewBox="0 0 14 14"><text x="7" y="10.5" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-size="7" font-weight="900" fill="#c9a547">On3</text></svg>
+      </div>
+      <div><div class="sbn">ON3</div><div class="sbsb">Recruiting Data</div></div>
+    </div>
+    <div class="sb">
+      <div class="sbi" style="background:#1B6F3C;">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="4.8" stroke="white" stroke-width="1.2" fill="none"/><line x1="7" y1="2.2" x2="7" y2="4" stroke="white" stroke-width="1.2" stroke-linecap="round"/><line x1="7" y1="10" x2="7" y2="11.8" stroke="white" stroke-width="1.2" stroke-linecap="round"/><line x1="2.2" y1="7" x2="4" y2="7" stroke="white" stroke-width="1.2" stroke-linecap="round"/><line x1="10" y1="7" x2="11.8" y2="7" stroke="white" stroke-width="1.2" stroke-linecap="round"/><circle cx="7" cy="7" r="1.4" fill="white"/></svg>
+      </div>
+      <div><div class="sbn">SAMS</div><div class="sbsb">Academic Support</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BASE LAYER — SYSTEMS OF RECORD ═══ -->
+<section class="l1">
+  <div class="lhd"><span class="dim">BASE LAYER — </span>SYSTEMS OF RECORD &amp; SOURCE SIGNALS</div>
+  <div class="lsub">Authoritative football operations, institutional, and external source signals.</div>
+  <div class="l1row">
+    <div class="l1cat">
+      <div class="l1ci"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1.5" stroke="#c9a547" stroke-width="1.2"/><path d="M4.5 6.5h7M4.5 9.5h5" stroke="#c9a547" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <div class="l1cn">Banner / Workday</div>
+      <div class="l1cs">Academics, enrollment, PTD</div>
+    </div>
+    <div class="l1cat">
+      <div class="l1ci"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5L2.5 4v4c0 4 5.5 6.5 5.5 6.5S14 12 14 8V4L8 1.5Z" stroke="#c9a547" stroke-width="1.2" stroke-linejoin="round"/><path d="M5.5 8.5l2 2L11 6" stroke="#c9a547" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="l1cn">NCAA / ACS</div>
+      <div class="l1cs">Eligibility, APR, compliance</div>
+    </div>
+    <div class="l1cat">
+      <div class="l1ci"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><polyline points="1.5,13 5,8 8,10 12,5 15,7" stroke="#c9a547" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="l1cn">GPS / Recovery</div>
+      <div class="l1cs">Load, HRV, readiness</div>
+    </div>
+    <div class="l1cat">
+      <div class="l1ci"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2.5" y="1.5" width="11" height="13" rx="1.5" stroke="#c9a547" stroke-width="1.2"/><path d="M5.5 8h5M8 5.5v5" stroke="#c9a547" stroke-width="1.2" stroke-linecap="round"/></svg></div>
+      <div class="l1cn">EMR Clearance</div>
+      <div class="l1cs">Practice status, RTP stage</div>
+    </div>
+    <div class="l1cat">
+      <div class="l1ci"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M5 7.5c0-1.7 1.3-3 3-3s3 1.3 3 3" stroke="#c9a547" stroke-width="1.2" stroke-linecap="round"/><circle cx="8" cy="7.5" r="1.3" fill="#c9a547"/><path d="M2 7.5C2 4 4.7 1.5 8 1.5S14 4 14 7.5" stroke="#c9a547" stroke-width="1" stroke-linecap="round" opacity="0.5"/><path d="M5 11l1.5 2h3L11 11" stroke="#c9a547" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" opacity="0.65"/></svg></div>
+      <div class="l1cn">NIL Platforms</div>
+      <div class="l1cs">Deals, categories, boosters</div>
+    </div>
+    <div class="l1cat">
+      <div class="l1ci"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1.5l1.5 4.5H14L10.5 8.5l1.5 4.5L8 10.5l-4 2.5 1.5-4.5L2 6h4.5Z" stroke="#c9a547" stroke-width="1" stroke-linejoin="round"/></svg></div>
+      <div class="l1cn">Recruiting CRM</div>
+      <div class="l1cs">Prospects, visits, Fit Scores</div>
+    </div>
+    <div class="l1cat">
+      <div class="l1ci"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#c9a547" stroke-width="1.2"/><path d="M8 5v6M6 6.5h2.5a1.5 1.5 0 0 1 0 3H6" stroke="#c9a547" stroke-width="1.1" stroke-linecap="round"/></svg></div>
+      <div class="l1cn">Finance / Contracts</div>
+      <div class="l1cs">Scholarships, triggers, budget</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ GOVERNANCE ═══ -->
+<div class="gov">
+  <div class="gi"><div class="gil">FERPA Governed</div><div class="gid">Academic signals controlled by institutional policy and role.</div></div>
+  <div class="gi"><div class="gil">HIPAA Boundary</div><div class="gid">HERMES receives clearance status only — no PHI.</div></div>
+  <div class="gi"><div class="gil">Role-Based Access</div><div class="gid">Coaches, compliance, AD, and leadership see only relevant views.</div></div>
+  <div class="gi"><div class="gil">NCAA Review</div><div class="gid">Recommendations require human compliance execution.</div></div>
+  <div class="gi"><div class="gil">Audit Ready</div><div class="gid">Signal lineage, alert history, and access logs are preserved.</div></div>
+</div>
+
+<!-- ═══ METRICS ═══ -->
+<section class="mets">
+  <div class="met">
+    <div class="ms">5 days <span class="arr">→</span> <em>&lt;2 hrs</em></div>
+    <div class="mn">Portal Fit Score</div>
+    <div class="md">Cross-domain due diligence for academic, NIL, roster, medical, and compliance fit.</div>
+  </div>
+  <div class="met">
+    <div class="ms"><em>$2M–$5M</em></div>
+    <div class="mn">Annual Value</div>
+    <div class="md">Conservative recoverable cost and risk avoidance for a Power 4 program.</div>
+  </div>
+  <div class="met">
+    <div class="ms"><em>3–6</em> slots</div>
+    <div class="mn">Scholarship Recovery</div>
+    <div class="md">Real-time ledger and hardship tracking reduce phantom scholarship loss.</div>
+  </div>
+  <div class="met">
+    <div class="ms"><em>$6M–$23M</em></div>
+    <div class="mn">Bowl Ban Exposure</div>
+    <div class="md">Forward APR projection creates early warning before sanctions become visible.</div>
+  </div>
+</section>
+
+<!-- ═══ FINAL STAT ═══ -->
+<div class="fs">
+  <p class="fsp">Program systems tell you what happened. <em>HERMES tells you what it means.</em> One captured portal target or one prevented APR bowl ban can exceed the platform cost.</p>
+  <p class="fss">Based on SEC bowl revenue distribution structures, Power 4 recruiting economics, and LSU program financials.</p>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="ft">
+  <div class="ftb">METVERO<span>|</span>HERMES</div>
+  <div class="ftt">INSTITUTIONAL INTELLIGENCE. PROGRAM IMPACT.</div>
+</footer>
+
+</div>
+</body>
+</html>

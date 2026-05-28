@@ -9,6 +9,8 @@ import ServicesPage from './pages/ServicesPage'
 import ProductsPage from './pages/ProductsPage'
 import AthenaPage from './pages/AthenaPage'
 import HermesPage from './pages/HermesPage'
+import HermesDocs from './pages/HermesDocs'
+import AthenaDocs from './pages/AthenaDocs'
 
 function App() {
   useEffect(() => {
@@ -31,17 +33,26 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="bg-[#0d1117] text-white">
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/products" element={<ProductsPage />} />
-          <Route path="/athena" element={<AthenaPage />} />
-          <Route path="/hermes" element={<HermesPage />} />
-        </Routes>
-        <Footer />
-      </div>
+      <Routes>
+        {/* Hidden doc pages — no Navbar/Footer */}
+        <Route path="/d/m7x9k2" element={<HermesDocs />} />
+        <Route path="/d/p3v8n1" element={<AthenaDocs />} />
+
+        {/* Main site */}
+        <Route path="*" element={
+          <div className="bg-[#0d1117] text-white">
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/products" element={<ProductsPage />} />
+              <Route path="/athena" element={<AthenaPage />} />
+              <Route path="/hermes" element={<HermesPage />} />
+            </Routes>
+            <Footer />
+          </div>
+        } />
+      </Routes>
     </BrowserRouter>
   )
 }
