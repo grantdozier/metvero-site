@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>HERMES — Football Program Intelligence | MetVero</title>
+<title>HERMES — Sports Organization Intelligence | MetVero</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -181,8 +181,35 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
 .note-box p{font-size:12px;color:#555;margin:0;}
 
 @media print{
+  /* Cover stands alone */
   .cover{min-height:auto;page-break-after:always;}
-  .section{page-break-inside:avoid;}
+
+  /* Do NOT try to keep whole sections together — they're longer than a page,
+     which forces arbitrary mid-content breaks. Instead, let sections flow and
+     protect the atomic blocks below from being split across a page boundary. */
+  .section{page-break-inside:auto;break-inside:auto;}
+
+  /* Running header should never be stranded at the bottom of a page */
+  .run-hd{page-break-after:avoid;break-after:avoid;page-break-inside:avoid;break-inside:avoid;}
+
+  /* Keep headings attached to the content that follows them */
+  .sec-eyebrow,.sec-title,.sec-sub,h3,h4{page-break-after:avoid;break-after:avoid;}
+  h3,h4{page-break-inside:avoid;break-inside:avoid;}
+
+  /* Atomic content blocks — never split these across pages */
+  .pq,.prob,.sig,.view-block,.sport-block,.note-box,.fab-pipe,.layer-stack,
+  .met-grid,.fin-total{
+    page-break-inside:avoid;break-inside:avoid;
+  }
+
+  /* Tables flow naturally but break only between rows, with headers repeated.
+     (Long appendix tables span pages cleanly; short tables stay together.) */
+  table{break-inside:auto;}
+  thead{display:table-header-group;}
+  tr{page-break-inside:avoid;break-inside:avoid;}
+
+  /* Avoid orphaned single lines of body copy */
+  p{orphans:3;widows:3;}
 }
 </style>
 </head>
@@ -204,9 +231,9 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
   </div>
 
   <div class="cover-body">
-    <div class="cover-eyebrow">Football Program Intelligence — Product Overview</div>
-    <div class="cover-title">The Intelligence Layer<br>Above the <em>Football Program.</em></div>
-    <div class="cover-sub">Institutional Intelligence for Power 4 Programs, the NFL, and Beyond</div>
+    <div class="cover-eyebrow">Sports Organization Intelligence — Product Overview</div>
+    <div class="cover-title">The Intelligence Layer<br>Above the <em>Sports Organization.</em></div>
+    <div class="cover-sub">One Intelligence Layer for Professional and Collegiate Sports — Football, Soccer, and Every League That Operates as a Complex Enterprise</div>
 
     <div class="cover-meta">
       <div class="cover-meta-item">
@@ -224,17 +251,17 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
     </div>
 
     <div class="cover-tagline">
-      "Program systems tell you what happened.<br><strong>HERMES tells you what it means — and what it will cost if you don't act.</strong>"
+      "Programs and systems tell you what happened.<br><strong>HERMES tells you what it means — and what it will cost if you don't act.</strong>"
     </div>
 
     <div class="cover-disclaimer">
-      This document has been prepared by MetVero as a strategic overview of the HERMES platform and its application to football program operations. Its purpose is to provide program leadership and key stakeholders with a comprehensive understanding of HERMES's institutional intelligence model and the capabilities it can bring to an existing operational ecosystem. This document is intended solely for evaluation and discussion purposes. It is not a contract, statement of work, binding proposal, or executed agreement. Nothing contained herein shall be interpreted as creating any obligation, commitment, or agreement on the part of the receiving institution or MetVero. The concepts, architectures, and financial estimates described herein reflect MetVero's current understanding and are expected to evolve through continued institutional review and stakeholder feedback. Any references to integrations, operational workflows, or future-state capabilities are illustrative and conceptual unless otherwise defined in a mutually executed agreement. MetVero welcomes review, feedback, and collaboration throughout the evaluation process.
+      This document has been prepared by MetVero as a strategic overview of the HERMES platform and its application to sports organization operations. Its purpose is to provide organization leadership and key stakeholders with a comprehensive understanding of HERMES's institutional intelligence model and the capabilities it can bring to an existing operational ecosystem. This document is intended solely for evaluation and discussion purposes. It is not a contract, statement of work, binding proposal, or executed agreement. Nothing contained herein shall be interpreted as creating any obligation, commitment, or agreement on the part of the receiving organization or MetVero. The concepts, architectures, and financial estimates described herein reflect MetVero's current understanding and are expected to evolve through continued organizational review and stakeholder feedback. Any references to integrations, operational workflows, or future-state capabilities are illustrative and conceptual unless otherwise defined in a mutually executed agreement. MetVero welcomes review, feedback, and collaboration throughout the evaluation process.
     </div>
   </div>
 
   <div class="cover-footer">
     <div class="cover-footer-brand">METVERO | HERMES</div>
-    <div class="cover-footer-right">Institutional Intelligence. Program Impact.</div>
+    <div class="cover-footer-right">Institutional Intelligence. Organizational Impact.</div>
   </div>
 </div>
 
@@ -247,20 +274,21 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
   <div class="sec-title">Table of Contents</div>
   <table style="width:100%;font-size:13px;border-collapse:collapse;">
     <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">1. Introduction</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">2</td></tr>
-    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">2. Background — The Football Program Intelligence Gap</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">3</td></tr>
+    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">2. Background — The Sports Organization Intelligence Gap</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">3</td></tr>
     <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">3. HERMES — How It Works</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">5</td></tr>
     <tr><td style="padding:8px 0 8px 20px;border-bottom:1px solid #ede8db;color:#555;">3.1 The Layer Stack</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">5</td></tr>
     <tr><td style="padding:8px 0 8px 20px;border-bottom:1px solid #ede8db;color:#555;">3.2 What Makes HERMES Different</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">6</td></tr>
-    <tr><td style="padding:8px 0 8px 20px;border-bottom:1px solid #ede8db;color:#555;">3.3 The Athletic Data Fabric</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">7</td></tr>
-    <tr><td style="padding:8px 0 8px 20px;border-bottom:1px solid #ede8db;color:#555;">3.4 Signal Architecture</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">8</td></tr>
-    <tr><td style="padding:8px 0 8px 20px;border-bottom:1px solid #ede8db;color:#555;">3.5 Four Intelligence Views</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">10</td></tr>
+    <tr><td style="padding:8px 0 8px 20px;border-bottom:1px solid #ede8db;color:#555;">3.3 The Sports Data Fabric</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">7</td></tr>
+    <tr><td style="padding:8px 0 8px 20px;border-bottom:1px solid #ede8db;color:#555;">3.4 The Signal Architecture</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">8</td></tr>
+    <tr><td style="padding:8px 0 8px 20px;border-bottom:1px solid #ede8db;color:#555;">3.5 Five Operational Lenses</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">10</td></tr>
     <tr><td style="padding:8px 0 8px 20px;border-bottom:1px solid #ede8db;color:#555;">3.6 The Ontology Engine</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">12</td></tr>
-    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">4. The Six Undeniable Problems</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">13</td></tr>
-    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">5. Financial Impact Model</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">17</td></tr>
-    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">6. Pro Sports Scalability</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">18</td></tr>
-    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">7. The Program Opportunity</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">19</td></tr>
-    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">8. Implementation Path</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">20</td></tr>
-    <tr><td style="padding:8px 0;color:#09090e;font-weight:600;">Appendix A — Data Exchange Specification</td><td style="padding:8px 0;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">22</td></tr>
+    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">4. One Core. Every League. — The Generic Architecture</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">13</td></tr>
+    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">5. The Source Systems HERMES Reads</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">16</td></tr>
+    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">6. The Undeniable Problems</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">18</td></tr>
+    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">7. Financial Impact Model</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">20</td></tr>
+    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">8. The AI-Native Operating Model &amp; The Organization Opportunity</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">21</td></tr>
+    <tr><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#09090e;font-weight:600;">9. Implementation Path</td><td style="padding:8px 0;border-bottom:1px solid #ede8db;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">22</td></tr>
+    <tr><td style="padding:8px 0;color:#09090e;font-weight:600;">Appendix A — Data Exchange Specification</td><td style="padding:8px 0;color:#9a7228;text-align:right;font-family:'Barlow Condensed',sans-serif;font-weight:700;">24</td></tr>
   </table>
 </div>
 
@@ -272,19 +300,19 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
   <div class="sec-eyebrow">Section 1</div>
   <div class="sec-title">Introduction</div>
 
-  <p>HERMES, a MetVero product, is the institutional intelligence layer that sits above the football program ecosystem and converts fragmented operational systems into coordinated, real-time decision intelligence.</p>
+  <p>HERMES, a MetVero product, is the institutional intelligence layer that sits above the sports-organization ecosystem and converts fragmented operational systems into coordinated, real-time decision intelligence.</p>
 
-  <p>HERMES is not a GPS platform. It is not a compliance software. It is not a recruiting CRM, a film tool, a NIL registry, or another analytics dashboard layered on top of tools that already exist.</p>
+  <p>HERMES is not a GPS platform. It is not an athlete-management system. It is not a scouting tool, a cap or contract tracker, a compliance module, or another analytics dashboard layered on top of tools that already exist.</p>
 
-  <p>HERMES is built on a single but powerful premise: football programs need more than data access. They need institutional context — the ability to understand what is happening across every domain simultaneously, why it is happening, and what action should happen next. HERMES creates that context by organizing information around institutional meaning, not just system structure.</p>
+  <p>HERMES is built on a single but powerful premise: a sports organization needs more than data access. It needs institutional context — the ability to understand what is happening across every domain simultaneously, why it is happening, and what action should happen next. HERMES creates that context by organizing information around organizational meaning, not just system structure.</p>
 
-  <div class="pq"><p>"The football program already has the data. It already has the systems. It already has the staff. What it does not have is a layer that connects those systems into institutional intelligence. HERMES is that layer."</p></div>
+  <div class="pq"><p>"The organization already has the data. It already has the systems. It already has the staff. What it does not have is the layer that connects those systems into organizational intelligence. HERMES is that layer."</p></div>
 
-  <p>MetVero's intelligence platform is designed to unify, interpret, and activate data across the performance, compliance, recruiting, medical, academic, NIL, and financial domains that define modern football program operations. HERMES solves the fragmentation problem by sitting above existing systems via API and other approved methods — aggregating and contextualizing information into a single, intelligent operating picture. It does not replace current tools. It makes them work together.</p>
+  <p>HERMES is domain-agnostic by design. It works for any organization that operates as a complex sporting enterprise — a soccer or football club, an NFL, NBA, or MLB franchise, or a college athletic department. The same intelligence core unifies, interprets, and activates data across the performance, medical, tactical, recruitment, roster, compliance, and commercial domains that define modern sporting operations. HERMES solves the fragmentation problem by sitting above existing systems via API and other approved methods — aggregating and contextualizing information into a single, intelligent operating picture. It does not replace current tools. It makes them work together.</p>
 
-  <p>For Power 4 programs, HERMES delivers role-calibrated intelligence to sports science staff, position coaches, coordinators, the head coach, the athletic director, and university leadership — driving outcomes across competitive performance, compliance standing, financial sustainability, and institutional oversight.</p>
+  <p>For each deployment, HERMES delivers role-calibrated intelligence to sports science staff, position and assistant coaches, the head coach, the sporting director or general manager, the executive office, and ownership — driving outcomes across competitive performance, financial sustainability, regulatory compliance, and enterprise oversight.</p>
 
-  <p>HERMES is a vertical deployment of the same intelligence abstraction philosophy underlying MetVero's ATHENA platform. Where ATHENA abstracts the university (academic systems → student intelligence), HERMES abstracts the football program (performance + compliance + recruiting + medical + financial systems → program intelligence). They share architecture, signal philosophy, and institutional conviction. They serve different operational domains.</p>
+  <p>HERMES is built on the same intelligence-abstraction philosophy underlying MetVero's ATHENA platform. Where ATHENA abstracts the university (academic systems → student intelligence), HERMES abstracts the sports organization (performance + medical + recruitment + roster + compliance + commercial systems → organizational intelligence). They share architecture, signal philosophy, and institutional conviction. They serve different operational domains.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
@@ -294,29 +322,29 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
 <div class="section">
   <div class="sec-eyebrow">Section 2</div>
   <div class="sec-title">Background</div>
-  <div class="sec-sub">The Football Program Intelligence Gap</div>
+  <div class="sec-sub">The Sports Organization Intelligence Gap</div>
 
-  <p>A Power 4 football program in the current era operates as one of the most complex institutional enterprises in American sport. A single program simultaneously manages 85 scholarship athletes, a 50+ person staff, a $100M+ annual operating budget, NCAA compliance obligations across recruiting, eligibility, and NIL, a transfer portal environment that moves in 48-hour windows, and a performance science infrastructure collecting data from 15 to 25 separate software systems.</p>
+  <p>A modern sports organization is one of the most complex enterprises in operation. Whether it is a Premier League soccer club, an NFL or NBA franchise, or a Division I athletic department, it simultaneously runs 15 to 25 separate software systems spanning performance, medical, tactical and film, recruitment, roster and cap, compliance, and commercial domains — operating against multi-million- to multi-hundred-million-dollar budgets, in transfer and trade markets that move in hours, under tightening financial regulation.</p>
 
   <p>None of those systems know what the others know.</p>
 
-  <p>Catapult holds GPS workload. Banner holds academic records. The NCAA Compliance Assistant holds eligibility certifications. Sportsware holds medical clearance. INFLCR holds NIL deal registry. On3 holds recruiting evaluations. Hudl holds film. Each system manages its domain with genuine capability. None of them interpret across each other.</p>
+  <p>GPS external load lives in Catapult or STATSports. Recovery and HRV live in Whoop or Oura. Availability and medical clearance live in the AMS — Kitman Labs or Smartabase. Event data lives in Opta or StatsBomb. Scouting lives in Wyscout. Market value lives in TransferRoom. The cap and contract position lives in spreadsheets. Ticketing and fan data live in SeatGeek and Salesforce. Each system manages its domain with genuine capability. None of them interpret across each other.</p>
 
-  <div class="pq"><p>"Football programs do not suffer from a lack of data. They suffer from a lack of institutional visibility. HERMES transforms fragmented operational systems into program intelligence."</p></div>
+  <div class="pq"><p>"Sports organizations do not suffer from a lack of data. They suffer from a lack of institutional visibility. HERMES transforms fragmented operational systems into organizational intelligence."</p></div>
 
-  <p>The result is a problem every athletic director, compliance officer, and head coach recognizes immediately. A recruiting coordinator manually cross-references six systems to evaluate a transfer portal entry — and the window closes before the offer is made. A compliance officer manages 150 NIL deals in a spreadsheet and misses a brand conflict that surfaces only when a dealer calls the AD. A sports science staff has GPS data in one portal and HRV data in another, and makes practice intensity decisions without knowing that three starters have final exams tomorrow and their sleep is compromised. An athletic director discovers the program's APR is approaching the 930 threshold from the NCAA's annual report — 8 months after the academic year ended, when the interventions that could have mattered are 2 years past.</p>
+  <p>The result is a problem every sporting director, performance director, and owner recognizes immediately. A sporting director cross-references six systems to evaluate a transfer target — and the window closes before the offer is made. A sports scientist sets training load for the week without knowing that three starters are already flagged for fixture congestion and depressed readiness. An owner learns from the auditor that the squad has breached the Squad Cost Ratio — months after the window to act has closed.</p>
 
   <p>This is not a failure of the systems. It is the ceiling of the era they were built in. Enterprise software was designed to manage activity within its own walls. Interpreting across domains was never part of the design.</p>
 
-  <h3>The NIL and Transfer Portal Era Has Made This Worse</h3>
+  <h3>The Modern Era Has Made This Worse</h3>
 
-  <p>The structural fragmentation that existed before 2021 has been compounded by two transformations that operating programs are still adjusting to. The NIL era created a compliance layer — brand registries, booster classifications, conflict detection, expiration tracking — that no program system was built to handle. The transfer portal created a recruiting window measured in hours, not weeks, that no manual cross-referencing process can serve at the speed the market moves.</p>
+  <p>The structural fragmentation that has always existed is now compounded by three pressures that organizations are still adjusting to. Transfer and trade windows are measured in hours, not weeks — no manual cross-referencing process can serve at the speed the market now moves. Financial regulation is tightening sharply: the UEFA Squad Cost Ratio falls to 70% of football revenue from 2025/26; the Premier League is replacing PSR with a Squad Cost Ratio framework (85% green / 115% red); pro leagues operate hard caps, soft caps with aprons, and luxury taxes; and college sports has entered a revenue-sharing era with hard rev-share caps. And load and availability have become the highest-ROI margin in sport — keeping high-value players fit is now a financial discipline, not just a medical one.</p>
 
-  <p>Programs that succeed in this environment are not necessarily the ones with the most resources. They are the ones that can make faster, more complete decisions. Decision speed, in the current football economy, is the competitive advantage that HERMES directly addresses.</p>
+  <p>Organizations that succeed in this environment are not necessarily the ones with the most resources. They are the ones that can make faster, more complete decisions. Decision speed, in the current sporting economy, is the competitive advantage that HERMES directly addresses.</p>
 
   <h3>What HERMES Does That No Individual System Can</h3>
 
-  <p>The data needed to run a football program at the highest level exists. The academic records, GPS loads, NIL contracts, eligibility certifications, film tags, scholarship counts, and injury histories are all captured somewhere. The problem is that no system currently answers the questions that require all of those domains simultaneously — the questions that determine whether a program wins in the transfer portal, avoids an NCAA violation, protects its APR, or prevents an avoidable injury.</p>
+  <p>The data needed to run a sports organization at the highest level already exists. The load metrics, recovery data, availability status, event data, scouting profiles, market values, cap positions, and contract terms are all captured somewhere. The problem is that no system answers the questions that require all of those domains simultaneously — the questions that determine whether an organization wins a transfer, stays inside its financial constraint, protects the availability of its highest-value players, or links a sporting decision to its enterprise outcome.</p>
 
   <p>HERMES answers those questions. Not by replacing the systems that hold the data, but by sitting above them — reading every signal, connecting every domain, and surfacing the cross-domain intelligence that no individual system in Layer 1 can produce.</p>
 </div>
@@ -331,7 +359,7 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
 
   <h3>3.1 The Layer Stack</h3>
 
-  <p>Rather than replacing systems of record, HERMES operates as a non-invasive intelligence overlay. It consumes data through secure, read-only connections to the program's existing platforms and returns structured intelligence to authorized users in role-appropriate interfaces. The architecture organizes into four functional layers:</p>
+  <p>Rather than replacing systems of record, HERMES operates as a non-invasive intelligence overlay. It consumes data through secure, read-only connections to the organization's existing platforms and returns structured intelligence to authorized users in role-appropriate interfaces. The architecture organizes into four functional layers:</p>
 
   <div class="layer-stack">
     <div class="layer layer-l3">
@@ -344,51 +372,50 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
     <div class="layer layer-l25">
       <div class="layer-tag">Layer 2.5</div>
       <div>
-        <div class="layer-name">Athletic Data Fabric</div>
-        <div class="layer-desc">Unified ingestion, entity resolution, delta tables, and structured signal serving. The infrastructure layer that makes intelligence possible — analogous to the Databricks layer that Palantir required before enterprise intelligence could operate at scale.</div>
+        <div class="layer-name">Sports Data Fabric</div>
+        <div class="layer-desc">Unified ingestion, entity resolution, delta tables, and structured signal serving. The infrastructure layer that makes intelligence possible — analogous to the Databricks foundation that Palantir required before enterprise intelligence could operate at scale.</div>
       </div>
     </div>
     <div class="layer layer-l2">
       <div class="layer-tag">Layer 2</div>
       <div>
-        <div class="layer-name">Football Workflow Systems</div>
-        <div class="layer-desc">Teamworks, Hudl, SAMS/Navigate, Compliance platforms, Recruiting CRM, NIL Management — the systems program staff use every day. HERMES enhances them without replacing them.</div>
+        <div class="layer-name">Workflow Systems</div>
+        <div class="layer-desc">Athlete-management systems (Kitman Labs, Smartabase), scouting platforms (Hudl Wyscout, StatsBomb IQ), ticketing and CRM (SeatGeek, Salesforce, KORE), and compliance tooling — the systems staff use every day. HERMES enhances them without replacing them.</div>
       </div>
     </div>
     <div class="layer layer-l1">
       <div class="layer-tag">Layer 1</div>
       <div>
         <div class="layer-name">Systems of Record &amp; Source Signals</div>
-        <div class="layer-desc">Catapult GPS, Banner/Workday, NCAA Compliance Assistant, Sportsware/Kitman Labs, INFLCR/Opendorse, On3/247Sports, Hawkin Dynamics, Hudl, institutional scholarship records — authoritative program data and raw source signals.</div>
+        <div class="layer-desc">GPS/EPTS (Catapult, STATSports), optical tracking (Second Spectrum, TRACAB, Hawk-Eye), event data (Opta, StatsBomb), force plates (VALD, Hawkin Dynamics), recovery wearables (Whoop, Oura, Polar), EMR/availability, scouting platforms, cap/contract ledgers, and governance feeds — authoritative data and raw source signals.</div>
       </div>
     </div>
   </div>
 
-  <p>This approach allows a program to deploy advanced institutional intelligence capabilities immediately — without displacing existing workflows, without placing additional burden on IT, and without the multi-year implementation timelines associated with system replacement.</p>
+  <p>This approach allows an organization to deploy advanced institutional intelligence capabilities immediately — without displacing existing workflows, without placing additional burden on IT, and without the multi-year implementation timelines associated with system replacement.</p>
 
   <h3>3.2 What Makes HERMES Different</h3>
 
-  <p>The football technology market has no shortage of analytics tools and performance platforms. What distinguishes HERMES is not the presence of AI — it is the institutional context in which that intelligence operates. Conventional platforms layer analytics onto a single system and call it intelligence. HERMES creates intelligence across the institution, enabling reasoning that spans every system, every role, and every data point simultaneously.</p>
+  <p>The sports technology market has no shortage of analytics tools and performance platforms. What distinguishes HERMES is not the presence of AI — it is the institutional context in which that intelligence operates. Conventional platforms layer analytics onto a single system and call it intelligence. HERMES creates intelligence across the organization, enabling reasoning that spans every system, every role, and every data point simultaneously.</p>
 
   <table class="comp-table">
     <tr><th>Capability</th><th>Conventional Platforms</th><th>HERMES by MetVero</th></tr>
     <tr><td>Architecture</td><td>Analytics on a single domain</td><td>Ontology-driven intelligence across all domains</td></tr>
-    <tr><td>Data Scope</td><td>Domain-specific (GPS only, film only, compliance only)</td><td><span class="check">✓</span> Cross-domain contextual intelligence</td></tr>
+    <tr><td>Data Scope</td><td>Domain-specific (GPS only, event data only, scouting only)</td><td><span class="check">✓</span> Cross-domain contextual intelligence</td></tr>
     <tr><td>Reporting Model</td><td>Retrospective dashboards</td><td><span class="check">✓</span> Real-time forward-looking projections</td></tr>
-    <tr><td>User Experience</td><td>Single interface for all roles</td><td><span class="check">✓</span> Role-calibrated intelligence per stakeholder</td></tr>
-    <tr><td>Portal Decisions</td><td>Manual 3–5 day process</td><td><span class="check">✓</span> 90-minute cross-domain Fit Score</td></tr>
-    <tr><td>NIL Compliance</td><td>Not addressed / spreadsheet</td><td><span class="check">✓</span> Automated conflict detection and brand registry</td></tr>
-    <tr><td>APR Projection</td><td>Annual retrospective report</td><td><span class="check">✓</span> Real-time forward model, 6-semester projection</td></tr>
-    <tr><td>Injury Prevention</td><td>Single-system load data</td><td><span class="check">✓</span> ACWR + recovery + academic stress combined signal</td></tr>
+    <tr><td>User Experience</td><td>Single interface for all roles</td><td><span class="check">✓</span> Role-calibrated lenses per stakeholder</td></tr>
+    <tr><td>Transfer / Trade Decisions</td><td>Manual multi-day process across systems</td><td><span class="check">✓</span> Cross-domain Fit Score in under 2 hours</td></tr>
+    <tr><td>Financial Compliance</td><td>Spreadsheet, reconciled after the fact</td><td><span class="check">✓</span> Live Squad-Cost-Ratio / cap headroom</td></tr>
+    <tr><td>Availability &amp; Load</td><td>Single-system load data</td><td><span class="check">✓</span> Load + recovery + availability + fixture signal combined</td></tr>
     <tr><td>Manual Reconciliation</td><td>Reduces some manual steps</td><td><span class="check">✓</span> Eliminates the cross-system reconciliation layer</td></tr>
-    <tr><td>Institutional Memory</td><td>Transactional records</td><td><span class="check">✓</span> Continuous pattern accumulation, institution-specific</td></tr>
+    <tr><td>Institutional Memory</td><td>Transactional records</td><td><span class="check">✓</span> Continuous pattern accumulation, organization-specific</td></tr>
   </table>
 
-  <h3>3.3 The Athletic Data Fabric</h3>
+  <h3>3.3 The Sports Data Fabric</h3>
 
-  <p>The Athletic Data Fabric is Layer 2.5 — the infrastructure layer between the source systems and the HERMES intelligence layer. It is the piece that most football programs are missing and the reason enterprise intelligence platforms have historically failed to deliver value in complex institutional environments: without a structured data foundation, there is no clean signal for intelligence to reason on.</p>
+  <p>The Sports Data Fabric is Layer 2.5 — the infrastructure layer between the source systems and the HERMES intelligence layer. It is the piece that most sports organizations are missing and the reason enterprise intelligence platforms have historically failed to deliver value in complex environments: without a structured data foundation, there is no clean signal for intelligence to reason on.</p>
 
-  <p>The parallel to the Databricks and Palantir partnership is instructive. Palantir builds institutional intelligence through ontology modeling — the same architecture underlying HERMES. But Palantir recognized that its intelligence layer required a structured data foundation before it could operate at enterprise scale. Databricks provided that foundation: a unified data lakehouse that ingested fragmented operational data, resolved identities across systems, normalized schemas, and served structured data to the intelligence layer above it. Football programs operate the same fragmentation problem. The Athletic Data Fabric is the missing layer.</p>
+  <p>The parallel to the Databricks and Palantir partnership is instructive. Palantir builds institutional intelligence through ontology modeling — the same architecture underlying HERMES. But Palantir recognized that its intelligence layer required a structured data foundation before it could operate at enterprise scale. Databricks provided that foundation: a unified data lakehouse that ingested fragmented operational data, resolved identities across systems, normalized schemas, and served structured data to the intelligence layer above it. Sports organizations face the same fragmentation problem. The Sports Data Fabric is the missing layer.</p>
 
   <div class="fab-pipe">
     <div class="fab-stage">
@@ -398,7 +425,7 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
     <div class="fab-arrow">→</div>
     <div class="fab-stage">
       <div class="fab-stage-n">Entity Resolution</div>
-      <div class="fab-stage-d">Player ID in Catapult = Student ID in Banner = Prospect ID in On3. One identity across all systems.</div>
+      <div class="fab-stage-d">One athlete identity across Catapult, the AMS, Wyscout, and the cap ledger. One identity across all systems.</div>
     </div>
     <div class="fab-arrow">→</div>
     <div class="fab-stage">
@@ -412,332 +439,469 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
     </div>
   </div>
 
-  <h3>3.4 Signal Architecture</h3>
+  <h3>3.4 The Signal Architecture</h3>
 
-  <p>HERMES's signal architecture is the central nervous system of the program. It does not replace any of the source systems. It listens to all of them simultaneously, attaches institutional meaning to what it hears, and routes the right intelligence to the right person in real time. Eight signal categories span the full institutional footprint of a football program:</p>
+  <p>HERMES's signal architecture is the central nervous system of the organization. It does not replace any of the source systems. It listens to all of them simultaneously, attaches institutional meaning to what it hears, and routes the right intelligence to the right person in real time. The architecture has two parts: a four-stage signal flow, and a taxonomy of signal categories.</p>
+
+  <h4 class="gold">The Signal Flow</h4>
+
+  <div class="fab-pipe">
+    <div class="fab-stage">
+      <div class="fab-stage-n">Pathway · Signals</div>
+      <div class="fab-stage-d">Unify fragmented sources into one identity-resolved data fabric.</div>
+    </div>
+    <div class="fab-arrow">→</div>
+    <div class="fab-stage">
+      <div class="fab-stage-n">Intervention · Intelligence</div>
+      <div class="fab-stage-d">Apply organization-calibrated rules to separate routine flags from real risk, with a named reason.</div>
+    </div>
+    <div class="fab-arrow">→</div>
+    <div class="fab-stage">
+      <div class="fab-stage-n">Operationalize · Context</div>
+      <div class="fab-stage-d">Enrich every signal with full context — the athlete's load history, availability, contract, and role.</div>
+    </div>
+    <div class="fab-arrow">→</div>
+    <div class="fab-stage">
+      <div class="fab-stage-n">Outcomes · Action</div>
+      <div class="fab-stage-d">Route role-specific intelligence to every stakeholder in real time.</div>
+    </div>
+  </div>
+
+  <h4 class="gold">The Signal Categories</h4>
+
+  <p>Eight signal categories span the full operational footprint of a sports organization. Each is sourced from real systems of record and resolved against a single athlete identity:</p>
 
   <div class="sig">
-    <div class="sig-head"><div class="sig-badge">S1</div><div class="sig-title">Roster Intelligence Signals</div></div>
-    <div class="sig-sources">Sources: NCAA Compliance databases, Banner/SIS, scholarship records, transfer portal feeds</div>
-    <div class="sig-items"><span class="sig-item">Eligibility Status</span><span class="sig-item">Scholarship Classification</span><span class="sig-item">Eligibility Clock</span><span class="sig-item">Transfer Status</span><span class="sig-item">Depth Chart Position</span><span class="sig-item">APR Contribution</span></div>
+    <div class="sig-head"><div class="sig-badge">S1</div><div class="sig-title">Roster &amp; Availability Signals</div></div>
+    <div class="sig-sources">Sources: registration/squad-list systems, league roster feeds, the AMS availability module</div>
+    <div class="sig-items"><span class="sig-item">Eligibility / Registration</span><span class="sig-item">Squad-List Compliance</span><span class="sig-item">Availability Status</span><span class="sig-item">Depth / Cover</span><span class="sig-item">Roster-Slot State</span></div>
   </div>
 
   <div class="sig">
-    <div class="sig-head"><div class="sig-badge">S2</div><div class="sig-title">Performance Intelligence Signals</div></div>
-    <div class="sig-sources">Sources: Catapult GPS, Polar, Whoop, Hawkin Dynamics, VALD, coaching grade systems</div>
-    <div class="sig-items"><span class="sig-item">Acute:Chronic Workload Ratio</span><span class="sig-item">High-Speed Running Load</span><span class="sig-item">HRV Readiness Score</span><span class="sig-item">Neuromuscular Output</span><span class="sig-item">Coaching Grade</span><span class="sig-item">Sprint Profile</span></div>
+    <div class="sig-head"><div class="sig-badge">S2</div><div class="sig-title">Performance &amp; Load Signals</div></div>
+    <div class="sig-sources">Sources: Catapult Vector, STATSports Apex, Hudl WIMU, Playermaker</div>
+    <div class="sig-items"><span class="sig-item">GPS External Load</span><span class="sig-item">Acute:Chronic Workload Ratio</span><span class="sig-item">High-Speed Running</span><span class="sig-item">Accel / Decel</span><span class="sig-item">PlayerLoad</span></div>
   </div>
 
   <div class="sig">
-    <div class="sig-head"><div class="sig-badge">S3</div><div class="sig-title">Medical Intelligence Signals</div></div>
-    <div class="sig-sources">Sources: Sportsware Online, Kitman Labs, institutional EMR (HIPAA-protected — clearance status only, no PHI)</div>
-    <div class="sig-items"><span class="sig-item">Practice Status</span><span class="sig-item">Return-to-Play Stage</span><span class="sig-item">Injury Risk Classification</span><span class="sig-item">Time-to-Clearance Estimate</span><span class="sig-item">Historical Pattern Flag</span></div>
+    <div class="sig-head"><div class="sig-badge">S3</div><div class="sig-title">Recovery &amp; Readiness Signals</div></div>
+    <div class="sig-sources">Sources: Whoop, Oura, Polar Team Pro, VALD ForceDecks/NordBord, Hawkin Dynamics</div>
+    <div class="sig-items"><span class="sig-item">HRV</span><span class="sig-item">Sleep</span><span class="sig-item">Wellness Questionnaire</span><span class="sig-item">sRPE</span><span class="sig-item">Neuromuscular Readiness (CMJ)</span></div>
   </div>
 
   <div class="sig">
-    <div class="sig-head"><div class="sig-badge">S4</div><div class="sig-title">Academic Intelligence Signals</div></div>
-    <div class="sig-sources">Sources: Banner/Workday, degree audit system, SAMS, Navigate, course management system</div>
-    <div class="sig-items"><span class="sig-item">Current GPA</span><span class="sig-item">PTD Checkpoint Status</span><span class="sig-item">APR Contribution Probability</span><span class="sig-item">Enrollment Status</span><span class="sig-item">Degree Progress</span><span class="sig-item">Exam Calendar Overlap</span></div>
+    <div class="sig-head"><div class="sig-badge">S4</div><div class="sig-title">Medical &amp; Availability Signals</div></div>
+    <div class="sig-sources">Sources: Kitman Labs iP, Smartabase, EDGE10 ARMS (clearance-only — clinical detail stays behind consent)</div>
+    <div class="sig-items"><span class="sig-item">Practice / Match Availability</span><span class="sig-item">Return-to-Play Stage</span><span class="sig-item">Injury-Risk Flag</span><span class="sig-item">Expected RTP Date</span></div>
   </div>
 
   <div class="sig">
-    <div class="sig-head"><div class="sig-badge">S5</div><div class="sig-title">Compliance Intelligence Signals</div></div>
-    <div class="sig-sources">Sources: NCAA Compliance Assistant, ACS, NIL platform APIs, institutional compliance records</div>
-    <div class="sig-items"><span class="sig-item">NIL Deal Status</span><span class="sig-item">NIL Category Registry</span><span class="sig-item">Contact Period Status</span><span class="sig-item">Booster Classification Flag</span><span class="sig-item">Portal Compliance Status</span><span class="sig-item">APR Running Score</span></div>
+    <div class="sig-head"><div class="sig-badge">S5</div><div class="sig-title">Tactical &amp; Match Signals</div></div>
+    <div class="sig-sources">Sources: Opta (Stats Perform), StatsBomb, Second Spectrum, Sony Hawk-Eye, TRACAB</div>
+    <div class="sig-items"><span class="sig-item">Event Data (xG, OBV)</span><span class="sig-item">Positional Tracking</span><span class="sig-item">Opponent Tendencies</span><span class="sig-item">Pressing / Off-Ball Runs</span></div>
   </div>
 
   <div class="sig">
-    <div class="sig-head"><div class="sig-badge">S6</div><div class="sig-title">Film &amp; Tactical Intelligence Signals</div></div>
-    <div class="sig-sources">Sources: Hudl, XOS Digital, PFF, TruMedia, internal video coordination systems</div>
-    <div class="sig-items"><span class="sig-item">Personnel Package Frequency</span><span class="sig-item">Formation Tendency</span><span class="sig-item">Coverage Shell Distribution</span><span class="sig-item">Individual Player Grade</span><span class="sig-item">Red Zone Tendency</span></div>
+    <div class="sig-head"><div class="sig-badge">S6</div><div class="sig-title">Recruitment &amp; Transfer Signals</div></div>
+    <div class="sig-sources">Sources: Hudl Wyscout, StatsBomb IQ, SciSports, TransferRoom (xTV), Transfermarkt</div>
+    <div class="sig-items"><span class="sig-item">Scouting Profile</span><span class="sig-item">Fit Score</span><span class="sig-item">Market Value</span><span class="sig-item">Contract Expiry</span><span class="sig-item">Transfer Interest</span></div>
   </div>
 
   <div class="sig">
-    <div class="sig-head"><div class="sig-badge">S7</div><div class="sig-title">Recruiting Intelligence Signals</div></div>
-    <div class="sig-sources">Sources: On3, 247Sports, Rivals, institutional evaluation databases, recruiting CRM</div>
-    <div class="sig-items"><span class="sig-item">Prospect Fit Score</span><span class="sig-item">Academic Eligibility Probability</span><span class="sig-item">Engagement Indicators</span><span class="sig-item">Decommitment Risk Score</span><span class="sig-item">Class Construction Score</span></div>
+    <div class="sig-head"><div class="sig-badge">S7</div><div class="sig-title">Compliance &amp; Cap Signals</div></div>
+    <div class="sig-sources">Sources: FIFA TMS, UEFA FSR, Premier League / league cap rules, GBE/work-permit systems</div>
+    <div class="sig-items"><span class="sig-item">Squad Cost Ratio / PSR</span><span class="sig-item">Salary-Cap Headroom</span><span class="sig-item">Roster/Registration Rules</span><span class="sig-item">Transfer Governance (ITC)</span><span class="sig-item">Work-Permit / GBE</span></div>
   </div>
 
   <div class="sig">
-    <div class="sig-head"><div class="sig-badge">S8</div><div class="sig-title">Financial Intelligence Signals</div></div>
-    <div class="sig-sources">Sources: Scholarship records, NIL collective reporting, recruiting budget, contract management</div>
-    <div class="sig-items"><span class="sig-item">Scholarship Budget Efficiency</span><span class="sig-item">NIL Budget Utilization</span><span class="sig-item">Recruiting ROI</span><span class="sig-item">APR Financial Exposure</span><span class="sig-item">Contract Trigger Status</span></div>
+    <div class="sig-head"><div class="sig-badge">S8</div><div class="sig-title">Financial &amp; Commercial Signals</div></div>
+    <div class="sig-sources">Sources: SeatGeek, Ticketmaster Archtics, Salesforce, KORE/Two Circles, SponsorUnited</div>
+    <div class="sig-items"><span class="sig-item">Matchday / Broadcast / Commercial Revenue</span><span class="sig-item">Wage Budget</span><span class="sig-item">Transfer Amortization</span><span class="sig-item">Sponsorship</span><span class="sig-item">Ticketing / Fan</span></div>
   </div>
 
-  <div class="note-box"><p><strong>Cross-Domain Alert Example:</strong> When ACWR &gt; 1.3 AND HRV is 15% below athlete baseline AND academic stress signal is active (exam in 48 hours) AND injury history flags the left hamstring as high-recurrence → HERMES generates a Priority Load Modification flag routed to sports science staff and the position coach. No individual system in Layer 1 produces this signal. HERMES does.</p></div>
+  <div class="note-box"><p><strong>Cross-Domain Alert Example:</strong> When ACWR &gt; 1.3 AND HRV is depressed versus baseline AND the player self-reports soreness AND availability history flags the same muscle group AND there are two fixtures in the next 6 days → HERMES raises a Priority Load-Modification flag to the sports scientist and head coach. No single Layer 1 system produces this signal. HERMES does.</p></div>
 
-  <h3>3.5 Four Intelligence Views</h3>
+  <div class="note-box"><p><strong>Cross-Domain Transfer Example (S6 × S4 × S7 × S8):</strong> A transfer Fit Score combines sporting fit (Wyscout / StatsBomb / SciSports) with medical and availability history (the AMS), Squad-Cost-Ratio headroom (UEFA FSR / league cap rules), and contract economics (wage, amortization, expiry) — into one score. No scouting tool, no cap spreadsheet, and no medical system produces it alone. HERMES does.</p></div>
 
-  <p>HERMES does not present the same interface to every user. It is built around the specific decision context of each stakeholder group, so sports science staff, position coaches, the athletic director, and university leadership each receive the intelligence relevant to their specific work, drawn from the same unified signal foundation.</p>
+  <h3>3.5 Five Operational Lenses</h3>
+
+  <p>HERMES does not present the same interface to every user. It is built around the specific decision context of each stakeholder group — one organization, viewed through five lenses by altitude. Each lens draws from the same unified signal foundation; what changes is the altitude and the question.</p>
 
   <div class="view-block">
-    <div class="view-block-head">View 1 — Athlete Signal View</div>
-    <div class="view-block-aud">Sports Science · Athletic Trainers · Position Coaches · Academic Support</div>
-    <p>Every athlete is a complete, live signal node. The Athlete Signal View synthesizes across all signal domains — performance, medical, academic, compliance, NIL — and presents the complete picture of where this athlete stands right now. The view does not require the user to cross-reference systems. It is the cross-reference.</p>
+    <div class="view-block-head">Lens 1 — Athlete Signal View · Street Level</div>
+    <div class="view-block-aud">Sports Science · Medical · Position &amp; Assistant Coaches</div>
+    <p>Every athlete is a complete, live signal node across load, recovery, medical availability, tactical contribution, and contract status. The Athlete Signal View synthesizes across all signal domains and presents where this athlete stands right now. The view does not require the user to cross-reference systems. It is the cross-reference.</p>
     <div class="view-caps">
-      <span class="view-cap">Live Readiness Score</span><span class="view-cap">ACWR Trend + Injury Risk Window</span><span class="view-cap">PTD Checkpoint Proximity</span><span class="view-cap">NIL Expiration Flags</span><span class="view-cap">Practice Status</span><span class="view-cap">Eligibility Clock</span>
+      <span class="view-cap">Live Readiness Score</span><span class="view-cap">ACWR Trend + Injury-Risk Window</span><span class="view-cap">Availability Status</span><span class="view-cap">Fixture-Congestion Flag</span><span class="view-cap">Contract Position</span>
     </div>
     <div class="view-query">
       <div class="view-query-label">Cross-Domain Alert That Makes This Irreplaceable</div>
-      <p>"Priority Load Modification flag detected: ACWR 1.42 this week + HRV 18% below baseline this morning + final exam in 36 hours + soft tissue history in right hamstring. Not from GPS. Not from the medical system. From HERMES."</p>
+      <p>"Priority Load-Modification flag: ACWR 1.42 this week + HRV depressed versus baseline this morning + self-reported soreness + soft-tissue availability history in the same muscle group + two fixtures in the next 6 days. Not from GPS. Not from the medical system. From HERMES."</p>
     </div>
   </div>
 
   <div class="view-block">
-    <div class="view-block-head">View 2 — Coaching Intelligence View</div>
-    <div class="view-block-aud">Head Coach · Coordinators · Position Coaches</div>
-    <p>This view aggregates athlete signals into unit and team-level readiness intelligence, and connects tactical film intelligence with personnel availability. The coordinator does not need to leave this view to understand who is available to play, how healthy the unit is, what the opponent is likely to do, and what personnel package is optimal given those constraints.</p>
+    <div class="view-block-head">Lens 2 — Coaching &amp; Performance View · Unit Level</div>
+    <div class="view-block-aud">Head Coach · Coordinators / Assistants · Strength &amp; Conditioning · Performance Staff</div>
+    <p>This lens aggregates athlete signals into squad and unit readiness, and connects tactical and opponent intelligence with availability. Staff do not need to leave the view to understand who is available, how fresh the unit is, what the opponent is likely to do, and what the optimal lineup is given those constraints.</p>
     <div class="view-caps">
-      <span class="view-cap">Position Group Readiness Matrix</span><span class="view-cap">Real-Time Depth Chart</span><span class="view-cap">Opponent Tendency Feed</span><span class="view-cap">Optimal Personnel Package</span><span class="view-cap">Recruiting Board + Fit Scores</span>
+      <span class="view-cap">Squad Readiness Matrix</span><span class="view-cap">Live Availability / Depth</span><span class="view-cap">Opponent Tendency Feed</span><span class="view-cap">Strongest Available XI</span><span class="view-cap">Projected HSR Load</span>
     </div>
     <div class="view-query">
       <div class="view-query-label">The Question HERMES Answers in Real Time</div>
-      <p>"Given our current available roster — accounting for the three players in RTP stage 3 and the two on academic restriction — what is our optimal 3rd-and-medium personnel package against a Cover 3 shell, and what is the historical success rate of that package against this opponent's defensive coordinator's tendencies?"</p>
+      <p>"Given current availability — accounting for the two players in RTP stage 3 and the one on modified training — what is our strongest available XI against this opponent's pressing structure, and how does our projected high-speed-running load compare with two fixtures in six days?"</p>
     </div>
   </div>
 
   <div class="view-block">
-    <div class="view-block-head">View 3 — Program Command View</div>
-    <div class="view-block-aud">Athletic Director · Deputy AD for Football Operations · Program CFO</div>
-    <p>This view presents the program as an operating enterprise. Scholarship budget, NIL budget, compliance exposure, recruiting pipeline, staff contract landscape, and APR trajectory are visible in a single operating picture with forward-looking projections.</p>
+    <div class="view-block-head">Lens 3 — Sporting Operations View · Organization Level</div>
+    <div class="view-block-aud">Sporting Director / General Manager · Head of Recruitment · Head of Analytics</div>
+    <p>This lens presents the squad as a managed asset base: roster and registration compliance, wage budget versus Squad-Cost-Ratio headroom, the transfer pipeline with Fit Scores, the contract-expiry curve, and transfer-fee amortization — in a single operating picture with forward-looking projections.</p>
     <div class="view-caps">
-      <span class="view-cap">Scholarship Ledger</span><span class="view-cap">NIL Collective Budget</span><span class="view-cap">Compliance Exposure Score</span><span class="view-cap">APR Trajectory Model</span><span class="view-cap">Recruiting Class Health</span><span class="view-cap">Staff Contract Status</span>
+      <span class="view-cap">Roster / Registration Compliance</span><span class="view-cap">Wage Budget vs SCR Headroom</span><span class="view-cap">Transfer Pipeline + Fit Scores</span><span class="view-cap">Contract-Expiry Curve</span><span class="view-cap">Amortization Schedule</span>
     </div>
     <div class="view-query">
-      <div class="view-query-label">The Question HERMES Enables for the AD</div>
-      <p>"If our next three home games produce the currently projected wins, does our TV contract trigger the performance bonus clause, and at that point what is our projected APR risk for the bowl eligibility window?"</p>
+      <div class="view-query-label">The Question HERMES Enables for the Sporting Director</div>
+      <p>"If we sign this target on a 5-year deal at this wage, what is the marginal impact on our Squad Cost Ratio, our registration and roster-slot compliance, and our contract-expiry exposure next summer?"</p>
     </div>
   </div>
 
   <div class="view-block">
-    <div class="view-block-head">View 4 — Institutional Outcome View</div>
-    <div class="view-block-aud">University President · Board of Trustees · Provost · Chief Revenue Officer</div>
-    <p>This view presents football program intelligence at the institutional level. Bowl eligibility probability, APR standing, NIL ROI, and competitive positioning are visible in real time — not assembled after the strategic window to act has closed.</p>
+    <div class="view-block-head">Lens 4 — Executive View · Satellite</div>
+    <div class="view-block-aud">President / CEO / Managing Director</div>
+    <p>This lens presents the organization as an operating enterprise: sporting performance trajectory, financial sustainability (revenue versus wages and amortization, PSR/SCR position), competitive standing, and major risk exposure — visible in real time, not assembled after the strategic window to act has closed.</p>
     <div class="view-caps">
-      <span class="view-cap">Bowl Eligibility Probability</span><span class="view-cap">APR vs. Peer Benchmarks</span><span class="view-cap">NIL Program ROI</span><span class="view-cap">Recruiting Class Trajectory</span><span class="view-cap">Brand Equity Signals</span>
+      <span class="view-cap">Performance Trajectory</span><span class="view-cap">Revenue vs Wage + Amortization</span><span class="view-cap">PSR / SCR Position</span><span class="view-cap">Competitive Standing</span><span class="view-cap">Risk Exposure</span>
+    </div>
+    <div class="view-query">
+      <div class="view-query-label">The Question HERMES Enables at the Executive Level</div>
+      <p>"If our current league trajectory holds, what is the projected revenue, and at what point does our committed wage plus amortization breach the Squad Cost Ratio threshold?"</p>
+    </div>
+  </div>
+
+  <div class="view-block">
+    <div class="view-block-head">Lens 5 — Ownership &amp; Governance View · Global</div>
+    <div class="view-block-aud">Owner · Board · Investors</div>
+    <p>The satellite view: enterprise value, multi-year financial sustainability, competitive positioning versus peers, brand and commercial trajectory, regulatory and compliance posture, and capital-allocation decisions — manager and sporting-director hires, transfer budget, infrastructure.</p>
+    <div class="view-caps">
+      <span class="view-cap">Enterprise Value</span><span class="view-cap">Multi-Year Sustainability</span><span class="view-cap">Peer Positioning</span><span class="view-cap">Commercial Trajectory</span><span class="view-cap">Compliance Posture</span>
     </div>
     <div class="view-query">
       <div class="view-query-label">The Insight HERMES Delivers at This Level</div>
-      <p>"Every 1-win improvement in the regular season correlates to $4.2M in bowl revenue, a 12% increase in recruiting class star average, and a 0.8-point APR improvement. Current trajectory puts us at 8 wins. One additional win, achievable if the following three depth chart decisions are made this week, shifts every one of those metrics."</p>
+      <p>"Every league-position improvement and qualification tier correlates to a defined uplift in broadcast and commercial revenue and in squad value. Our current trajectory implies a specific enterprise-value path — and the capital-allocation decisions this window most affect it."</p>
     </div>
   </div>
 
   <h3>3.6 The Ontology Engine</h3>
 
-  <p>The ontology engine is HERMES's deepest differentiator. The competitive moat is not data collection — every system in Layer 1 already collects data. The competitive moat is meaning. HERMES does not store records; it maintains a living institutional model of the program — every entity, every relationship, every signal, updated in real time.</p>
+  <p>The ontology engine is HERMES's deepest differentiator. The competitive moat is not data collection — every system in Layer 1 already collects data. The competitive moat is meaning. HERMES does not store records; it maintains a living model of the organization — every entity, every relationship, every signal, updated in real time.</p>
 
-  <p>An ontology is a formal representation of the entities in a domain, the relationships between them, and the meaning of signals in context. HERMES builds and maintains a football institution ontology that enables queries no individual system can answer:</p>
+  <p>An ontology is a formal representation of the entities in a domain, the relationships between them, and the meaning of signals in context. HERMES builds and maintains a sports-organization ontology — Athlete, Contract, Availability and Injury Event, Transfer Target, Match, Staff, Signal, and Squad/Roster, and the relationships between them — that enables queries no individual system can answer:</p>
 
   <div class="note-box">
-    <p><strong>Sample Ontology Query 1:</strong> "Which defensive linemen have an ACWR above 1.4, are within 9 credits of losing a PTD checkpoint, have a hamstring injury in their history, and have an NIL deal with a performance bonus tied to games played?" — No individual system contains all those facts. The ontology connects them.</p>
+    <p><strong>Sample Ontology Query 1:</strong> "Which midfielders have an ACWR above 1.4, a soft-tissue availability history in the same muscle group, a contract expiring within 12 months, and a release clause below current market value?" — No individual system contains all those facts. The ontology connects them.</p>
   </div>
   <div class="note-box">
-    <p><strong>Sample Ontology Query 2:</strong> "Which recruits in this class have an academic eligibility probability below 70%, represent positions where we have 2+ returning starters, and come from territories where we have no upcoming evaluation scheduled?" — A class construction efficiency question that takes a day from spreadsheets. The ontology answers it in real time.</p>
+    <p><strong>Sample Ontology Query 2:</strong> "Which transfer targets have a sporting Fit Score above 80, fit within our remaining Squad-Cost-Ratio headroom, satisfy our work-permit and registration rules, and play a position where we have an expiring contract?" — A recruitment-efficiency question that takes a day across spreadsheets and scouting tools. The ontology answers it in real time.</p>
   </div>
   <div class="note-box">
-    <p><strong>Sample Ontology Query 3:</strong> "What is our projected APR score for next semester if our three most academically at-risk athletes fail to remain enrolled, and at what threshold does that projection trigger bowl ban risk?" — No compliance system projects APR forward in real time. HERMES does.</p>
+    <p><strong>Sample Ontology Query 3:</strong> "What is our projected Squad Cost Ratio next season if we trigger these two contract extensions and our broadcast revenue lands at the mid-case — and at what point does that breach the threshold?" — No cap spreadsheet projects the constraint forward against revenue scenarios. HERMES does.</p>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 4: THE SIX PROBLEMS
+     SECTION 4: ONE CORE. EVERY LEAGUE.
 ═══════════════════════════════════════════════════════ -->
-<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">4 — The Six Undeniable Problems</div></div>
+<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">4 — One Core. Every League.</div></div>
 <div class="section">
   <div class="sec-eyebrow">Section 4</div>
-  <div class="sec-title">The Six Undeniable Problems</div>
-  <div class="sec-sub">Specific, measurable, financially grounded. These are not pain points — they are institutional exposure.</div>
+  <div class="sec-title">One Core. Every League.</div>
+  <div class="sec-sub">The Generic Architecture — the common functional spine, and how each vertical maps into it.</div>
 
-  <div class="prob">
-    <div class="prob-head"><div class="prob-num">01</div><div class="prob-title">The Transfer Portal Window Is 48 Hours. Your Decision Process Takes 5 Days.</div></div>
-    <div class="prob-body">
-      <p>When a player enters the transfer portal, evaluating fit requires answers from six different systems: Banner/Workday for academic records, the NCAA Eligibility Center for eligibility, the NIL collective spreadsheet for budget, the compliance office for visit tracking, the medical staff's EMR for injury history, and the SIS for scholarship counts. Manual cross-referencing takes 3 to 5 business days.</p>
-      <p>The top 20% of portal entries — the ones that change program trajectories — are decided within 24 to 48 hours. Programs that cannot complete due diligence in under 2 hours do not make offers — not because the player doesn't fit, but because the information wasn't ready in time.</p>
-    </div>
-    <div class="prob-exp"><div class="prob-exp-label">Financial Exposure</div><div class="prob-exp-val">3 missed marquee portal targets per cycle = $10M–$30M in institutional value. Single 5-star transfer NIL value: $500K–$2M.</div></div>
-    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">Portal entry triggers automatic cross-domain Fit Score: academic eligibility probability, scholarship slot status, NIL headroom, medical flag summary, and compliance risk — in under 90 minutes.</div></div>
-  </div>
+  <p>HERMES does not model a sport. It models the common functional spine that every sports organization shares. Each league is the same spine with three things swapped: the <strong>vendor binding</strong> (which product fills each data slot), the <strong>constraint shape</strong> (the salary or cost constraint is polymorphic), and the <strong>title binding</strong> (the sporting-operations leader's title). Build the abstraction once; bind the concrete league at deployment.</p>
 
-  <div class="prob">
-    <div class="prob-head"><div class="prob-num">02</div><div class="prob-title">150 Active NIL Deals, Managed on a Spreadsheet.</div></div>
-    <div class="prob-body">
-      <p>A mature NIL program has 50 to 65 active deals simultaneously across automotive, food and beverage, apparel, technology, local services, alcohol, gambling, and financial products. Brand conflicts surface only when a dealer calls the AD. Booster entanglement in NIL LLCs surfaces only during an NCAA enforcement review. Contract expirations go untracked until a competing brand calls the player directly.</p>
-    </div>
-    <div class="prob-exp"><div class="prob-exp-label">Financial Exposure</div><div class="prob-exp-val">Average Level I NCAA violation: $50K–$100K direct fine + 2–5 scholarship reductions. At $47K/slot/year: $564K in scholarship budget alone over a 4-year compliance period.</div></div>
-    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">Unified NIL ledger with brand category registry, conflict detection engine, booster classification checks, and expiration calendar. Every new deal is reviewed before execution.</div></div>
-  </div>
+  <h3>The Common Functional Spine</h3>
 
-  <div class="prob">
-    <div class="prob-head"><div class="prob-num">03</div><div class="prob-title">Scholarship Efficiency Is Bleeding $141,000 to $282,000 Per Year.</div></div>
-    <div class="prob-body">
-      <p>Programs lose 3 to 6 scholarship slots annually to fragmented information: missed 14-day medical hardship windows, incorrect graduation transfer departure dates recorded in SIS, and over-signing attrition miscalculations. Each wasted scholarship is worth $47,000 per academic year with zero roster return.</p>
-    </div>
-    <div class="prob-exp"><div class="prob-exp-label">Financial Exposure</div><div class="prob-exp-val">3 wasted slots per year = $141K annually. Over a 4-year cycle: $564K in recoverable scholarship efficiency loss.</div></div>
-    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">Real-time scholarship ledger with automated medical hardship deadline tracking, graduation transfer clearance timelines, and roster scenario modeling. Slot mismanagement drops to near zero.</div></div>
-  </div>
+  <p>Every organization — pro or college, in any league — is built on the same layered structure. This is the shape of the org chart, and it is what the generic HERMES core abstracts:</p>
 
-  <div class="prob">
-    <div class="prob-head"><div class="prob-num">04</div><div class="prob-title">Preventable Injuries Are Destroying Game-Week Rosters.</div></div>
-    <div class="prob-body">
-      <p>Programs using Catapult GPS collect 15–20 data points per athlete per session. Programs using Polar or Whoop collect HRV and sleep quality. Programs using Hawkin Dynamics collect neuromuscular readiness. The data exists — in three systems that do not communicate. The academic advisor knows that three starters have finals this week and their sleep is disrupted. That information never reaches the sports science staff. A 2022 Power 5 study showed a 34% increase in soft tissue injuries in the two weeks following high-academic-stress periods. The sports science staff makes practice intensity decisions without access to the academic calendar.</p>
-    </div>
-    <div class="prob-exp"><div class="prob-exp-label">Financial Exposure</div><div class="prob-exp-val">4–6 preventable soft tissue injuries per season: $500K–$1.2M in direct medical costs, re-recruiting costs, APR impact, and portal departure risk.</div></div>
-    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">Unified load management dashboard: GPS workload + recovery metrics + academic calendar signals simultaneously. ACWR spike + low HRV + exam overlap generates a 48–72 hour early warning flag.</div></div>
-  </div>
-
-  <div class="prob">
-    <div class="prob-head"><div class="prob-num">05</div><div class="prob-title">Late Academic Disqualification Is Destroying Recruiting Classes.</div></div>
-    <div class="prob-body">
-      <p>The academic eligibility check is the final step in the recruiting process. It should be the first. 3 to 5 recruits per class at major programs are discovered — after offer, after official visit, after commitment — to have NCAA core course deficiencies, GPA shortfalls, or test score problems. The offer slot was committed. The class was built around these players. The replacement recruit, signed from what remains in the pool after disqualification, is rarely equivalent.</p>
-    </div>
-    <div class="prob-exp"><div class="prob-exp-label">Financial Exposure</div><div class="prob-exp-val">3 late-disqualification recruits per class × $47K scholarship × 4-year participation value = $564K in lost scholarship utilization, plus recruiting investment already spent.</div></div>
-    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">Prospect Fit Score runs academic eligibility modeling at the point of evaluation — before the offer is extended. Programs stop investing heavily in academically unqualifiable prospects.</div></div>
-  </div>
-
-  <div class="prob">
-    <div class="prob-head"><div class="prob-num">06</div><div class="prob-title">APR Violations Are Invisible Until It's Too Late.</div></div>
-    <div class="prob-body">
-      <p>The NCAA APR is a rolling 4-year metric. The 930 threshold triggers sanctions: practice time restrictions, scholarship reductions, and postseason bans. No system currently gives programs a forward-looking APR model. Programs discover they are approaching the 930 threshold when the NCAA publishes the annual report — typically 8 months after the academic year ends. The interventions that could have mattered are 2 years past.</p>
-    </div>
-    <div class="prob-exp"><div class="prob-exp-label">Financial Exposure</div><div class="prob-exp-val">SEC bowl ban cost: $4M–$18M in conference distribution + $2M–$5M institutional revenue. Total exposure: $6M–$23M per banned bowl appearance.</div></div>
-    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">Real-time APR projection model per athlete, per semester, projected forward 4–8 semesters. Intervention recommendations surface when rolling trajectory intersects the 930 threshold — with 6 semesters of early warning.</div></div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 5: FINANCIAL IMPACT
-═══════════════════════════════════════════════════════ -->
-<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">5 — Financial Impact Model</div></div>
-<div class="section">
-  <div class="sec-eyebrow">Section 5</div>
-  <div class="sec-title">Financial Impact Model</div>
-
-  <div class="met-grid">
-    <div class="met-cell"><div class="met-val">5 days<br><em>→ 90 min</em></div><div class="met-label">Portal Decision Speed</div><div class="met-desc">Cross-domain Fit Score replaces 5-day manual process across 6 systems.</div></div>
-    <div class="met-cell"><div class="met-val"><em>$2M–$5M</em></div><div class="met-label">Annual Value</div><div class="met-desc">Conservative recoverable cost and risk avoidance for a Power 4 program in steady state.</div></div>
-    <div class="met-cell"><div class="met-val"><em>3–6</em> slots</div><div class="met-label">Scholarship Recovery</div><div class="met-desc">Real-time ledger and hardship tracking eliminate phantom scholarship loss annually.</div></div>
-    <div class="met-cell"><div class="met-val"><em>$6M–$23M</em></div><div class="met-label">Bowl Ban Exposure</div><div class="met-desc">Forward APR projection creates 6-semester early warning before sanctions become visible.</div></div>
-  </div>
-
-  <table class="fin-table">
-    <tr><th>Problem</th><th>Annual Financial Exposure</th><th>HERMES Resolution</th><th>Projected Recovery</th></tr>
-    <tr><td class="gold">Portal decision speed</td><td>$10M–$30M per cycle in missed transfers</td><td>90-minute cross-domain Fit Score</td><td>2–3 marquee portal targets captured per cycle</td></tr>
-    <tr><td class="gold">NIL compliance failures</td><td>$150K–$300K per violation cycle</td><td>Automated NIL ledger + conflict engine</td><td>90%+ reduction in preventable violations</td></tr>
-    <tr><td class="gold">Scholarship efficiency loss</td><td>$141K–$282K per year</td><td>Real-time ledger + hardship deadline tracking</td><td>3–6 wasted slots recovered annually</td></tr>
-    <tr><td class="gold">Preventable soft tissue injuries</td><td>$500K–$1.2M per season</td><td>Cross-domain load + academic stress monitoring</td><td>4–6 injuries prevented per season</td></tr>
-    <tr><td class="gold">Late academic disqualification</td><td>$564K per class cycle</td><td>Front-loaded academic eligibility probability</td><td>3+ late disqualifications prevented per class</td></tr>
-    <tr><td class="gold">APR bowl ban risk</td><td>$6M–$23M per banned game</td><td>Real-time APR projection + 6-semester warning</td><td>Bowl ban risk near-eliminated for manageable programs</td></tr>
+  <table class="comp-table">
+    <tr><th>Org Layer</th><th>Function</th><th>Sporting-Ops Leader (varies by league)</th></tr>
+    <tr><td>Governance / Ownership</td><td>Capital, mandate, strategic direction</td><td>Owner / Board / University President + Trustees</td></tr>
+    <tr><td>Executive Leadership</td><td>Enterprise direction and accountability</td><td>President / CEO · College: Athletic Director</td></tr>
+    <tr><td>Sporting Operations</td><td>Personnel, scouting, analytics, roster/cap</td><td>Sporting Director / GM / President of Baseball Ops / AD</td></tr>
+    <tr><td>Coaching &amp; Performance</td><td>Coaching, sports science, medical</td><td>Head Coach / Manager + performance staff</td></tr>
+    <tr><td>Business Operations</td><td>Revenue, brand, facilities, finance, comms</td><td>Commercial / Finance leadership</td></tr>
+    <tr><td>Player Development</td><td>Pipeline from acquisition to contributor</td><td>Academy / Farm / G-League / College Dev</td></tr>
   </table>
 
-  <div class="fin-total">
-    <div class="fin-total-label">Conservative Annual Value Delivered by HERMES (Power 4 Program)</div>
-    <div class="fin-total-val">$2M – $5M</div>
+  <p>Beneath that org sits a single cross-cutting data spine that holds for every vertical: <strong>Tracking → Performance → Medical / Biomechanics → Roster / Cap → Acquisition → Compliance.</strong> HERMES models that spine once. The following blocks show how each vertical binds into it — soccer first, as the lead example, then the pro leagues, then the college extension.</p>
+
+  <div class="sport-block">
+    <div class="sport-head"><div class="sport-badge">SOCCER</div><div class="sport-title">Football / Soccer Club</div></div>
+    <p><strong>Sporting Director model.</strong> Tracking is league-provided optical (Second Spectrum, TRACAB) plus club-owned GPS (Catapult Vector, STATSports Apex). The AMS is Kitman Labs or Smartabase. Scouting and market intelligence run on Hudl Wyscout, StatsBomb, and TransferRoom. Talent acquisition is the transfer market, governed by FIFA TMS and the Clearing House.</p>
+    <p>The constraint is the most complex of any vertical: the <strong>UEFA Squad Cost Ratio (70%)</strong> plus the <strong>Premier League PSR / SCR framework (85% green / 115% red)</strong>, FIFA transfer governance (ITC, solidarity, training compensation), <strong>GBE work permits</strong>, and homegrown / locally-trained quotas. Revenue is the three pillars — matchday, broadcast, and commercial.</p>
+    <div class="sport-stat">Constraint: UEFA SCR 70% + PL SCR 85%/115% + FIFA TMS + GBE + homegrown quotas — a polymorphic, multi-layer cost constraint.</div>
   </div>
-
-  <p style="margin-top:16px;">In a portal cycle where HERMES captures one marquee transfer that a competitor would otherwise win, or prevents one APR-driven bowl ban, the single-event ROI exceeds $10M. One prevented APR bowl ban pays for HERMES for 20 years. One captured portal target pays for it for 5. The question is not whether HERMES is worth the cost. The question is how many seasons a program is willing to operate without it.</p>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════
-     SECTION 6: PRO SPORTS SCALABILITY
-═══════════════════════════════════════════════════════ -->
-<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">6 — Pro Sports Scalability</div></div>
-<div class="section">
-  <div class="sec-eyebrow">Section 6</div>
-  <div class="sec-title">Pro Sports Scalability</div>
-  <div class="sec-sub">The same architecture. Higher stakes. The identical fragmentation problem at 10x to 50x the financial exposure.</div>
-
-  <p>HERMES was designed for the football institution, not for a specific regulatory environment. The ontology architecture, signal taxonomy, and intelligence layers are directly transferable to professional sports operations. The data fragmentation problem is identical. The financial stakes are not.</p>
 
   <div class="sport-block">
     <div class="sport-head"><div class="sport-badge">NFL</div><div class="sport-title">National Football League</div></div>
-    <p>A 32-team franchise operates with a $255M salary cap (2024), a 53-man active roster, and a $150M–$200M annual operating budget. The NFL equivalent of scholarship management is salary cap management — one incorrect cap restructure produces $10M–$30M in dead cap space. The trade deadline is the transfer portal: evaluating a trade target requires cap impact (OverTheCap), performance signal (PFF, Next Gen Stats), injury history (NFLPA summary), and scheme fit (film) — from at least 6 systems, in 48 hours.</p>
-    <div class="sport-stat">Dead cap mismanagement: $10M–$30M per incident. Draft pick misallocation ($10M–$30M guaranteed): same Fit Score logic, higher stakes.</div>
+    <p><strong>General Manager model.</strong> Tracking is RFID, not optical — Next Gen Stats via Zebra Technologies chips in shoulder pads and the ball. Film and grading run on PFF and Hudl/XOS. Talent intake is the Draft, Combine, and Pro Days.</p>
+    <p>The constraint is a <strong>HARD salary cap</strong> (≈$279.2M in 2025) with signing-bonus proration (max 5 years), void years, dead cap, and the franchise tag — a true ceiling that cannot be exceeded.</p>
+    <div class="sport-stat">Constraint: hard cap (~$279M, 2025) · proration · void years · dead cap · franchise tag.</div>
   </div>
 
   <div class="sport-block">
     <div class="sport-head"><div class="sport-badge">NBA</div><div class="sport-title">National Basketball Association</div></div>
-    <p>The NBA presents the most financially concentrated injury management problem in professional sports. A franchise pays a maximum salary player $50M–$60M per year. A single preventable injury to that player in a playoff run costs $2M–$5M in gate revenue, $10M–$30M in potential Finals revenue, and $50M–$200M in long-term franchise valuation impact. The 82-game season creates the most acute load management challenge in sport — back-to-back-to-back schedules, altitude changes, time zone travel — all tracked in fragmented sports science systems today.</p>
-    <div class="sport-stat">One star player injury from preventable load spike: $50M+ in playoff revenue at risk. HERMES's S2/S3 cross-domain signal layer justifies the platform cost on a single back-to-back decision.</div>
+    <p><strong>President of Basketball Operations / GM model.</strong> The defining tech signature is a two-vendor split: Sony Hawk-Eye is the official optical tracking layer, and Second Spectrum (Genius Sports) is the official team-analytics layer. Force plates (Hawkin, VALD) and P3 biomechanics feed readiness and pre-draft profiling.</p>
+    <p>The constraint is a <strong>SOFT cap</strong> with a luxury tax and escalating first and second aprons (2025-26: cap $154.6M, tax $187.9M, first apron $195.9M, second apron $207.8M). The marquee data/medical issue is <strong>load management</strong> across an 82-game season and back-to-backs, governed by the league's Player Participation Policy.</p>
+    <div class="sport-stat">Constraint: soft cap + luxury tax + first/second apron. Signature problem: load management across 82 games.</div>
   </div>
 
   <div class="sport-block">
     <div class="sport-head"><div class="sport-badge">MLB</div><div class="sport-title">Major League Baseball</div></div>
-    <p>162 games produces the highest volume load management problem in professional sports. Combined with Statcast integration for biomechanical signal extraction — spin rate decline, release point inconsistency, velocity trajectory — HERMES creates an injury prevention system with direct, measurable impact. Statcast-sourced velocity decline and release point shift are measurable early warning signals for UCL stress, detectable 4–8 weeks before a Tommy John injury.</p>
-    <div class="sport-stat">Starting pitcher Tommy John surgery: 12–18 months lost production on a $15M–$30M/year contract, plus replacement cost. HERMES detects the pattern before the injury.</div>
+    <p><strong>President of Baseball Operations / GM model.</strong> Tracking is Statcast (Sony Hawk-Eye optical, since 2020, replacing the TrackMan radar baseline). Pitching biomechanics run on markerless KinaTrax and high-speed Edgertronic cameras.</p>
+    <p>The constraint is <strong>NO hard cap</strong> — only a soft deterrent via the Competitive Balance Tax ($237M base in 2025, escalating rates and surcharge tiers). The health signature is distinctive: <strong>velocity, spin rate, and release-point drift</strong> serve as UCL / Tommy John early-warning signals, detectable weeks before injury.</p>
+    <div class="sport-stat">Constraint: no cap; Competitive Balance Tax ($237M, 2025). Health signature: velocity / spin / release as UCL early-warning.</div>
+  </div>
+
+  <div class="sport-block">
+    <div class="sport-head"><div class="sport-badge">NCAA</div><div class="sport-title">NCAA Division I</div></div>
+    <p><strong>Athletic Director model, with an emerging pro-style General Manager.</strong> This vertical fuses an <strong>academic / eligibility domain</strong> (Banner, Workday, SAMS, plus the Academic Progress Rate) on top of the athletic spine — the one domain pro leagues lack, and the explicit bridge to MetVero's ATHENA.</p>
+    <p>Post-House-settlement (effective July 1, 2025), <strong>roster caps replace scholarship limits</strong> (football capped at 105), with a <strong>~$20.5M per-school revenue-sharing cap</strong>, enforcement by the new <strong>College Sports Commission</strong>, and NIL managed through INFLCR and Opendorse.</p>
+    <div class="sport-stat">Constraint: rev-share cap (~$20.5M) + roster caps (FB 105) + APR academic eligibility + CSC enforcement.</div>
+  </div>
+
+  <h3>The Polymorphic Constraint</h3>
+
+  <p>The constraint slot is the clearest illustration of the abstraction. It is polymorphic across deployments — a hard cap (NFL), a soft cap with aprons (NBA), a luxury tax with no ceiling (MLB), a Squad Cost Ratio (soccer/UEFA), or a revenue-share cap fused with academic eligibility (NCAA). HERMES models the abstract constraint — committed cost versus an allowable envelope, with marginal-impact projection on every new commitment — and binds the concrete rule per deployment. The same is true for the tracking, AMS, scouting, and cap-ledger slots: HERMES models the function, and binds whatever product the organization runs.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 5: THE SOURCE SYSTEMS HERMES READS
+═══════════════════════════════════════════════════════ -->
+<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">5 — Source Systems</div></div>
+<div class="section">
+  <div class="sec-eyebrow">Section 5</div>
+  <div class="sec-title">The Source Systems HERMES Reads</div>
+  <div class="sec-sub">Data Fabric Reference. HERMES is integration-agnostic — it binds whatever systems the organization actually runs.</div>
+
+  <p>HERMES reads from the systems of record already in place. The tables below are a reference to the real, current systems across each domain; an actual deployment binds the specific subset the organization operates.</p>
+
+  <h4 class="gold">Performance / GPS</h4>
+  <table class="app-table">
+    <tr><th>System</th><th>Vendor</th><th>Domain Signal</th><th>Typical Integration</th></tr>
+    <tr><td>Vector</td><td>Catapult</td><td>Total distance, HSR bands, PlayerLoad, accel/decel, metabolic power</td><td>OpenField cloud; CSV; Connect API + webhooks</td></tr>
+    <tr><td>Apex</td><td>STATSports</td><td>HSR, sprints, Dynamic Stress Load, 70+ real-time metrics</td><td>Sonra; CSV; Integration API (Team ID)</td></tr>
+    <tr><td>WIMU PRO</td><td>RealTrack Systems (Hudl)</td><td>HMLD, PlayerLoad, hybrid GPS+UWB positioning</td><td>SPRO software; CSV export</td></tr>
+    <tr><td>Playermaker</td><td>Playermaker</td><td>Boot-mounted technical metrics — touches, releases, technical balance</td><td>App; cloud export</td></tr>
+  </table>
+
+  <h4 class="gold">Optical &amp; Event Data</h4>
+  <table class="app-table">
+    <tr><th>System</th><th>Vendor</th><th>Domain Signal</th><th>Typical Integration</th></tr>
+    <tr><td>Second Spectrum</td><td>Genius Sports</td><td>Optical player + ball tracking (official: EPL, NBA, MLS)</td><td>League-provided feed; real-time</td></tr>
+    <tr><td>TRACAB</td><td>TRACAB (Sony Hawk-Eye)</td><td>In-stadium multi-camera optical tracking</td><td>League / competition-provided</td></tr>
+    <tr><td>Hawk-Eye</td><td>Sony Hawk-Eye Innovations</td><td>Optical tracking + officiating (NBA official tracking; MLB Statcast)</td><td>League-provided feed</td></tr>
+    <tr><td>Opta</td><td>Stats Perform</td><td>~60 event types, xG; industry reference event data</td><td>Feeds / API</td></tr>
+    <tr><td>StatsBomb</td><td>Hudl</td><td>3,400+ events/match, freeze-frame context, xG, OBV</td><td>Data API; analytics platform</td></tr>
+  </table>
+
+  <h4 class="gold">Recovery &amp; Readiness</h4>
+  <table class="app-table">
+    <tr><th>System</th><th>Vendor</th><th>Domain Signal</th><th>Typical Integration</th></tr>
+    <tr><td>WHOOP</td><td>WHOOP</td><td>HRV, resting HR, sleep, Strain, Recovery score</td><td>App + team dashboard; API</td></tr>
+    <tr><td>Oura Ring</td><td>Oura</td><td>Sleep architecture, skin temperature, HRV, Readiness</td><td>App + API; enterprise tiers</td></tr>
+    <tr><td>Polar Team Pro</td><td>Polar</td><td>Team HR + integrated GPS; HR-derived load, recovery</td><td>Team Pro cloud; export/API</td></tr>
+    <tr><td>ForceDecks / NordBord</td><td>VALD</td><td>CMJ, jump height, peak power, inter-limb asymmetry, hamstring strength</td><td>VALD Hub; API</td></tr>
+    <tr><td>Force Plates</td><td>Hawkin Dynamics</td><td>Daily CMJ readiness, RSI-mod, eccentric metrics, asymmetry</td><td>Cloud dashboard; API/export</td></tr>
+  </table>
+
+  <h4 class="gold">Athlete Management / Medical</h4>
+  <table class="app-table">
+    <tr><th>System</th><th>Vendor</th><th>Domain Signal</th><th>Typical Integration</th></tr>
+    <tr><td>iP: Intelligence Platform</td><td>Kitman Labs</td><td>EMR, availability/RTP, workload/readiness, ML Risk Advisor</td><td>150+ integrations; cloud; API</td></tr>
+    <tr><td>Smartabase</td><td>Teamworks (Fusion Sport)</td><td>Wellness, monitoring, medical/EMR, screening, RTP</td><td>Open platform; API</td></tr>
+    <tr><td>ARMS / E10</td><td>EDGE10 Group</td><td>Medical EHR + performance analytics; 750+ teams across leagues</td><td>Cloud; API</td></tr>
+  </table>
+  <div class="note-box"><p><strong>Privacy boundary:</strong> The AMS holds full clinical detail under role-restricted, consent-gated access (GDPR special-category / Art. 9; HIPAA where applicable). HERMES consumes only the <strong>availability / clearance status</strong> — available, modified, or unavailable, with an optional RTP stage — analogous to a HIPAA "clearance-only" disclosure. No diagnosis, no treatment, no clinical notes ever cross into the HERMES processing layer.</p></div>
+
+  <h4 class="gold">Recruitment &amp; Market</h4>
+  <table class="app-table">
+    <tr><th>System</th><th>Vendor</th><th>Domain Signal</th><th>Typical Integration</th></tr>
+    <tr><td>Hudl Wyscout</td><td>Hudl</td><td>Video scouting, 600+ competitions, player database, reports</td><td>Web platform; API/export</td></tr>
+    <tr><td>StatsBomb IQ</td><td>Hudl</td><td>Recruitment longlists, radars/percentiles, comparison</td><td>Web app; data feeds / API</td></tr>
+    <tr><td>SciSports</td><td>SciSports</td><td>Player potential / development forecasting, Recruitment Center</td><td>Web platform; API</td></tr>
+    <tr><td>TransferRoom</td><td>TransferRoom</td><td>xTV (Expected Transfer Value), availability/interest, contract expiry</td><td>Web platform; intelligence hub</td></tr>
+    <tr><td>Transfermarkt</td><td>Transfermarkt</td><td>Community market values, contract expiry, transfer history</td><td>Public web; referenced feeds</td></tr>
+  </table>
+
+  <h4 class="gold">Cap / Contract &amp; Governance</h4>
+  <table class="app-table">
+    <tr><th>System</th><th>Vendor / Body</th><th>Domain Signal</th><th>Typical Integration</th></tr>
+    <tr><td>FIFA TMS</td><td>FIFA</td><td>International transfer matching, ITC, agent fees, proof of payment</td><td>FIFA portal via national associations</td></tr>
+    <tr><td>FIFA Clearing House</td><td>FIFA</td><td>Training compensation, 5% solidarity contribution, EPP</td><td>TMS-driven; association registration data</td></tr>
+    <tr><td>UEFA FSR (Squad Cost Ratio)</td><td>UEFA</td><td>Squad cost vs revenue ratio (70% from 2025/26)</td><td>Club financial reporting; ERP-derived</td></tr>
+    <tr><td>League cap rules</td><td>PL / MLS / NFL / NBA / MLB</td><td>PSR/SCR, salary budget + allocation money, hard/soft cap, CBT</td><td>Internal ledger; OverTheCap / Spotrac (pro)</td></tr>
+    <tr><td>ERP / Finance</td><td>Dynamics 365 / Sage / NetSuite</td><td>Amortization schedules, wage ledger, PSR/SCR reporting</td><td>System of record; API/export</td></tr>
+  </table>
+
+  <h4 class="gold">Commercial &amp; Fan</h4>
+  <table class="app-table">
+    <tr><th>System</th><th>Vendor</th><th>Domain Signal</th><th>Typical Integration</th></tr>
+    <tr><td>SeatGeek / Ticketmaster Archtics / AXS</td><td>SeatGeek / TM / AXS</td><td>Ticket sales, season-ticket records, access scans, buyer data</td><td>API; access control; CRM integration</td></tr>
+    <tr><td>SecuTix</td><td>SecuTix (ELCA)</td><td>European ticketing/CRM, fan profiles, memberships</td><td>Platform + CRM/access integrations</td></tr>
+    <tr><td>Salesforce</td><td>Salesforce</td><td>Fan/member CRM, segmentation, unified profile (Data Cloud)</td><td>APIs; KORE modules embed</td></tr>
+    <tr><td>KORE / Two Circles</td><td>Two Circles</td><td>Ticketing, sponsorship/partner, premium engagement</td><td>Embeds into Salesforce / Dynamics</td></tr>
+    <tr><td>SponsorUnited</td><td>SponsorUnited</td><td>Sponsorship intelligence, brand spend, partnership benchmarking</td><td>Platform + data feeds</td></tr>
+  </table>
+
+  <p style="margin-top:16px;">HERMES does not require any of these specific products. It binds whatever the organization runs, in whatever combination, through read-only connections. The function is fixed; the vendor is a deployment detail.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 6: THE UNDENIABLE PROBLEMS
+═══════════════════════════════════════════════════════ -->
+<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">6 — The Undeniable Problems</div></div>
+<div class="section">
+  <div class="sec-eyebrow">Section 6</div>
+  <div class="sec-title">The Undeniable Problems</div>
+  <div class="sec-sub">Specific, financially grounded, and recognizable in any sporting organization. These are not pain points — they are institutional exposure.</div>
+
+  <div class="prob">
+    <div class="prob-head"><div class="prob-num">01</div><div class="prob-title">The Transfer / Trade Window Moves in Hours. Cross-System Due Diligence Takes Days.</div></div>
+    <div class="prob-body">
+      <p>Evaluating a transfer or trade target requires answers from six different systems: sporting fit from the scouting platform (Wyscout, StatsBomb), market value from TransferRoom or Transfermarkt, availability and injury history from the AMS, contract economics and cap headroom from the ledger, registration and work-permit eligibility from compliance, and tactical fit from event data. Manual cross-referencing takes days.</p>
+      <p>The targets that change trajectories are decided in hours. Organizations that cannot complete due diligence in time do not make the move — not because the player doesn't fit, but because the information wasn't ready.</p>
+    </div>
+    <div class="prob-exp"><div class="prob-exp-label">Exposure</div><div class="prob-exp-val">Missed marquee targets per window translate directly into lost on-pitch value and squad-value upside — a range that scales with the organization's market and budget.</div></div>
+    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">A cross-domain Fit Score — sporting fit + availability history + cap/SCR headroom + contract economics — produced in under 2 hours.</div></div>
+  </div>
+
+  <div class="prob">
+    <div class="prob-head"><div class="prob-num">02</div><div class="prob-title">Financial-Regulation Exposure Is Discovered After the Fact.</div></div>
+    <div class="prob-body">
+      <p>The Squad Cost Ratio, PSR position, or salary-cap state is reconstructed in spreadsheets and surfaces — too late — from the auditor or the league. A breach can mean points deductions, transfer bans, and fines. The marginal impact of a signing on the constraint is rarely modeled before the deal is signed.</p>
+    </div>
+    <div class="prob-exp"><div class="prob-exp-label">Exposure</div><div class="prob-exp-val">Points deductions, transfer embargoes, and fines — plus the competitive and commercial cost of a sanction discovered after the corrective window has closed.</div></div>
+    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">Live cap / Squad-Cost-Ratio headroom with marginal-impact modeling on every signing and extension before it is committed.</div></div>
+  </div>
+
+  <div class="prob">
+    <div class="prob-head"><div class="prob-num">03</div><div class="prob-title">Preventable Soft-Tissue Injuries Drain the Highest-Value Roster Spots.</div></div>
+    <div class="prob-body">
+      <p>GPS load lives in Catapult or STATSports. Recovery and HRV live in Whoop, Oura, or Polar. Neuromuscular readiness lives in VALD or Hawkin. Availability and injury history live in the AMS. The fixture calendar lives somewhere else again. The data exists — in systems that do not communicate. Load is set without the full readiness, history, and congestion picture, and avoidable soft-tissue injuries follow.</p>
+    </div>
+    <div class="prob-exp"><div class="prob-exp-label">Exposure</div><div class="prob-exp-val">Lost availability of high-value players: direct medical cost, lost on-pitch output, and the depreciation of an asset the organization is paying for whether or not it plays.</div></div>
+    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">Cross-domain load-modification early warning — ACWR + recovery + availability history + fixture congestion — flagged before the session that would cause the injury.</div></div>
+  </div>
+
+  <div class="prob">
+    <div class="prob-head"><div class="prob-num">04</div><div class="prob-title">Recruitment Spends Heavily Evaluating Players Who Don't Fit.</div></div>
+    <div class="prob-body">
+      <p>Sporting fit, financial fit, and registration fit are assessed late and separately. Significant scouting, analyst, and travel investment goes into players who turn out not to fit the wage structure, the cap headroom, the work-permit criteria, or the registration rules — facts that should have been the first filter, not the last.</p>
+    </div>
+    <div class="prob-exp"><div class="prob-exp-label">Exposure</div><div class="prob-exp-val">Recruitment investment spent on unviable targets, and opportunity cost against the players who did fit but were evaluated too slowly.</div></div>
+    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">A front-loaded multi-domain Fit Score at the point of evaluation — sporting, financial, medical, and registration fit assessed together, first.</div></div>
+  </div>
+
+  <div class="prob">
+    <div class="prob-head"><div class="prob-num">05</div><div class="prob-title">The Link Between a Sporting Decision and the Enterprise Outcome Is Invisible Until Reported.</div></div>
+    <div class="prob-body">
+      <p>This week's lineup, extension, or transfer decision has a downstream effect on revenue, cost, and enterprise value. That link is reconstructed long after the fact, in board decks and year-end accounts — never available at the moment the decision is made.</p>
+    </div>
+    <div class="prob-exp"><div class="prob-exp-label">Exposure</div><div class="prob-exp-val">Capital and roster decisions made without a forward line of sight to their financial and enterprise-value consequences.</div></div>
+    <div class="prob-res"><div class="prob-res-label">HERMES Resolution</div><div class="prob-res-val">A forward-looking projection connecting performance → revenue and cost → enterprise value, available at the executive and ownership lenses.</div></div>
   </div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 7: THE PROGRAM OPPORTUNITY
+     SECTION 7: FINANCIAL IMPACT MODEL
 ═══════════════════════════════════════════════════════ -->
-<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">7 — The Program Opportunity</div></div>
+<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">7 — Financial Impact Model</div></div>
 <div class="section">
   <div class="sec-eyebrow">Section 7</div>
-  <div class="sec-title">The Program Opportunity</div>
+  <div class="sec-title">Financial Impact Model</div>
+  <div class="sec-sub">Value framed as ranges. Magnitudes scale with the organization's market, budget, and competition.</div>
 
-  <p>The opportunity for a Power 4 program is not to add another platform to a stack that already has 15 to 25 systems. The opportunity is to create a more intelligent program operating model — one in which athletes receive more coordinated support, staff spend less time on manual reconciliation, the athletic director has real-time program visibility, and institutional leadership makes compliance and financial decisions with confidence rather than latency.</p>
+  <div class="met-grid">
+    <div class="met-cell"><div class="met-val">Days<br><em>→ &lt;2 hrs</em></div><div class="met-label">Decision Speed</div><div class="met-desc">Cross-domain Fit Score replaces a multi-day manual process across six systems.</div></div>
+    <div class="met-cell"><div class="met-val"><em>Live</em></div><div class="met-label">Cap / SCR Headroom</div><div class="met-desc">Breach risk modeled before commitment, not discovered from the auditor.</div></div>
+    <div class="met-cell"><div class="met-val"><em>↓ Risk</em></div><div class="met-label">Availability</div><div class="met-desc">Early-warning flags recover availability of the highest-value players.</div></div>
+    <div class="met-cell"><div class="met-val"><em>Forward</em></div><div class="met-label">Enterprise Linkage</div><div class="met-desc">Performance projected through to revenue, cost, and enterprise value.</div></div>
+  </div>
 
-  <p>HERMES is MetVero's strategic commitment to the institutions that deploy it: not as a vendor relationship, but as an institutional intelligence partnership. The goal is not to deploy software. The goal is to build the intelligence capabilities that allow a program to operate as a competitive, compliant, and financially efficient enterprise in an environment where fragmented information is the primary operational liability.</p>
+  <table class="fin-table">
+    <tr><th>Problem</th><th>Annual Exposure (Range)</th><th>HERMES Resolution</th><th>Projected Recovery</th></tr>
+    <tr><td class="gold">Decision speed</td><td>Lost on-pitch and squad-value upside per window</td><td>Sub-2-hour cross-domain Fit Score</td><td>Marquee targets captured that competitors miss</td></tr>
+    <tr><td class="gold">Cap / SCR breach</td><td>Points deductions, transfer bans, fines</td><td>Live headroom + marginal-impact modeling</td><td>Breach risk modeled before commitment</td></tr>
+    <tr><td class="gold">Preventable injuries</td><td>Direct cost + lost output of high-value players</td><td>Cross-domain load-modification early warning</td><td>Recovered availability across the season</td></tr>
+    <tr><td class="gold">Recruitment inefficiency</td><td>Investment spent on unviable targets</td><td>Front-loaded multi-domain Fit Score</td><td>Evaluation effort redirected to viable targets</td></tr>
+    <tr><td class="gold">Performance–enterprise linkage</td><td>Decisions made without forward line of sight</td><td>Forward performance → revenue/cost → value model</td><td>Capital and roster decisions made with foresight</td></tr>
+  </table>
 
-  <h3>Why This Era Makes the Intelligence Layer Urgent</h3>
+  <div class="fin-total">
+    <div class="fin-total-label">Conservative Annual Value (Top-Tier Club / Pro Franchise)</div>
+    <div class="fin-total-val">$5M – $25M+</div>
+  </div>
 
-  <p>Three structural shifts in college football have converged to make the intelligence layer a competitive necessity rather than a nice-to-have:</p>
-
-  <ul>
-    <li><strong>NIL complexity.</strong> 85 scholarship athletes × active NIL market = 50–65 simultaneous contracts with brand conflicts, booster entanglement risk, and expiration clocks. No legacy compliance system was built for this. Spreadsheets are not a compliance strategy.</li>
-    <li><strong>Transfer portal velocity.</strong> The portal moves in 48-hour windows. Programs that cannot complete cross-domain due diligence faster than competitors consistently miss the players that change program trajectories. Decision speed is now roster construction strategy.</li>
-    <li><strong>APR financial exposure.</strong> The NCAA's APR enforcement mechanism creates a direct link between academic support outcomes and bowl eligibility. For an SEC program, the gap between managing APR proactively and discovering a problem at annual reporting time can be $6M to $23M. No program should discover its bowl exposure from an NCAA report.</li>
-  </ul>
-
-  <div class="pq"><p>"The program already has the data. It already has the staff. It already has the systems. What it does not have is a layer that connects those systems into institutional intelligence. You are already paying for everything HERMES needs to work. You are not paying for the layer that makes it work together."</p></div>
-
-  <h3>What HERMES Is Not</h3>
-
-  <p>HERMES is not a system replacement project. It does not require programs to migrate off Catapult, Hudl, Banner, Teamworks, or any existing platform. It does not require staff to change the way they use the tools they already use. It sits above those systems, reads what they produce, and surfaces the intelligence that none of them can produce individually. The total lift required from the program's IT function is connection access — APIs, SFTP exports, scheduled reports. HERMES does the rest.</p>
+  <p style="margin-top:16px;">In a window where HERMES captures one marquee target a competitor would otherwise win, or prevents one regulatory breach or one preventable injury to a high-value player, the single-event return justifies the platform on its own. The question is not whether HERMES is worth the cost. The question is how many seasons an organization is willing to operate without it.</p>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════
-     SECTION 8: IMPLEMENTATION PATH
+     SECTION 8: AI-NATIVE OPERATING MODEL & ORGANIZATION OPPORTUNITY
 ═══════════════════════════════════════════════════════ -->
-<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">8 — Implementation Path</div></div>
+<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">8 — The Organization Opportunity</div></div>
 <div class="section">
   <div class="sec-eyebrow">Section 8</div>
+  <div class="sec-title">The AI-Native Operating Model</div>
+  <div class="sec-sub">And the organization opportunity it creates.</div>
+
+  <p>Every leap in computing happened when a new layer abstracted the complexity beneath it. Assembly gave way to programming languages. Languages gave way to operating systems. Operating systems gave way to applications. Applications gave way to enterprise systems. Each layer let the people above it stop managing the layer below and start operating at a higher altitude.</p>
+
+  <p>Sports organizations have already made one of those leaps. They moved from clipboards and filing cabinets to enterprise systems — athlete-management platforms, GPS, scouting databases, cap tools, ticketing and CRM. Those systems are powerful. But they were built to manage activity within their own walls, not to interpret across them. The leap that has not yet been made is the intelligence layer above them.</p>
+
+  <p>The organizations that lead the next decade will not be the ones with the most systems. They will be the ones that made this leap first — the ones that stopped asking their staff to be the integration layer between fifteen tools, and gave them an intelligence layer instead.</p>
+
+  <div class="pq"><p>"The organization already has the data. It already has the staff. It already has the systems. What it does not have is the layer that connects those systems into organizational intelligence. You are already paying for everything HERMES needs to work. You are not paying for the layer that makes it work together."</p></div>
+
+  <p>The opportunity is not to add another platform to a stack that already has 15 to 25 systems. The opportunity is a more intelligent operating model — one in which athletes receive more coordinated support, staff spend less time on manual reconciliation, the sporting director and executive office have real-time visibility, and ownership makes capital and compliance decisions with confidence rather than latency. HERMES is MetVero's strategic commitment to the organizations that deploy it: not a vendor relationship, but an institutional intelligence partnership.</p>
+
+  <h3>What HERMES Is Not</h3>
+
+  <p>HERMES is not a system replacement project. It does not require the organization to migrate off Catapult, the AMS, Wyscout, the cap ledger, or any existing platform. It does not change how staff use the tools they already use. It sits above those systems, reads what they produce, and surfaces the intelligence none of them can produce individually. The only lift required from IT is read-only connection access — APIs, SFTP exports, scheduled reports. HERMES does the rest.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════
+     SECTION 9: IMPLEMENTATION PATH
+═══════════════════════════════════════════════════════ -->
+<div class="run-hd"><div class="run-hd-brand">METVERO HERMES</div><div class="run-hd-section">9 — Implementation Path</div></div>
+<div class="section">
+  <div class="sec-eyebrow">Section 9</div>
   <div class="sec-title">Implementation Path</div>
 
-  <p>MetVero will configure HERMES as a read-only intelligence layer for the initial program pilot. HERMES will sit above the program's approved systems of record and convert fragmented performance, compliance, recruiting, medical, academic, NIL, and financial data into a shared operating picture across the four Intelligence Views. HERMES will not replace any existing system.</p>
+  <p>MetVero configures HERMES as a read-only intelligence layer for the initial deployment. HERMES sits above the organization's approved systems of record and converts fragmented performance, medical, tactical, recruitment, roster, compliance, and commercial data into a shared operating picture across the five operational lenses. HERMES does not replace any existing system.</p>
 
-  <h3>Deployment Path</h3>
+  <h3>Deployment Phases</h3>
 
   <table class="impl-table">
-    <tr><th>Stage</th><th>Purpose</th><th>Output</th></tr>
-    <tr><td><strong>Approved Data Foundation</strong></td><td>Establish the minimum approved data foundation required to support the pilot</td><td>Approved source list, access model, primary identifier, and data exchange boundary</td></tr>
-    <tr><td><strong>Athletic Data Fabric Setup</strong></td><td>Configure ingestion pipelines, entity resolution, and delta table infrastructure for approved sources</td><td>Operational Layer 2.5 with normalized signal feeds from all approved sources</td></tr>
-    <tr><td><strong>HERMES Configuration</strong></td><td>Configure the ontology model, signal rules, cross-domain alert thresholds, and role-based access for the four Intelligence Views</td><td>Configured Athlete, Coaching, Program Command, and Institutional Outcome views</td></tr>
-    <tr><td><strong>Workflow Alignment</strong></td><td>Review existing staff workflows, spreadsheets, and manual processes that HERMES will simplify or replace</td><td>Validated workflows, reporting needs, and configuration adjustments</td></tr>
-    <tr><td><strong>Stakeholder Validation</strong></td><td>Confirm data flow, role-based access, alert logic, and launch readiness with program stakeholders</td><td>Pilot validation, stakeholder feedback, and go-live readiness</td></tr>
+    <tr><th>Phase</th><th>Activities</th><th>Output</th></tr>
+    <tr><td><strong>Phase 1: Discovery &amp; Data Foundation</strong></td><td>System inventory, API mapping, data governance, GDPR / medical-boundary review, entity-resolution design, stakeholder validation</td><td>Approved source list, access model, primary identifier, and data-exchange boundary</td></tr>
+    <tr><td><strong>Phase 2: Sports Data Fabric</strong></td><td>Ingestion pipeline configuration, entity resolution deployment, delta-table setup, signal-feed validation</td><td>Operational Layer 2.5 with normalized signal feeds from all approved sources</td></tr>
+    <tr><td><strong>Phase 3: HERMES Intelligence Configuration</strong></td><td>Ontology model, signal rules, cross-domain alert thresholds, the five operational lenses, role-based access</td><td>Configured Athlete, Coaching &amp; Performance, Sporting Operations, Executive, and Ownership lenses</td></tr>
+    <tr><td><strong>Phase 4: Validation &amp; Go-Live</strong></td><td>Stakeholder review, KPI validation, user acceptance, training, launch readiness, post-launch stabilization</td><td>Validated deployment and go-live readiness</td></tr>
   </table>
 
-  <h3>Program Stakeholders Required</h3>
+  <h3>Stakeholders Required</h3>
 
   <table class="impl-table">
     <tr><th>Area</th><th>Stakeholder / Function</th><th>What They Confirm</th></tr>
-    <tr><td><strong>Executive Sponsorship</strong></td><td>Athletic Director or Deputy AD</td><td>Technology alignment, governance path, escalation support</td></tr>
-    <tr><td><strong>Academic Systems</strong></td><td>Banner/Workday owner, Registrar</td><td>Academic record access, degree audit data, transfer credit structure</td></tr>
-    <tr><td><strong>Compliance</strong></td><td>Compliance Director, NCAA Compliance officer</td><td>NIL registry access, eligibility data, contact period rules</td></tr>
-    <tr><td><strong>Sports Science</strong></td><td>Director of Sports Science, S&amp;C staff</td><td>GPS platform access, recovery data, load monitoring workflows</td></tr>
-    <tr><td><strong>Medical</strong></td><td>Team physician or Athletic Trainer lead</td><td>HIPAA boundary confirmation, clearance status data access</td></tr>
-    <tr><td><strong>Recruiting</strong></td><td>Director of Recruiting, recruiting coordinators</td><td>Recruiting CRM access, prospect data, On3/247 integration</td></tr>
-    <tr><td><strong>IT / Security</strong></td><td>Program IT or institutional ITS</td><td>FERPA exposure, access methods, authentication model, security review</td></tr>
-  </table>
-
-  <h3>Proposed Schedule</h3>
-
-  <table class="impl-table">
-    <tr><th>Phase</th><th>Activities</th><th>Duration</th></tr>
-    <tr><td><strong>Phase 1: Discovery &amp; Data Foundation</strong></td><td>System inventory, API mapping, data governance, FERPA/HIPAA review, entity resolution design, stakeholder validation</td><td>Weeks 1–6</td></tr>
-    <tr><td><strong>Phase 2: Athletic Data Fabric</strong></td><td>Ingestion pipeline configuration, entity resolution deployment, delta table setup, HERMES signal feed validation</td><td>Weeks 7–10</td></tr>
-    <tr><td><strong>Phase 3: HERMES Intelligence Configuration</strong></td><td>Ontology model configuration, cross-domain alert rules, four Intelligence View deployment, role-based access provisioning</td><td>Weeks 11–16</td></tr>
-    <tr><td><strong>Phase 4: Validation &amp; Go-Live</strong></td><td>Stakeholder review sessions, KPI validation, user acceptance, training, launch readiness, post-launch stabilization</td><td>Weeks 17–20</td></tr>
+    <tr><td><strong>Executive Sponsorship</strong></td><td>President / CEO / Athletic Director</td><td>Strategic alignment, governance path, escalation support</td></tr>
+    <tr><td><strong>Sporting Operations</strong></td><td>Sporting Director / GM, Head of Recruitment</td><td>Scouting, cap-ledger, and contract-data access</td></tr>
+    <tr><td><strong>Performance / Sports Science</strong></td><td>Head of Performance, S&amp;C staff</td><td>GPS, force-plate, and recovery-data access; load workflows</td></tr>
+    <tr><td><strong>Medical</strong></td><td>Club Doctor / Head of Medical</td><td>Availability / clearance boundary confirmation; consent gate</td></tr>
+    <tr><td><strong>Recruitment</strong></td><td>Head of Recruitment, analysts</td><td>Scouting platform and market-data integration</td></tr>
+    <tr><td><strong>Commercial / Finance</strong></td><td>CFO / Commercial Director</td><td>Revenue, ticketing/CRM, and ERP/amortization data</td></tr>
+    <tr><td><strong>IT / Security</strong></td><td>IT lead / Data Protection Officer</td><td>Access methods, authentication, GDPR alignment, security review</td></tr>
   </table>
 
   <h3>Initial Access Model</h3>
@@ -745,10 +909,10 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
   <table class="impl-table">
     <tr><th>Area</th><th>Requirement</th><th>Notes</th></tr>
     <tr><td>Data Access</td><td>Read-only through approved reports, exports, APIs, or SFTP</td><td>Final method depends on what each source system supports</td></tr>
-    <tr><td>Identity</td><td>Program universal athlete ID for entity correlation</td><td>HERMES does not use SSN, date of birth, or health record identifiers</td></tr>
-    <tr><td>Medical</td><td>HIPAA boundary enforced: clearance status only, no PHI</td><td>Practice status, RTP stage, risk flag. No clinical detail.</td></tr>
-    <tr><td>Security</td><td>Program IT / security review, FERPA alignment</td><td>MetVero provides diagrams, data mapping, and supporting documentation</td></tr>
-    <tr><td>Infrastructure</td><td>HERMES hosted and managed by MetVero</td><td>No net-new program-hosted infrastructure required</td></tr>
+    <tr><td>Identity</td><td>One athlete identity for entity correlation</td><td>HERMES does not use national ID, date of birth, or health-record identifiers</td></tr>
+    <tr><td>Medical</td><td>Availability / clearance status only, no clinical detail</td><td>Available / modified / unavailable + RTP stage. No diagnosis.</td></tr>
+    <tr><td>Security</td><td>IT / security review, GDPR alignment</td><td>MetVero provides diagrams, data mapping, and supporting documentation</td></tr>
+    <tr><td>Infrastructure</td><td>HERMES hosted and managed by MetVero</td><td>No net-new organization-hosted infrastructure required</td></tr>
   </table>
 </div>
 
@@ -761,110 +925,96 @@ li{font-size:13px;line-height:1.65;color:#333;margin-bottom:4px;}
   <div class="sec-title">Data Exchange Specification</div>
 
   <h4>Purpose</h4>
-  <p>This appendix defines what data may cross the program → HERMES boundary, subject to program approval per element during Discovery, at what sensitivity, for what purpose, on what cadence, and under what retention. The data inventory below defines the full pilot scope. The Phase 1 minimum-viable data set is a subset confirmed during Discovery.</p>
+  <p>This appendix defines what data may cross the organization → HERMES boundary, subject to approval per element during Discovery, at what sensitivity, for what purpose, on what cadence, and under what retention. The data inventory below defines the full deployment scope. The Phase 1 minimum-viable data set is a subset confirmed during Discovery.</p>
 
   <h4>Access Standards</h4>
-  <p>Unless a section states otherwise: read-only access via supported reports, exports, APIs, or SFTP. No admin credentials, no raw database access, no write-back. Default retention: lifetime of engagement + 7 years. Source system object names in [brackets] are placeholders, replaced with actual report or endpoint names during system owner verification.</p>
+  <p>Unless a section states otherwise: read-only access via supported reports, exports, APIs, or SFTP. No admin credentials, no raw database access, no write-back. Default retention: lifetime of engagement + 7 years. Source system object names in [brackets] are placeholders, replaced with actual report or endpoint names during system-owner verification.</p>
 
   <h4>Sensitivity Classes</h4>
   <table class="app-table" style="margin-bottom:20px;">
     <tr><th>Class</th><th>Definition</th></tr>
-    <tr><td><span class="sensitivity-hipaa">HIPAA-Protected</span></td><td>Health and medical information. HERMES consumes clearance status only — no PHI enters the processing layer under any circumstances.</td></tr>
-    <tr><td><span class="sensitivity-ferpa">FERPA Non-Directory</span></td><td>FERPA-protected educational records (grades, GPA, courses, degree progress). Governed by institutional data sharing agreement.</td></tr>
-    <tr><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Athletic eligibility data subject to NCAA rules and bylaws. Read-only; no HERMES recommendation constitutes a bylaw-actionable event without human compliance review.</td></tr>
-    <tr><td><span class="sensitivity-op">Operational</span></td><td>Non-sensitive technical or program operational data (athlete universal ID, course codes, term codes, position labels).</td></tr>
+    <tr><td><span class="sensitivity-hipaa">Medical-Protected</span></td><td>Health and medical information (GDPR Art. 9 / HIPAA where applicable). HERMES consumes clearance status only — no clinical detail enters the processing layer under any circumstances.</td></tr>
+    <tr><td><span class="sensitivity-ferpa">Commercially-Sensitive</span></td><td>Wage, contract, transfer-fee, and commercial-revenue data. Governed by a data-sharing agreement; access role-restricted.</td></tr>
+    <tr><td><span class="sensitivity-ncaa">Regulated</span></td><td>League / governance data subject to UEFA, FIFA, or league rules. Read-only; no HERMES output constitutes a regulatory-actionable event without human compliance review.</td></tr>
+    <tr><td><span class="sensitivity-op">Operational</span></td><td>Non-sensitive technical or operational data (athlete identity key, position labels, fixture codes, session metrics).</td></tr>
   </table>
 
-  <h4>A.1 — Academic System (Banner / Workday Student)</h4>
+  <h4>A.1 — Performance / GPS (Catapult / STATSports / WIMU)</h4>
   <table class="app-table">
     <tr><th>Data Element</th><th>Sensitivity</th><th>Purpose</th><th>Refresh</th></tr>
-    <tr><td>Athlete universal ID (primary key)</td><td><span class="sensitivity-op">Operational</span></td><td>Identity correlation across all sources</td><td>On enrollment</td></tr>
-    <tr><td>Enrollment status</td><td><span class="sensitivity-ferpa">FERPA</span></td><td>APR point eligibility, eligibility clock</td><td>Daily</td></tr>
-    <tr><td>Current and cumulative GPA</td><td><span class="sensitivity-ferpa">FERPA</span></td><td>PTD compliance, APR contribution probability</td><td>Grade posting cadence</td></tr>
-    <tr><td>Credits completed, credits toward degree</td><td><span class="sensitivity-ferpa">FERPA</span></td><td>PTD checkpoint tracking (24/40/72/96)</td><td>Daily during term</td></tr>
-    <tr><td>Course enrollment, current and historical</td><td><span class="sensitivity-ferpa">FERPA</span></td><td>Degree progress, exam calendar integration</td><td>Daily</td></tr>
-    <tr><td>Academic holds or registration blocks</td><td><span class="sensitivity-ferpa">FERPA</span></td><td>Eligibility risk alert</td><td>On event</td></tr>
-    <tr><td>Declared major, catalog year</td><td><span class="sensitivity-ferpa">FERPA</span></td><td>Degree path modeling</td><td>On change</td></tr>
+    <tr><td>Athlete identity key (primary)</td><td><span class="sensitivity-op">Operational</span></td><td>Identity correlation across all sources</td><td>On registration</td></tr>
+    <tr><td>Session load (total distance, HSR, PlayerLoad, sprint count)</td><td><span class="sensitivity-op">Operational</span></td><td>ACWR calculation, load-modification alerts</td><td>Post-session</td></tr>
+    <tr><td>Accel / decel counts</td><td><span class="sensitivity-op">Operational</span></td><td>Mechanical load, neuromuscular fatigue signal</td><td>Post-session</td></tr>
+    <tr><td>Sprint profile (max velocity, accel profile)</td><td><span class="sensitivity-op">Operational</span></td><td>Performance benchmarking, velocity-based tracking</td><td>Per session</td></tr>
   </table>
 
-  <h4>A.2 — NCAA Compliance &amp; Eligibility (Compliance Assistant / ACS)</h4>
+  <h4>A.2 — AMS / Medical (Kitman Labs / Smartabase / EDGE10)</h4>
+  <div class="note-box"><p><strong>Medical Boundary:</strong> HERMES receives availability / clearance status signals only. No clinical notes, no diagnosis, no treatment detail, no medication records enter the HERMES processing layer under any circumstances. The AMS integration is configured at the source to export only the availability fields below.</p></div>
   <table class="app-table">
     <tr><th>Data Element</th><th>Sensitivity</th><th>Purpose</th><th>Refresh</th></tr>
-    <tr><td>Eligibility certification status</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Eligibility clock, APR contribution tracking</td><td>On certification event</td></tr>
-    <tr><td>Years of eligibility used / remaining</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Roster construction modeling</td><td>Per semester</td></tr>
-    <tr><td>Medical hardship status and application dates</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Scholarship efficiency tracking, hardship deadline alerts</td><td>On event</td></tr>
-    <tr><td>Transfer one-time exception status</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Portal compliance, eligibility clock</td><td>On event</td></tr>
-    <tr><td>APR running score (multi-year)</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>APR trajectory projection, bowl ban risk modeling</td><td>Per semester end</td></tr>
-    <tr><td>Contact period calendar, visit counts</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Compliance deadline alerts</td><td>Weekly</td></tr>
+    <tr><td>Availability status (Available / Modified / Unavailable)</td><td><span class="sensitivity-hipaa">Clearance Only</span></td><td>Roster availability and depth modeling</td><td>Daily</td></tr>
+    <tr><td>Return-to-play stage</td><td><span class="sensitivity-hipaa">Clearance Only</span></td><td>RTP timeline projection, load-plan compliance</td><td>On protocol advancement</td></tr>
+    <tr><td>Injury-risk flag (by body region, no diagnosis)</td><td><span class="sensitivity-hipaa">Clearance Only</span></td><td>Cross-domain load alert</td><td>On load-threshold trigger</td></tr>
+    <tr><td>HRV / wellness readiness vs baseline</td><td><span class="sensitivity-op">Operational</span></td><td>Cross-domain readiness signal</td><td>Morning assessment</td></tr>
   </table>
 
-  <h4>A.3 — Performance &amp; Recovery (Catapult / Polar / Hawkin Dynamics)</h4>
+  <h4>A.3 — Optical &amp; Event Data (Opta / StatsBomb / Second Spectrum)</h4>
   <table class="app-table">
     <tr><th>Data Element</th><th>Sensitivity</th><th>Purpose</th><th>Refresh</th></tr>
-    <tr><td>Session workload metrics (total distance, HSD, PlayerLoad, sprint count)</td><td><span class="sensitivity-op">Operational</span></td><td>ACWR calculation, load modification alerts</td><td>Post-session</td></tr>
-    <tr><td>HRV readiness score vs. individual baseline</td><td><span class="sensitivity-op">Operational</span></td><td>Cross-domain readiness signal</td><td>Morning assessment</td></tr>
-    <tr><td>Force plate output (peak power, asymmetry index)</td><td><span class="sensitivity-op">Operational</span></td><td>Neuromuscular readiness, return-to-play progression</td><td>Morning test</td></tr>
-    <tr><td>Sprint profile (max velocity, acceleration profile)</td><td><span class="sensitivity-op">Operational</span></td><td>Performance benchmarking, velocity-based training tracking</td><td>Per velocity session</td></tr>
+    <tr><td>Event data (passes, shots, xG, OBV)</td><td><span class="sensitivity-op">Operational</span></td><td>Tactical signals, player performance</td><td>Post-match</td></tr>
+    <tr><td>Positional tracking (x/y coordinates)</td><td><span class="sensitivity-op">Operational</span></td><td>Off-ball runs, pressing, opponent structure</td><td>Post-match</td></tr>
+    <tr><td>Opponent tendency profiles</td><td><span class="sensitivity-op">Operational</span></td><td>Coaching &amp; Performance lens, lineup modeling</td><td>Pre-match</td></tr>
   </table>
 
-  <h4>A.4 — Medical Clearance (Sportsware / Kitman Labs)</h4>
-  <div class="note-box"><p><strong>HIPAA Boundary:</strong> HERMES receives clearance status signals only. No PHI, no clinical notes, no diagnosis, no treatment detail, no medication records enter the HERMES processing layer under any circumstances. Medical system integration is configured at the source to export only the three clearance status fields defined below.</p></div>
+  <h4>A.4 — Recruitment / Market (Wyscout / StatsBomb IQ / TransferRoom)</h4>
   <table class="app-table">
     <tr><th>Data Element</th><th>Sensitivity</th><th>Purpose</th><th>Refresh</th></tr>
-    <tr><td>Practice status (Full / Limited / Non-Contact / Out)</td><td><span class="sensitivity-hipaa">HIPAA Clearance Only</span></td><td>Roster availability modeling, depth chart status</td><td>Daily trainer update</td></tr>
-    <tr><td>Return-to-play protocol stage (1–5)</td><td><span class="sensitivity-hipaa">HIPAA Clearance Only</span></td><td>RTP timeline projection, load plan compliance</td><td>On protocol advancement</td></tr>
-    <tr><td>Risk classification flag (Green / Yellow / Red by body region)</td><td><span class="sensitivity-hipaa">HIPAA Clearance Only</span></td><td>Injury risk modeling, cross-domain load alert</td><td>On load threshold trigger</td></tr>
+    <tr><td>Scouting profile (position, metrics, percentiles)</td><td><span class="sensitivity-op">Operational</span></td><td>Fit Score engine, recruitment longlists</td><td>Weekly</td></tr>
+    <tr><td>Market value (xTV / community / model)</td><td><span class="sensitivity-ferpa">Commercially-Sensitive</span></td><td>Valuation vs release clause, financial fit</td><td>On update</td></tr>
+    <tr><td>Contract expiry / transfer interest</td><td><span class="sensitivity-op">Operational</span></td><td>Pipeline planning, free-agent risk</td><td>On update</td></tr>
   </table>
 
-  <h4>A.5 — NIL Registry (INFLCR / Opendorse / Institutional Records)</h4>
+  <h4>A.5 — Cap / Contract &amp; Governance (FIFA TMS / UEFA FSR / League Rules / ERP)</h4>
   <table class="app-table">
     <tr><th>Data Element</th><th>Sensitivity</th><th>Purpose</th><th>Refresh</th></tr>
-    <tr><td>Active NIL deals (athlete ID, brand category, value range, duration, expiration)</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Brand conflict detection, booster classification check</td><td>On deal execution</td></tr>
-    <tr><td>Deal status (Active / Expired / Pending / Flagged)</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Expiration calendar alerts</td><td>Daily</td></tr>
-    <tr><td>Booster registry match flag</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Impermissible inducement prevention</td><td>On deal review</td></tr>
-    <tr><td>NIL collective budget utilization by position group</td><td><span class="sensitivity-op">Operational</span></td><td>Recruiting financial modeling, portal Fit Score</td><td>Weekly</td></tr>
+    <tr><td>Wage ledger (base, bonuses, agent fees)</td><td><span class="sensitivity-ncaa">Regulated</span></td><td>Squad-Cost-Ratio computation, cap headroom</td><td>On change</td></tr>
+    <tr><td>Transfer-fee amortization schedule</td><td><span class="sensitivity-ncaa">Regulated</span></td><td>SCR / PSR position, marginal-impact modeling</td><td>On signing</td></tr>
+    <tr><td>Registration / roster-slot state</td><td><span class="sensitivity-ncaa">Regulated</span></td><td>Squad-list and roster-rule compliance</td><td>Per window</td></tr>
+    <tr><td>Work-permit / GBE eligibility</td><td><span class="sensitivity-ncaa">Regulated</span></td><td>Recruitment-eligibility filter</td><td>On evaluation</td></tr>
+    <tr><td>Transfer governance status (ITC, solidarity)</td><td><span class="sensitivity-ncaa">Regulated</span></td><td>Transfer-process compliance</td><td>On transfer event</td></tr>
   </table>
 
-  <h4>A.6 — Recruiting Data (On3 / 247Sports / Institutional CRM)</h4>
+  <h4>A.6 — Commercial / Fan (SeatGeek / Salesforce / KORE)</h4>
   <table class="app-table">
     <tr><th>Data Element</th><th>Sensitivity</th><th>Purpose</th><th>Refresh</th></tr>
-    <tr><td>Prospect profile (position, class, athletic grade, commitment status)</td><td><span class="sensitivity-op">Operational</span></td><td>Fit Score engine, class construction modeling</td><td>Weekly</td></tr>
-    <tr><td>High school transcript / core course completion</td><td><span class="sensitivity-ferpa">FERPA</span></td><td>Academic eligibility probability modeling</td><td>On evaluation</td></tr>
-    <tr><td>Official visit record, contact log</td><td><span class="sensitivity-ncaa">NCAA-Restricted</span></td><td>Contact period compliance, engagement scoring</td><td>On event</td></tr>
-    <tr><td>Scholarship slot commitments by position</td><td><span class="sensitivity-op">Operational</span></td><td>Scholarship budget efficiency, class construction</td><td>On signing</td></tr>
-  </table>
-
-  <h4>A.7 — Film &amp; Tactical (Hudl)</h4>
-  <table class="app-table">
-    <tr><th>Data Element</th><th>Sensitivity</th><th>Purpose</th><th>Refresh</th></tr>
-    <tr><td>Film tags (formation, personnel, play type, result)</td><td><span class="sensitivity-op">Operational</span></td><td>Tactical tendency signals, opponent analysis</td><td>Post-game</td></tr>
-    <tr><td>Individual player grades (overall, position-specific)</td><td><span class="sensitivity-op">Operational</span></td><td>Performance intelligence signals, depth chart context</td><td>Per film session</td></tr>
-    <tr><td>Personnel package frequency by situation</td><td><span class="sensitivity-op">Operational</span></td><td>Coaching Intelligence View, optimal personnel modeling</td><td>Post-game</td></tr>
+    <tr><td>Revenue by stream (matchday / broadcast / commercial)</td><td><span class="sensitivity-ferpa">Commercially-Sensitive</span></td><td>Revenue vs cost modeling, SCR denominator</td><td>Periodic</td></tr>
+    <tr><td>Ticketing / season-ticket aggregates</td><td><span class="sensitivity-op">Operational</span></td><td>Matchday revenue trajectory</td><td>Weekly</td></tr>
+    <tr><td>Sponsorship asset / deal values</td><td><span class="sensitivity-ferpa">Commercially-Sensitive</span></td><td>Commercial-revenue trajectory</td><td>On change</td></tr>
   </table>
 
   <h4>Out-of-Scope Across All Sources</h4>
-  <p>HERMES does not consume any of the following from any source unless expressly approved in writing by the program and institutional legal counsel:</p>
+  <p>HERMES does not consume any of the following from any source unless expressly approved in writing by the organization and legal counsel:</p>
   <ul>
-    <li>Social Security Numbers or date of birth</li>
-    <li>Financial aid records, scholarship dollar amounts, billing or account balances</li>
-    <li>Health records, medical records, mental health records, counseling records (beyond the three HIPAA clearance-only fields defined in A.4)</li>
-    <li>Parent or guardian information, emergency contact information</li>
-    <li>Disciplinary records, Title IX records</li>
+    <li>Raw clinical or diagnosis detail beyond availability / clearance status</li>
+    <li>Personal medical records, mental-health records, or treatment notes</li>
+    <li>National ID numbers, passport numbers, or date of birth</li>
+    <li>Individual fan / customer personal data beyond approved aggregates</li>
     <li>Free-text clinical notes of any kind</li>
-    <li>Any student records subject to a FERPA directory opt-out</li>
+    <li>Banking, payroll-account, or personal financial-account detail</li>
+    <li>Disciplinary or HR records</li>
   </ul>
 
   <h4>Retention and Deletion</h4>
-  <p>Default retention: lifetime of engagement + 7 years post-engagement, subject to institutional records management policy. Final retention schedule confirmed during Discovery. Upon written notice from the program, all consumed source data is deleted within 30 days. HERMES-derived data (risk scores, projections, pattern models) is deleted or anonymized at the program's election. Backup purge rotation: 90 days. Deletion certificates issued to the program upon completion.</p>
+  <p>Default retention: lifetime of engagement + 7 years post-engagement, subject to the organization's records-management policy and GDPR obligations. Final retention schedule confirmed during Discovery. Upon written notice, all consumed source data is deleted within 30 days. HERMES-derived data (Fit Scores, projections, pattern models) is deleted or anonymized at the organization's election. Backup purge rotation: 90 days. Deletion certificates issued upon completion.</p>
 
   <div class="note-box" style="margin-top:20px;">
-    <p><strong>Appendix A Review Status:</strong> This appendix represents the initial data exchange specification for program review. Final source system names, access methods, retention requirements, sensitivity classifications, and verification items will be confirmed during Phase 1: Discovery and Data Foundation. Anything not approved through this process remains outside the pilot scope.</p>
+    <p><strong>Appendix A Review Status:</strong> This appendix represents the initial data-exchange specification for review. Final source system names, access methods, retention requirements, sensitivity classifications, and verification items will be confirmed during Phase 1: Discovery &amp; Data Foundation. Anything not approved through this process remains outside the deployment scope.</p>
   </div>
 
   <div style="margin-top:48px;padding-top:24px;border-top:1px solid #ede8db;text-align:center;">
     <p style="font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.2em;color:#9a7228;text-transform:uppercase;margin-bottom:8px;">METVERO · HERMES</p>
-    <p style="font-size:12px;color:#999;font-style:italic;">HERMES is a MetVero platform. Relationship to ATHENA: HERMES applies the intelligence abstraction layer architecture to athletic institutions. ATHENA applies the same architecture to academic institutions. They share a philosophy, a signal model, and an institutional conviction that the intelligence layer is the most valuable software a complex institution can operate — not because it replaces what they have, but because it makes what they have actually work together.</p>
-    <p style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.15em;color:#c0b090;margin-top:12px;text-transform:uppercase;">Institutional Intelligence. Program Impact.</p>
+    <p style="font-size:12px;color:#999;font-style:italic;">HERMES is a MetVero platform. Relationship to ATHENA: HERMES applies the intelligence-abstraction layer architecture to sports organizations. ATHENA applies the same architecture to academic institutions. They share a philosophy, a signal model, and an institutional conviction that the intelligence layer is the most valuable software a complex organization can operate — not because it replaces what they have, but because it makes what they have actually work together.</p>
+    <p style="font-family:'Barlow Condensed',sans-serif;font-size:10px;letter-spacing:.15em;color:#c0b090;margin-top:12px;text-transform:uppercase;">Institutional Intelligence. Organizational Impact.</p>
   </div>
 </div>
 
