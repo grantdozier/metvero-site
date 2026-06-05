@@ -7,6 +7,8 @@ import ScrollToTop from './components/ScrollToTop'
 import Home from './pages/Home'
 import ServicesPage from './pages/ServicesPage'
 import ProductsPage from './pages/ProductsPage'
+import IndustriesPage from './pages/IndustriesPage'
+import InsightsPage from './pages/InsightsPage'
 import AthenaPage from './pages/AthenaPage'
 import HermesPage from './pages/HermesPage'
 import HermesDocs from './pages/HermesDocs'
@@ -45,7 +47,9 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/services" element={<ServicesPage />} />
+              <Route path="/industries" element={<IndustriesPage />} />
               <Route path="/products" element={<ProductsPage />} />
+              <Route path="/insights" element={<InsightsPage />} />
               <Route path="/athena" element={<AthenaPage />} />
               <Route path="/hermes" element={<HermesPage />} />
             </Routes>
