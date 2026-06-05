@@ -126,7 +126,7 @@ export default function Hero() {
           transition={{ duration: 0.9, delay: 2.8, ease: [0.22, 1, 0.36, 1] }}
           className="mt-8 text-[17px] leading-relaxed text-white/50 max-w-xl mx-auto"
         >
-          We partner with institutions to design, build, and deploy AI that transforms operations.
+          We build AI that absorbs the busywork of running an institution — so people stay face-to-face with the decisions that matter.
         </motion.p>
 
         {/* CTAs — last to appear */}
